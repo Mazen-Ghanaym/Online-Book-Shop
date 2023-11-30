@@ -1,2 +1,2 @@
 # Book-Shop
-Online website allows you to buy sell books 
+Online website allows you to buy and sell books 
