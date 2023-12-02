@@ -106,6 +106,13 @@ def signup():
         return render_template("signup.html", error_message="", invalid=False)
 
 # logout -> mazen
+@app.route("/logout")
+def logout():
+    """Log user out"""
+    # Forget any user_id
+    session.clear()
+    # Redirect user to login form
+    return redirect("/")
 # profile -> mahmoud
 # home
 # library 
