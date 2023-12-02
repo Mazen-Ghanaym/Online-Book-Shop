@@ -34,6 +34,50 @@ def after_request(response):
     return response
 
 # login  -> mazen
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    """Log user in"""
+    # Forget any user_id
+    session.clear()
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+        """Ensure username was submitted"""
+        email = request.form.get("email")
+        password = request.form.get("password")
+        # Ensure email was submitted
+        if not email:
+            return render_template("login.html", error_message="must provide username", invalid=True)
+        # Ensure password was submitted
+        elif not password:
+            return render_template("login.html", error_message="must provide password", invalid=True)
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # Query database for username
+        db.execute("SELECT * FROM users WHERE email = ?", (email,))
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        rows = [dict(zip(columns, row)) for row in db.fetchall()]
+
+        # Ensure username exists and password is correct
+        if len(rows) != 1:
+            return render_template("login.html", error_message="invalid username and/or password", invalid=True)
+        
+        if rows[0]["password"] != password:
+            return render_template("login.html", error_message="invalid username and/or password", invalid=True)
+        
+        # commit and close database
+        con.commit()
+        db.close()
+        con.close()
+        # Remember which user has logged in
+        session["user_id"] = rows[0]["user_id"]
+        # Redirect user to home page
+        return redirect("/")
+    # User reached route via GET (as by clicking a link or via redirect)
+    else:
+        return render_template("login.html", error_message="", invalid=False)
+
 # signup -> mazen
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -69,7 +113,7 @@ def signup():
             return render_template("invalid.html", error_message="confirmation doesn't match password!", invalid=True)
 
         # connect with database and create cursor called db
-        con = sqlite3.connect("trading.db")
+        con = sqlite3.connect("Books.db")
         db = con.cursor()
         # retrive all users from database with the same email
         db.execute("SELECT * FROM User WHERE email = ?;", (email,))
@@ -113,6 +157,7 @@ def logout():
     session.clear()
     # Redirect user to login form
     return redirect("/")
+
 # profile -> mahmoud
 # home
 # library 
