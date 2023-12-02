@@ -46,10 +46,10 @@ def login():
         password = request.form.get("password")
         # Ensure email was submitted
         if not email:
-            return render_template("login.html", error_message="must provide username", invalid=True)
+            return render_template("login.html", error_message="message", invalid=True)
         # Ensure password was submitted
         elif not password:
-            return render_template("login.html", error_message="must provide password", invalid=True)
+            return render_template("login.html", error_message="message", invalid=True)
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
         db = con.cursor()
@@ -61,10 +61,10 @@ def login():
 
         # Ensure username exists and password is correct
         if len(rows) != 1:
-            return render_template("login.html", error_message="invalid username and/or password", invalid=True)
+            return render_template("login.html", error_message="message", invalid=True)
         
         if rows[0]["password"] != password:
-            return render_template("login.html", error_message="invalid username and/or password", invalid=True)
+            return render_template("login.html", error_message="message", invalid=True)
         
         # commit and close database
         con.commit()
@@ -98,19 +98,19 @@ def signup():
         # check if user provide valid username
         if not email:
             # wail for render the register page with error message
-            return render_template("signup.html", error_message="INVALID USERNAME!", invalid=True)
+            return render_template("signup.html", error_message="message", invalid=True)
 
         # check if user provide valid password
         if not password:
-            return render_template("signup.html", error_message="INVALID PASSWORD!", invalid=True)
+            return render_template("signup.html", error_message="message", invalid=True)
 
         # check if user provide valid confirm
         if not confirm:
-            return render_template("signup.html", error_message="INVALID CONFIRM PASSWORD!", invalid=True)
+            return render_template("signup.html", error_message="message", invalid=True)
 
         # check if password equals the confirmation password
         if password != confirm:
-            return render_template("invalid.html", error_message="confirmation doesn't match password!", invalid=True)
+            return render_template("invalid.html", error_message="message", invalid=True)
 
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
@@ -124,7 +124,7 @@ def signup():
 
         # check if username registered before
         if len(users) >= 1:
-            return render_template("signup.html", error_message="USERNAME EXISTS", invalid=True)
+            return render_template("signup.html", error_message="message", invalid=True)
 
         # after validating all conditions insert new user into database
         db.execute("INSERT INTO User(email,full_name,password) VALUES(?,?,?);", (email, fullname, password,))
