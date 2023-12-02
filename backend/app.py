@@ -163,6 +163,133 @@ def logout():
 # library 
 # book -> mahmoud
 # cart -> mazen
+                # session["cart"] = []
+@app.route("/cart/add/<book_id>", methods=["GET", "POST"])
+@login_required
+def add_to_cart(book_id):
+    """Add book to cart"""
+    if request.method == "GET":
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # retrive all books from database with the same book_id
+        db.execute("SELECT * FROM Book WHERE book_id = ? WHERE state = ?;", (book_id,1,))
+
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        books = [dict(zip(columns, row)) for row in db.fetchall()]
+
+        # add book to cart
+        session["cart"].append(books[0])
+
+        # commit changes
+        con.commit()
+        db.close()
+        con.close()
+
+        # redirect to the main page
+        return redirect("/")
+    else:
+        # I don't know what to do here
+        return "TODO"
+
+@app.route("/cart/remove/<book_id>", methods=["GET", "POST"])
+@login_required
+def remove_from_cart(book_id):
+    """Remove book from cart"""
+    if request.method == "GET":
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # retrive all books from database with the same book_id
+        db.execute("SELECT * FROM Book WHERE book_id = ? WHERE state = ?;", (book_id,1,))
+
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        books = [dict(zip(columns, row)) for row in db.fetchall()]
+
+        # remove book from cart
+        session["cart"].remove(books[0])
+
+        # commit changes
+        con.commit()
+        db.close()
+        con.close()
+
+        # redirect to the main page
+        return redirect("/")
+    else:
+        # I don't know what to do here
+        return "TODO"
+
+@app.route("/cart", methods=["GET", "POST"])
+@login_required
+def cart():
+    """Show cart"""
+    if request.method == "GET":
+        return render_template("cart.html", cart=session["cart"])
+    else:
+        # retrive data from form
+        address = request.form.get("address")
+        phone = request.form.get("phone")
+        user_id = session["user_id"]
+        date_time = strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        total = 0
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # each book in session["cart"] has [book_id, title, image, price, quantity, writer_id, category_id]
+        # ! I think about error why
+        # ! while i'm updating the book['quantity'] in session["cart"] if i found an error 
+        # ! and i returned the user if he want to change the quantity of the book
+        # ! when compare we will compare with the updated quantity(from prevous request) not the original quantity(in database)
+        for book in session["cart"]:
+            # quantity_name = quantity_[book_id] this name will be the same as the name of the input in cart.html form
+            quentity_name = "quentity_" + str(book["book_id"])
+            # retrive new quantity from form
+            new_quantity = request.form.get(quentity_name)
+            # check if new quantity is valid
+            try:
+                new_quantity = int(new_quantity)
+            except ValueError:
+                return render_template("cart.html", cart=session["cart"], error_message="message", invalid=True)
+            # check if new quantity is valid
+            if new_quantity < 0:
+                return render_template("cart.html", cart=session["cart"], error_message="message", invalid=True)
+            # check if new quantity is valid
+            if new_quantity > book["quantity"]:
+                return render_template("cart.html", cart=session["cart"], error_message="message", invalid=True)
+            # update quantity in session["cart"]
+            book["quantity"] = new_quantity
+            # update quantity in database
+            total += book["price"] * book["quantity"]
+        
+        # check if total is valid with user balance
+        """TODO"""
+
+        # insert into bill table first
+        db.execute("INSERT INTO Bill(address, phone, user_id, date_time, total) VALUES(?,?,?,?);", (address, phone, user_id, date_time, total,))
+        # retrive bill id from database
+        db.execute("SELECT * FROM Bill WHERE user_id=? AND date_time=?;", (user_id, date_time,))
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        bills = [dict(zip(columns, row)) for row in db.fetchall()]
+        bill_id = bills[0]["bill_id"]
+        # insert into order table they have same bill
+        for book in session["cart"]:
+            db.execute("INSERT INTO Order(bill_id, book_id, quantity, price_per_book) VALUES(?,?,?,?);", (bill_id, book["book_id"], book["quantity"], book["price"],))
+        # update quantity in database
+        for book in session["cart"]:
+            db.execute("UPDATE Book SET quantity=? WHERE book_id=?;", (book["quantity"], book["book_id"],))
+        # commit changes
+        con.commit()
+        db.close()
+        con.close()
+        # redirect to the main page
+        session["cart"] = []
+        flash("Order has been placed successfully")
+        return redirect("/")
+
 # admin 
 # add book
 ## all books
