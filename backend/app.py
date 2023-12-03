@@ -327,6 +327,49 @@ def cart():
         flash("Order has been placed successfully")
         return redirect("/")
 
+# save quantity changes in cart
+@app.route("/cart/save", methods=["GET", "POST"])
+@login_required
+def save_cart():
+    """Save cart"""
+    if request.method == "POST":
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # retrive original books from database
+        db.execute("SELECT * FROM Book WHERE book_id IN (?) AND state = ?;", (session["cart"].keys(),1,))
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        books = [dict(zip(columns, row)) for row in db.fetchall()]
+        # each book in session["cart"] has {book_id : quantity}
+        # copy books to new_books for updating quantity in new_books
+        new_books = books
+        # update quantity in new_books
+        for book in session["cart"].keys():
+            new_books[book]["quantity"] = session["cart"][book]
+        
+        # retrive new quantity from form for each book
+        for book_id in session["cart"].keys():
+            # quantity_name = quantity_[book_id] this name will be the same as the name of the input in cart.html form
+            quantity_name = "quentity_" + str(book_id)
+            # retrive new quantity from form
+            new_quantity = request.form.get(quantity_name)
+            # check if new quantity is valid
+            try:
+                new_quantity = int(new_quantity)
+            except ValueError:
+                return render_template("cart.html", cart=new_books, error_message="message", invalid=True)
+            # check if new quantity is valid
+            if new_quantity < 0:
+                return render_template("cart.html", cart=new_books, error_message="message", invalid=True)
+            # check if new quantity is valid
+            if new_quantity > books[book_id]["quantity"]:
+                return render_template("cart.html", cart=new_books, error_message="message", invalid=True)
+            # update quantity in session["cart"]
+            session["cart"][book_id] = new_quantity
+            # update quantity in database
+        redirect("/cart")
+
 # admin 
 # add book
 ## all books
