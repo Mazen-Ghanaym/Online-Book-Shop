@@ -54,7 +54,7 @@ def login():
         con = sqlite3.connect("Books.db")
         db = con.cursor()
         # Query database for username
-        db.execute("SELECT * FROM users WHERE email = ?", (email,))
+        db.execute("SELECT * FROM User WHERE email = ?", (email,))
         # convert retrived data into list of dictionaries
         columns = [column[0] for column in db.description]
         rows = [dict(zip(columns, row)) for row in db.fetchall()]
@@ -98,20 +98,19 @@ def signup():
         # check if user provide valid username
         if not email:
             # wail for render the register page with error message
-            return render_template("signup.html", error_message="message", invalid=True)
+            return render_template("signup.html", error_message="message email", invalid=True)
 
         # check if user provide valid password
         if not password:
-            return render_template("signup.html", error_message="message", invalid=True)
+            return render_template("signup.html", error_message="message password", invalid=True)
 
         # check if user provide valid confirm
         if not confirm:
-            return render_template("signup.html", error_message="message", invalid=True)
+            return render_template("signup.html", error_message="message confirm", invalid=True)
 
         # check if password equals the confirmation password
         if password != confirm:
             return render_template("signup.html", error_message="message", invalid=True)
-
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
         db = con.cursor()
@@ -128,9 +127,9 @@ def signup():
 
         # after validating all conditions insert new user into database
         user_state = db.execute("SELECT * FROM User_state WHERE title = ?;", ('user',)).fetchone()
-        db.execute("INSERT INTO User(email,full_name,password,admin_state_id) VALUES(?,?,?,?);", (email, fullname, password,user_state[0][1],))
+        db.execute("INSERT INTO User(email,full_name,password,admin_state_id) VALUES(?,?,?,?);", (email, fullname, password,user_state[0],))
         # retrive new user id from database
-        db.execute("SELECT * FROM users WHERE email=?", (email,))
+        db.execute("SELECT * FROM User WHERE email=?", (email,))
 
         # convert retrived data into list of dictionaries
         columns = [column[0] for column in db.description]

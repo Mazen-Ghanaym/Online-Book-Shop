@@ -6,11 +6,14 @@
     <title>SIGNUP</title>
 </head>
 <body>
+    {% if invalid==True %}
+    <h1>error {{error_message}}</h1>
+    {% endif %}
     <form action="/signup" method="post">
         <input type="email" name="email" placeholder="Email">
         <input type="text" name="fullname" placeholder="Full Name">
         <input type="password" name="password" placeholder="Password">
-        <input type="password" name="confirm_password" placeholder="Confirm Password">
+        <input type="password" name="confirm" placeholder="Confirm Password">
         <button type="submit">Sign Up</button>
     </form>
 </body>
