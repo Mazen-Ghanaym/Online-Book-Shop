@@ -16,7 +16,7 @@ app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-session["cart"] = {} # {book_id: quantity}
+# session["cart"] = {} # {book_id: quantity}
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -160,6 +160,12 @@ def logout():
 
 # profile -> mahmoud
 # home
+@app.route("/")
+@login_required
+def index():
+    """Show home page"""
+    session['cart'] = {}
+    return render_template("layout.html")
 # library 
 # book -> mahmoud
 # cart -> mazen
