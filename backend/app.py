@@ -110,7 +110,7 @@ def signup():
 
         # check if password equals the confirmation password
         if password != confirm:
-            return render_template("invalid.html", error_message="message", invalid=True)
+            return render_template("signup.html", error_message="message", invalid=True)
 
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
