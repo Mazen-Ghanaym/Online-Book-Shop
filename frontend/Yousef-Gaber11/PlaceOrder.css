@@ -1,0 +1,226 @@
+/* ------------------------------------------------------------------------Adjust the header styles------------------------------------------------------------------- */
+.header {
+  text-align: center;
+  background-color: #000000;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 65px;
+}
+
+
+/* -----------------------------------------------------Simplify the styles for the (profile) and (car-marketing) links --------------------------------------------- */
+
+.profile{
+  ppadding: 4px;
+  margin: 12px;
+  float: right;
+}
+.car-marketing {
+  padding: 3px;
+  margin: 12px;
+  float: right;
+}
+
+/* -------------------------------------------------------------------Simplify the styles for the (logo) ------------------------------------------------------------ */
+.logo {
+  float: left;
+  padding: 2px;
+  margin: 12px 0px 0px 20px;
+}
+
+/* -----------------------------------------------------------------------Reset some default styles------------------------------------------------------------------ */
+body,
+h2,
+p,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* -------------------------------------------------------------------Simplify the styles for the (body)-------------------------------------------------------------- */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vh
+}
+
+.title{
+  position: absolute;
+  top: 90px;
+  left: 250px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.imgeforbook{
+  position: absolute;
+  top: 145px;
+  left: 445px;
+}
+
+.titlebook{
+  padding: 20px;
+  margin: 20px auto; 
+  position: absolute;
+  top: 125px;
+  left: 600px;
+  font-weight: bold;
+    font-size: 27px;
+
+}
+
+.Writer{
+  padding: 20px;
+  margin: 20px auto; 
+  position: absolute;
+  top: 165px;
+  left: 600px;
+}
+
+.description{
+    color: black;
+    width: 400px;
+    padding: 20px;
+    margin: 20px auto; 
+    top: 195px;
+    left: 600px; 
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+}
+
+
+
+
+
+
+
+
+
+.group_flex{
+  width: 700px;
+  padding: 20px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+  font-weight: bold;
+  position: absolute;
+  top: 300px;
+  left: 406px; 
+}
+.group_flex div{
+  color: rgb(0, 0, 0);
+  width: 25%;
+  text-align: center;
+  padding: 20px;
+}
+/* -----------------------------------------------------------Simplify the styles for the (container)-------------------------------------------------*/
+.container {
+  overflow: hidden;
+  width: 600px;
+  position: absolute;
+  top: 410px;
+  left: 441.600px;
+}
+/* ------------------------------------------------------------Simplify the styles for the (form)------------------------------------------------------*/
+form {
+  padding: 22px;
+  margin: 0px;
+}
+/* ------------------------------------------------------------Simplify the styles for the (labels) --------------------------------------------------- */
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  color: #000000;
+}
+/* ---------------------------------------------------------Simplify the styles for the (any input filed) ---------------------------------------------*/
+input {
+  width: 100%; 
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  background-color: #eee;
+  box-sizing: border-box;
+}
+#phonenum {
+  width: 40%;
+}
+
+button {
+  background-color: #00cc07;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+button:hover {
+  background-color: #00d60b;
+}
+
+
+
+/* ------------------------------------------------------------Adjust the footer styles-------------------------------------------------- */
+.footer {
+  text-align: center;
+  background-color: #000000;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 0;
+  z-index: 1;
+
+  grid-area: footer;
+  
+}
+/*       ____________________________________________              تجارب        ______________________________________________________                 */
+
+
+/*  
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+*/
+
+/*  
+.container {
+  max-width: 100%;
+  margin: 0 auto; 
+}
+@media screen and (max-width: 768px) {
+  .container {
+    width: 90%;
+    margin: 10px;
+  }
+}*/
+
+
+::selection{
+  color: black;
+  background-color: rgb(217, 217, 217);;
+}
+
+
+/* ------------------------------------------------------------------ #The_End. ---------------------------------------------------------------------------*/
