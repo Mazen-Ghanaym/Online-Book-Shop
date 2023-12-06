@@ -1,0 +1,156 @@
+:root {
+    --main-color: #c4c4c4;
+    --box-font-size: 18px;
+}
+
+:visited {
+    color: rgb(179, 179, 179);
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.sub-title {
+    margin: 60px 60px 30px 60px;
+    font-size:30px;
+}
+
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+.book {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.book .image {
+    width:20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.book .image img {
+    width: 220px;
+    height: auto;
+    border-radius: 5px;
+    max-width: 100%;
+}
+
+.book .info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.book .info .title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.book .info .rate ul{
+    list-style-type: none;
+    display: flex;
+    margin:20px 0px;
+}
+.book .info .rate ul li{
+    margin-right: 10px;
+    font-size: 20px;
+}
+.checked {
+    color: orange;
+}
+.book .card{
+    width:20%;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: rgb(241, 238, 238);
+    font-size:var(--box-font-size);
+}
+
+.book .card .price {
+    position: relative;
+    display: flex;
+    /* justify-content: space-around; */
+    /* align-items: center; */
+    width: 100%;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.book .card .price .mid{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.book .card .quantity {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.book .card .quantity label {
+    font-weight: bold;
+}
+.book .card .quantity input {
+    appearance: textfield;
+    width: 50px;
+    height: 22px;
+    text-align: center;
+    margin: 5px;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.book .card .buttons-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+.book .card .buttons-group button {
+    width: 80%;
+    height: 30px;
+    margin: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    color:white;
+}
+.book .card .buttons-group .buy-btn {
+    background-color: #00ADD3;
+}
+.book .card .buttons-group .rmv-btn {
+    background-color: rgb(252, 39, 39);
+}
+.book .card .buttons-group .buy-btn:hover {
+    background-color: #067892;
+    cursor: pointer;
+}
+.book .card .buttons-group .rmv-btn:hover {
+    background-color: rgb(144, 12, 12);
+    cursor: pointer;
+}

@@ -1,0 +1,191 @@
+:root {
+    --main-color: #c4c4c4;
+}
+
+:visited {
+    color: rgb(179, 179, 179);
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+nav {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+}
+
+.left-navbar ul {
+    
+    display: flex;
+    flex-direction: row;
+    
+    margin-left:20px;
+    
+    list-style: none;
+}
+
+.right-navbar ul {
+    display: flex;
+    flex-direction: row-reverse;
+    
+    list-style: none;
+}
+
+.right-navbar ul li {
+    margin: 0px 20px;
+}
+
+.book {
+    width: 100%;
+    height: 600px;
+    margin-top: 50px;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.book .image{
+    flex-basis: 25%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.book .image img{
+    width: 450px;
+    height: auto;
+    max-width: 100%;
+}
+
+
+.book .info {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+.book .info .title {
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.book .info .author {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.book .info .rate ul{
+    list-style-type: none;
+    display: flex;
+    margin:20px 0px;
+}
+.book .info .rate ul li{
+    margin-right: 10px;
+    font-size: 20px;
+}
+.checked {
+    color: orange;
+}
+
+.book .info .description {
+    font-size: 20px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.book .info .description p {
+    margin: 10px 0px;
+}
+
+
+.book .card {
+    flex-basis: 25%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-color);
+    font-size: 20px;
+    margin-top:75px;
+    margin-bottom:75px;
+    padding: 100px 50px;
+
+    border-radius: 20px;
+}
+.book .card .price {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom : 30px;
+}
+.book .card .price {
+    font-size: 20px;
+    font-weight: bold;
+    
+}
+.book .card .quantity{
+    margin-bottom: 50px;
+}
+.book .card .quantity label {
+    font-size: 20px;
+    font-weight: bold;
+}
+.book .card .quantity input {
+    appearance: textfield;
+    width: 50px;
+    height: 22px;
+    text-align: center;
+    padding: 5px 6px;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.book .card .buttons-group{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+}
+.book .card .buttons-group  button{
+    display: block;
+    width: 300px;
+    padding: 20px ;
+    border-radius: 20px;
+
+}
+.book .card .buttons-group .add-btn  {
+    background-color: #00ADD3;
+    color : white;
+    font-size: 20px;
+    font-weight:700;
+    border-color: white;
+    line-height: 12.1px;
+}
+.book .card .buttons-group .buy-btn {
+    background-color: #00D32F;
+    color : white;
+    font-size: 20px;
+    font-weight:700;
+    line-height: 12.1px;
+}
+
+.book .card .buttons-group .buy-btn:hover {
+    background-color: #055d18;
+}
+.book .card .buttons-group .add-btn:hover {
+    background-color: #0a758d;
+}
+
+
