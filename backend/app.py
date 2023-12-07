@@ -110,7 +110,7 @@ def signIn():
     else:
         return render_template("signIn.html", error_message="", invalid=False)
 
-# signup -> mazen
+# signup -> mazen ##
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     session.clear()
