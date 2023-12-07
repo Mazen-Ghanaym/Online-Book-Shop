@@ -57,7 +57,7 @@ def getQuaryFromDataBase(database = "Books.db" ,quary_text = "", *args):
         return None
     return data
 
-def createErrorMessage(err_state = False, err_type = none, err_mesg_txt = none):
+def createErrorMessage(err_state = False, err_type = None, err_mesg_txt = None):
     error_message = {"error_state" : err_state,
                     "error_type" : err_type,
                     "error_message_text" : err_mesg_txt
