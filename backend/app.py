@@ -206,7 +206,7 @@ def profile():
         return render_template("layout.html",
          page_name = "profile", 
          err_mes = createErrorMessage(),
-         items = personInfo)
+         items = ["name","email","pass"])
 
 
 # home
