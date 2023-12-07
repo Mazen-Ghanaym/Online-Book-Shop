@@ -207,12 +207,39 @@ def profile():
 
 
 # home
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
     """Show home page"""
-    session['cart'] = {}
-    return render_template("layout.html")
+    if(request.method == "GET"):
+        session['cart'] = {}
+
+        # display all categories with their books
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # retrive all categories from database
+        db.execute("SELECT * FROM Category;")
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        categories = [dict(zip(columns, row)) for row in db.fetchall()]
+        # retrive all books from database with state = 1 and each category with their books in dictionary
+        for category in categories:
+            db.execute("SELECT * FROM Book WHERE category_id=? AND state=?;", (category["category_id"], 1,))
+            # convert retrived data into list of dictionaries
+            columns = [column[0] for column in db.description]
+            category["books"] = [dict(zip(columns, row)) for row in db.fetchall()]
+        # commit changes
+        con.commit()
+        db.close()
+        con.close()
+        # render home page
+        return render_template("index.html", categories=categories)
+    else:
+        # retrive data from form
+        search = request.form.get("search")
+        # TODO:
+
 # library 
 # book -> mahmoud
 @app.route("/book/<int:bookId>",  methods=["GET", "POST"])
