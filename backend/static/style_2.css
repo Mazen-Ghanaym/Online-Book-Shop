@@ -15,7 +15,7 @@
 
 .sub-title {
     margin: 60px 60px 30px 60px;
-    font-size:30px;
+    font-size: 30px;
 }
 
 
@@ -28,6 +28,7 @@
     padding-left: 15%;
     padding-right: 15%;
 }
+
 .book {
     display: flex;
     justify-content: space-between;
@@ -36,7 +37,7 @@
 }
 
 .book .image {
-    width:20%;
+    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,25 +55,29 @@
     display: flex;
     flex-direction: column;
 }
+
 .book .info .title {
     font-size: 20px;
     font-weight: bold;
 }
 
-.book .info .rate ul{
+.book .info .rate ul {
     list-style-type: none;
     display: flex;
-    margin:20px 0px;
+    margin: 20px 0px;
 }
-.book .info .rate ul li{
+
+.book .info .rate ul li {
     margin-right: 10px;
     font-size: 20px;
 }
+
 .checked {
     color: orange;
 }
-.book .card{
-    width:20%;
+
+.book .card {
+    width: 20%;
     height: 220px;
     display: flex;
     justify-content: center;
@@ -82,7 +87,7 @@
     padding: 20px;
     border-radius: 15px;
     background-color: rgb(241, 238, 238);
-    font-size:var(--box-font-size);
+    font-size: var(--box-font-size);
 }
 
 .book .card .price {
@@ -96,7 +101,7 @@
     text-align: center;
 }
 
-.book .card .price .mid{
+.book .card .price .mid {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -113,6 +118,7 @@
 .book .card .quantity label {
     font-weight: bold;
 }
+
 .book .card .quantity input {
     appearance: textfield;
     width: 50px;
@@ -132,24 +138,29 @@
     width: 100%;
     margin-top: 10px;
 }
+
 .book .card .buttons-group button {
     width: 80%;
     height: 30px;
     margin: 10px;
     border-radius: 10px;
     font-weight: bold;
-    color:white;
+    color: white;
 }
+
 .book .card .buttons-group .buy-btn {
     background-color: #00ADD3;
 }
+
 .book .card .buttons-group .rmv-btn {
     background-color: rgb(252, 39, 39);
 }
+
 .book .card .buttons-group .buy-btn:hover {
     background-color: #067892;
     cursor: pointer;
 }
+
 .book .card .buttons-group .rmv-btn:hover {
     background-color: rgb(144, 12, 12);
     cursor: pointer;

@@ -22,19 +22,19 @@ nav {
 }
 
 .left-navbar ul {
-    
+
     display: flex;
     flex-direction: row;
-    
-    margin-left:20px;
-    
+
+    margin-left: 20px;
+
     list-style: none;
 }
 
 .right-navbar ul {
     display: flex;
     flex-direction: row-reverse;
-    
+
     list-style: none;
 }
 
@@ -52,7 +52,7 @@ nav {
     justify-content: space-evenly;
 }
 
-.book .image{
+.book .image {
     flex-basis: 25%;
     height: 100%;
     width: 100%;
@@ -60,7 +60,8 @@ nav {
     justify-content: center;
     align-items: center;
 }
-.book .image img{
+
+.book .image img {
     width: 450px;
     height: auto;
     max-width: 100%;
@@ -73,26 +74,30 @@ nav {
     flex-direction: column;
     padding-left: 20px;
 }
+
 .book .info .title {
     font-size: 50px;
     font-weight: bold;
     margin-top: 20px;
     margin-bottom: 30px;
 }
+
 .book .info .author {
     font-size: 20px;
     margin-bottom: 25px;
 }
 
-.book .info .rate ul{
+.book .info .rate ul {
     list-style-type: none;
     display: flex;
-    margin:20px 0px;
+    margin: 20px 0px;
 }
-.book .info .rate ul li{
+
+.book .info .rate ul li {
     margin-right: 10px;
     font-size: 20px;
 }
+
 .checked {
     color: orange;
 }
@@ -114,32 +119,37 @@ nav {
     flex-direction: column;
     background-color: var(--main-color);
     font-size: 20px;
-    margin-top:75px;
-    margin-bottom:75px;
+    margin-top: 75px;
+    margin-bottom: 75px;
     padding: 100px 50px;
 
     border-radius: 20px;
 }
+
 .book .card .price {
 
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-bottom : 30px;
+    margin-bottom: 30px;
 }
+
 .book .card .price {
     font-size: 20px;
     font-weight: bold;
-    
+
 }
-.book .card .quantity{
+
+.book .card .quantity {
     margin-bottom: 50px;
 }
+
 .book .card .quantity label {
     font-size: 20px;
     font-weight: bold;
 }
+
 .book .card .quantity input {
     appearance: textfield;
     width: 50px;
@@ -151,41 +161,44 @@ nav {
     font-size: 20px;
     font-weight: bold;
 }
-.book .card .buttons-group{
+
+.book .card .buttons-group {
     display: flex;
     flex-direction: column;
     gap: 12px;
     justify-content: space-between;
     align-items: center;
 }
-.book .card .buttons-group  button{
+
+.book .card .buttons-group button {
     display: block;
     width: 300px;
-    padding: 20px ;
+    padding: 20px;
     border-radius: 20px;
 
 }
-.book .card .buttons-group .add-btn  {
+
+.book .card .buttons-group .add-btn {
     background-color: #00ADD3;
-    color : white;
+    color: white;
     font-size: 20px;
-    font-weight:700;
+    font-weight: 700;
     border-color: white;
     line-height: 12.1px;
 }
+
 .book .card .buttons-group .buy-btn {
     background-color: #00D32F;
-    color : white;
+    color: white;
     font-size: 20px;
-    font-weight:700;
+    font-weight: 700;
     line-height: 12.1px;
 }
 
 .book .card .buttons-group .buy-btn:hover {
     background-color: #055d18;
 }
+
 .book .card .buttons-group .add-btn:hover {
     background-color: #0a758d;
 }
-
-

@@ -29,7 +29,8 @@
   float: right;
 }
 
-.sing-in span,.sing-up span{
+.sing-in span,
+.sing-up span {
   display: inherit;
   border-radius: inherit;
   padding: 1rem 2rem;
@@ -92,7 +93,7 @@
 }
 
 /* --------------------------------------------------- Reset some default styles (body ,h2 ,p ,button) ----------------------------------------------- */
- 
+
 body,
 h2,
 p,
@@ -160,7 +161,7 @@ label {
 /*...................................................... Simplify the styles for the (any input filed) ............................................. */
 
 input {
-  width: 100%; 
+  width: 100%;
   padding: 10px;
   margin-bottom: 16px;
   border: 1px solid #000000;
@@ -217,8 +218,9 @@ button:hover {
 
 .container {
   max-width: 100%;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
+
 @media screen and (max-width: 768px) {
   .container {
     width: 90%;
@@ -226,10 +228,12 @@ button:hover {
   }
 }
 
-::selection{
+::selection {
   color: rgb(0, 0, 0);
-  background-color: rgb(217, 217, 217);;
+  background-color: rgb(217, 217, 217);
+  ;
 }
+
 /*  
 *{
   box-sizing: border-box;

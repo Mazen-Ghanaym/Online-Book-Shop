@@ -13,11 +13,12 @@
 
 /* -----------------------------------------------------Simplify the styles for the (profile) and (car-marketing) links --------------------------------------------- */
 
-.profile{
+.profile {
   ppadding: 4px;
   margin: 12px;
   float: right;
 }
+
 .car-marketing {
   padding: 3px;
   margin: 12px;
@@ -51,7 +52,7 @@ body {
   width: 100vh
 }
 
-.title{
+.title {
   position: absolute;
   top: 90px;
   left: 250px;
@@ -59,44 +60,44 @@ body {
   font-weight: bold;
 }
 
-.imgeforbook{
+.imgeforbook {
   position: absolute;
   top: 145px;
   left: 445px;
 }
 
-.titlebook{
+.titlebook {
   padding: 20px;
-  margin: 20px auto; 
+  margin: 20px auto;
   position: absolute;
   top: 125px;
   left: 600px;
   font-weight: bold;
-    font-size: 27px;
+  font-size: 27px;
 
 }
 
-.Writer{
+.Writer {
   padding: 20px;
-  margin: 20px auto; 
+  margin: 20px auto;
   position: absolute;
   top: 165px;
   left: 600px;
 }
 
-.description{
-    color: black;
-    width: 400px;
-    padding: 20px;
-    margin: 20px auto; 
-    top: 195px;
-    left: 600px; 
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;  
-    overflow: hidden;
-    text-overflow: ellipsis;
-    position: absolute;
+.description {
+  color: black;
+  width: 400px;
+  padding: 20px;
+  margin: 20px auto;
+  top: 195px;
+  left: 600px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: absolute;
 }
 
 
@@ -107,7 +108,7 @@ body {
 
 
 
-.group_flex{
+.group_flex {
   width: 700px;
   padding: 20px;
   margin: 30px auto;
@@ -117,14 +118,16 @@ body {
   font-weight: bold;
   position: absolute;
   top: 300px;
-  left: 406px; 
+  left: 406px;
 }
-.group_flex div{
+
+.group_flex div {
   color: rgb(0, 0, 0);
   width: 25%;
   text-align: center;
   padding: 20px;
 }
+
 /* -----------------------------------------------------------Simplify the styles for the (container)-------------------------------------------------*/
 .container {
   overflow: hidden;
@@ -133,11 +136,13 @@ body {
   top: 410px;
   left: 441.600px;
 }
+
 /* ------------------------------------------------------------Simplify the styles for the (form)------------------------------------------------------*/
 form {
   padding: 22px;
   margin: 0px;
 }
+
 /* ------------------------------------------------------------Simplify the styles for the (labels) --------------------------------------------------- */
 label {
   font-weight: bold;
@@ -145,9 +150,10 @@ label {
   margin-bottom: 8px;
   color: #000000;
 }
+
 /* ---------------------------------------------------------Simplify the styles for the (any input filed) ---------------------------------------------*/
 input {
-  width: 100%; 
+  width: 100%;
   padding: 10px;
   margin-bottom: 16px;
   border: 1px solid #000000;
@@ -155,6 +161,7 @@ input {
   background-color: #eee;
   box-sizing: border-box;
 }
+
 #phonenum {
   width: 40%;
 }
@@ -172,6 +179,7 @@ button {
   font-size: 20px;
   font-weight: bold;
 }
+
 button:hover {
   background-color: #00d60b;
 }
@@ -191,8 +199,9 @@ button:hover {
   z-index: 1;
 
   grid-area: footer;
-  
+
 }
+
 /*       ____________________________________________              تجارب        ______________________________________________________                 */
 
 
@@ -217,9 +226,10 @@ button:hover {
 }*/
 
 
-::selection{
+::selection {
   color: black;
-  background-color: rgb(217, 217, 217);;
+  background-color: rgb(217, 217, 217);
+  ;
 }
 
 
