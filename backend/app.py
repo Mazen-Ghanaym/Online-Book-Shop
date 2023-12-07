@@ -201,12 +201,12 @@ def profile():
     else:
         personInfo = getQuaryFromDataBase("Books.db",
                                           "select * from user where user_id = ?",
-                                          int(session["user_id"]),
-                                          )
+                                        int(session["user_id"]),
+                                        )
         return render_template("layout.html",
-         page_name = "profile", 
-         err_mes = createErrorMessage(),
-         items = ["name","email","pass"])
+        page_name = "profile", 
+        err_mes = createErrorMessage(),
+        items = ["name","email","pass"])
 
 
 # home
