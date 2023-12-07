@@ -203,7 +203,10 @@ def profile():
                                           "select * from user where user_id = ?",
                                           int(session["user_id"]),
                                           )
-        return render_template("layout.html")
+        return render_template("layout.html",
+         page_name = "profile", 
+         err_mes = createErrorMessage(),
+         items = personInfo)
 
 
 # home
@@ -282,7 +285,7 @@ def book(bookId):
             session["cart"][bookId] = int(request.form.get("quantity"))
         if "cart" in session:
             quantityOfBook = int(request.form.get("quantity")) # TODO need to pass as arg!
-        return render_template("try.html", page_name = f"add to cart book id = {bookId}")
+        return render_template("singlebook.html", page_name = f"add to cart book id = {bookId}")
     
     # if the user request the page via get method
     else:
