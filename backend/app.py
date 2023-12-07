@@ -203,7 +203,7 @@ def profile():
                                           "select * from user where user_id = ?",
                                           int(session["user_id"]),
                                           )
-        return render_template("try.html")
+        return render_template("layout.html")
 
 
 # home
@@ -239,7 +239,7 @@ def book(bookId):
                             "error_message_text" : "Quantity can not be non positive!"}
             # return the page with the ma=essage
             # do not forget to add the bookInfo to the page. 
-            return render_template("try.html", 
+            return render_template("singlebook.html", 
                                    page_name = "error message : quantity can not be non positive!", 
                                    err_mes = error_message)
 
@@ -269,7 +269,7 @@ def book(bookId):
             error_message["error_state"] = True
             error_message["error_type"] = "not found"
             error_message["error_message_text"] = "This book is not found at current time!"
-        return render_template("try.html",
+        return render_template("singlebook.html",
                                 title = title,
                                 page_name = f"bookId = {bookId}",
                                 err_mes = error_message)
