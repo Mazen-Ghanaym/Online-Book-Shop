@@ -7,6 +7,11 @@
 </head>
 <body>
     {{ page_name }}
+    <div style="background-color: red; color: black;">
+    {%if err_mes.error_state == 1 %}
+        {{err_mes.error_message_text}}
+    {%endif%}
+    </div>
     {% for item in items %}
         <div>{{item}}</div>
     {% endfor %}
