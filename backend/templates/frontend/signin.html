@@ -1,4 +1,4 @@
-<!-- /* ................................................................... Page Sing-Up.................................................................... */ -->
+<!-- /* ................................................................... Page Sing-In.................................................................... */ -->
 
 <!DOCTYPE html>
 
@@ -7,8 +7,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="static/SignUp.css" />
-  <title>Sign Up</title>
+  <link rel="stylesheet" href="static/SignIn.css" />
+  <title>Sign In</title>
 </head>
 
 <body>
@@ -19,12 +19,12 @@
       <img class="logo" src="images/bookshop.png" width="60PX" height="60PX" />
       <!--logo-->
 
-      <a class="sing-in" href="SingIn.html">
+      <a href="{{ url_for('signin') }}" class="sing-in">
         <!--button sing in-->
         <span> Sign In </span>
       </a>
 
-      <a class="sing-up" href="SignUp.html">
+      <a href="{{ url_for('signup') }}" class="sing-up">
         <!--button sing up-->
         <span> Sign Up </span>
       </a>
@@ -38,25 +38,17 @@
     <form action="####" method="post">
       <!--start form-->
 
-      <h2>Sign Up</h2>
-
-      <label for="Full Name">Full Name:</label>
-      <!--input filed for full name-->
-      <input type="text" id="Full Name" name="Full Name" required />
+      <h2>Sign In</h2>
 
       <label for="Email">Email:</label>
       <!--input filed for email-->
       <input type="email" id="Email" name="Email" required />
 
-      <label for="pass1">Password:</label>
+      <label for="pass">Password:</label>
       <!--input filed for password-->
-      <input type="password" id="pass1" name="Password" required />
+      <input type="password" id="pass" name="Password" required />
 
-      <label for="pass2">Confirm Password:</label>
-      <!--input filed for confirm password-->
-      <input type="password" id="pass2" name="Password" required />
-
-      <button type="submit">Sign Up</button>
+      <button type="submit">Sign In</button>
       <!--button submit form-->
     </form>
     <!--end form-->
