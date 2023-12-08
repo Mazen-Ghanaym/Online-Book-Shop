@@ -1,0 +1,240 @@
+/* ................................................................... Page Sing-In.................................................................... */
+
+/* ----------------------------------------------------------------------HEADER------------------------------------------------------------------------ */
+
+.header {
+  text-align: center;
+  background-color: #000000;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+}
+
+/* ------------------------------------------------------------ button (sing-in , sing-up) ------------------------------------------------------------------- */
+
+.sing-in,
+.sing-up {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  color: #ffffff;
+  margin: 10px;
+  width: fit-content;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  float: right;
+}
+
+.sing-in span,.sing-up span{
+  display: inherit;
+  border-radius: inherit;
+  padding: 1rem 2rem;
+  translate: 0.25rem -0.25rem;
+  transition: translate 1000ms cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    background-color 250ms;
+}
+
+.sing-in span {
+  background-color: rgb(0, 135, 211);
+}
+
+.sing-up span {
+  background-color: rgb(18, 214, 61);
+}
+
+/* ----------------------button (sing-in) ------------------------*/
+
+.sing-in {
+  background-color: rgb(9, 99, 149);
+}
+
+.sing-in:hover span {
+  background-color: rgb(0, 64, 180);
+}
+
+.sing-in:active span {
+  translate: none;
+}
+
+
+.sing-in:hover {
+  background-color: rgb(2, 40, 90);
+}
+
+/* ----------------------button (sing-up) ------------------------*/
+
+.sing-up {
+  background-color: rgb(5, 165, 29);
+}
+
+.sing-up:hover {
+  background-color: rgb(3, 74, 20);
+}
+
+.sing-up:active span {
+  translate: none;
+}
+
+.sing-up:hover span {
+  background-color: rgb(9, 149, 40);
+}
+
+/*--------------------------------------------------------- Simplify the styles for the (logo) -------------------------------------------------------  */
+
+.logo {
+  float: left;
+  padding: 11px;
+  margin: -6px 10px;
+}
+
+/* --------------------------------------------------- Reset some default styles (body ,h2 ,p ,button) ----------------------------------------------- */
+ 
+body,
+h2,
+p,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+/*........................................................ Simplify the styles for the (body) .......................................................*/
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  direction: ltr;
+}
+
+/*....................................................... Simplify the styles for the (container) ................................................*/
+
+.container {
+  background-color: #ffffff;
+  border-radius: 30px;
+  overflow: hidden;
+  width: 1000px;
+  margin: 20px;
+  transition: 1.5s;
+}
+
+.container:hover {
+  box-shadow: 0 0 20px rgb(0, 135, 211);
+}
+
+/*........................................................... Simplify the styles for the (form) ..............................................*/
+
+form {
+  padding: 30px;
+  border: 3px solid #000000;
+  border-radius: 30px;
+}
+
+/*.................................................. Simplify the styles for the (h2) ues in word (Sing in) ................................... */
+
+h2 {
+  text-align: left;
+  color: #000000;
+  margin-bottom: 30px;
+  font-weight: 600;
+  font-size: 35px;
+}
+
+
+/* ...........................................................Simplify the styles for the (labels)...............................................  */
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #000000;
+  font-weight: bold;
+}
+
+
+/*...................................................... Simplify the styles for the (any input filed) ............................................. */
+
+input {
+  width: 100%; 
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  background-color: rgb(217, 217, 217);
+  box-sizing: border-box;
+}
+
+input:hover {
+  box-shadow: 0 0 20px rgb(9, 99, 149);
+}
+
+/*............................................................. button for submit form .................................................................*/
+
+button {
+  background-color: rgb(0, 135, 211);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  margin-top: 35px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  transition: .5s;
+}
+
+button:hover {
+  background-color: rgb(0, 64, 180);
+  letter-spacing: 6px;
+}
+
+/*............................................................. Adjust the footer styles.................................................................... */
+
+.footer {
+  text-align: center;
+  background-color: #000000;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 0;
+  height: 8px;
+  line-height: 6px;
+}
+
+
+/*       ____________________________________________              تجارب        ______________________________________________________                 */
+
+
+
+.container {
+  max-width: 100%;
+  margin: 0 auto; 
+}
+@media screen and (max-width: 768px) {
+  .container {
+    width: 90%;
+    margin: 10px;
+  }
+}
+
+::selection{
+  color: rgb(0, 0, 0);
+  background-color: rgb(217, 217, 217);;
+}
+/*  
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}*/
+
+/* ------------------------------------------------------------------ #The_End. ---------------------------------------------------------------------------*/

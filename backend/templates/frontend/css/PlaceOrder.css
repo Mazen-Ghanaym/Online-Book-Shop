@@ -1,0 +1,174 @@
+.buy .title {
+  position: absolute;
+  top: 90px;
+  left: 250px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.buy .imgeforbook {
+  position: absolute;
+  top: 145px;
+  left: 445px;
+}
+
+.buy .titlebook {
+  padding: 20px;
+  margin: 20px auto;
+  position: absolute;
+  top: 125px;
+  left: 600px;
+  font-weight: bold;
+  font-size: 27px;
+}
+
+.buy .Writer {
+  padding: 20px;
+  margin: 20px auto;
+  position: absolute;
+  top: 165px;
+  left: 600px;
+}
+
+.buy .description {
+  color: black;
+  width: 400px;
+  padding: 20px;
+  margin: 20px auto;
+  top: 195px;
+  left: 600px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: absolute;
+}
+
+.buy .group_flex {
+  /* width: 700px; */
+  padding: 20px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+  font-weight: bold;
+  /* position: absolute; */
+  transition: 500ms;
+  top: 300px;
+  left: 406px;
+}
+
+.buy .group_flex div {
+  /* color: rgb(0, 0, 0); */
+  width: 100%;
+  text-align: center;
+  font-size: 1.8rem;
+  padding: 20px;
+}
+.buy .group_flex:hover {
+  background-color: #00cc07;
+  color: #fff !important;
+  cursor: pointer;
+}
+/* -----------------------------------------------------------Simplify the styles for the (container)-------------------------------------------------*/
+.buy .container {
+  overflow: hidden;
+  /* width: 600px; */
+  /* position: absolute; */
+}
+/* ------------------------------------------------------------Simplify the styles for the (form)------------------------------------------------------*/
+.buy form {
+  padding: 22px;
+  margin: 0px;
+}
+/* ------------------------------------------------------------Simplify the styles for the (labels) --------------------------------------------------- */
+.buy label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  color: #000000;
+}
+/* ---------------------------------------------------------Simplify the styles for the (any input filed) ---------------------------------------------*/
+.buy input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  background-color: #eee;
+  box-sizing: border-box;
+}
+.buy button {
+  background-color: #00cc07;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+.buy button:hover {
+  background-color: #00d60b;
+}
+
+/* ------------------------------------------------------------Adjust the footer styles-------------------------------------------------- */
+.buy .footer {
+  text-align: center;
+  background-color: #000000;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 0;
+  z-index: 1;
+
+  grid-area: footer;
+}
+/*       ____________________________________________              تجارب        ______________________________________________________                 */
+
+/*  
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+*/
+
+/*  
+.container {
+  max-width: 100%;
+  margin: 0 auto; 
+}
+@media screen and (max-width: 768px) {
+  .container {
+    width: 90%;
+    margin: 10px;
+  }
+}*/
+
+::selection {
+  color: black;
+  background-color: rgb(217, 217, 217);
+}
+
+/* ------------------------------------------------------------------ #The_End. ---------------------------------------------------------------------------*/
+.save-btn-form {
+  width: 100%;
+  margin-top: 2rem;
+  text-align: center;
+}
+.save-btn-form button {
+  font-size: 1.2rem;
+
+  border-radius: 15px;
+  background-color: rgb(0, 135, 211);
+  color: white;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}

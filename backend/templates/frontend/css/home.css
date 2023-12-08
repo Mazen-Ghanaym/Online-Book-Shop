@@ -1,0 +1,300 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+html {
+  font-size: 10px;
+}
+
+header {
+  height: 474px;
+  width: 100%;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.699) 100%, transparent),
+    url(../images/hero-img.png);
+  background-position: center;
+  /* background-attachment: scroll; */
+}
+
+/* ************************************* navbar **************************************/
+header nav {
+  /* height: 61px; */
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  padding: 10px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav img {
+  cursor: pointer;
+}
+
+.sing,
+.log {
+  width: 82px;
+  border: none;
+  color: white;
+  margin-left: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.sing {
+  background-color: #00d32f;
+}
+
+.log {
+  background-color: #0087d3;
+}
+
+.sing:hover {
+  background-color: #005212;
+}
+
+.log:hover {
+  background-color: #003a5b;
+}
+
+/* ************************************* search **************************************/
+
+.search {
+  height: calc(100% - 130px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search input {
+  width: 30%;
+  height: 37px;
+  padding: 10px;
+  font-size: 2rem;
+
+  border-radius: 0 12px 12px 0;
+  border-left: none;
+  border: none;
+  outline: none;
+}
+
+.search button {
+  height: 37px;
+  font-size: 1.6rem;
+  border-radius: 12px 0 0 12px;
+  border: none;
+  background-color: white;
+  padding-left: 12px;
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+.search button i {
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+/* *************************************  **************************************/
+
+.books {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: 600ms;
+  margin-bottom: 30px;
+  padding: 20px;
+  gap: 20px;
+}
+
+.books:hover {
+  background-color: #f0f0f0;
+}
+
+.catigories {
+  padding: 90px 90px;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.head {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 31.47px;
+  margin-bottom: 30px;
+}
+
+.type-book {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 37px;
+}
+
+.book {
+  position: relative;
+  height: 350px;
+  width: 156px;
+  /* margin-bottom: 40px; */
+  cursor: pointer;
+  border: 1px solid black;
+  overflow: hidden;
+}
+.book .add-to-cart {
+  position: absolute;
+  top: 45%;
+  right: -35%;
+
+  color: white;
+  border: none;
+  border-radius: 0 0 0 12px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.book .add-to-cart button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background-color: rgba(128, 128, 128, 0.774);
+  padding: 1rem;
+  border-radius: 100%;
+
+  color: rgb(41, 41, 41);
+}
+.img-book {
+  width: 100%;
+  height: 187px;
+}
+
+.img-book img {
+  width: 100%;
+  height: 100%;
+}
+
+.book-details {
+  padding: 0.4rem;
+  /* display: flex;
+    flex-direction: column; */
+}
+.book-details .add-to-cart {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  color: white;
+  border: none;
+  border-radius: 0 0 0 12px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.title {
+  margin-bottom: 7px;
+}
+
+.title .book-title {
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+  line-height: 12.1px;
+}
+
+.title .book-creator {
+  text-decoration: none;
+  color: #4a4949;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.title .book-creator:hover {
+  color: black;
+}
+
+.explain {
+  font-size: 1rem;
+  font-weight: 500;
+
+  color: #000000;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.price {
+  display: flex;
+  justify-content: end;
+}
+
+.price span {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 12.1px;
+}
+
+/* ************************************* stars ************************************* */
+
+.checked {
+  color: orange;
+}
+
+.stars {
+  height: 20px;
+  margin-top: 4px;
+  padding-left: 4px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+
+.fa {
+  font-size: 17px;
+}
+
+/* ************************************* footer ************************************* */
+
+footer {
+  height: 27px;
+  color: white;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.copy {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14.52px;
+}
+
+.popular-books .book {
+  cursor: pointer;
+  border: 3px solid gold;
+  overflow: hidden;
+}
+
+.catigories {
+  padding-top: 0;
+}
+.popular-books {
+  padding-top: 50px;
+  padding-bottom: 0;
+}

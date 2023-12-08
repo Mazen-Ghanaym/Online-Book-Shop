@@ -269,7 +269,7 @@ def book(bookId):
                             "error_message_text" : "Quantity can not be non positive!"}
             # return the page with the ma=essage
             # do not forget to add the bookInfo to the page. 
-            return render_template("singlebook.html", 
+            return render_template("frontend/single-book.html", 
                                    page_name = "error message : quantity can not be non positive!", 
                                    err_mes = error_message)
 
@@ -285,7 +285,7 @@ def book(bookId):
             session["cart"][bookId] = int(request.form.get("quantity"))
         if "cart" in session:
             quantityOfBook = int(request.form.get("quantity")) # TODO need to pass as arg!
-        return render_template("singlebook.html", page_name = f"add to cart book id = {bookId}")
+        return render_template("frontend/single-book.html", page_name = f"add to cart book id = {bookId}")
     
     # if the user request the page via get method
     else:
@@ -299,7 +299,7 @@ def book(bookId):
             error_message["error_state"] = True
             error_message["error_type"] = "not found"
             error_message["error_message_text"] = "This book is not found at current time!"
-        return render_template("singlebook.html",
+        return render_template("frontend/single-book.html",
                                 title = title,
                                 page_name = f"bookId = {bookId}",
                                 err_mes = error_message)
