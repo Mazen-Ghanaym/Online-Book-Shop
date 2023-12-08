@@ -110,7 +110,7 @@ def signIn():
     else:
         return render_template("signIn.html", error_message="", invalid=False)
 
-# signup -> mazen ##
+# signup -> mazen
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     session.clear()
@@ -201,12 +201,12 @@ def profile():
     else:
         personInfo = getQuaryFromDataBase("Books.db",
                                           "select * from user where user_id = ?",
-                                        int(session["user_id"]),
-                                        )
+                                          int(session["user_id"]),
+                                          )
         return render_template("layout.html",
-        page_name = "profile", 
-        err_mes = createErrorMessage(),
-        items = ["name","email","pass"])
+         page_name = "profile", 
+         err_mes = createErrorMessage(),
+         items = personInfo)
 
 
 # home
