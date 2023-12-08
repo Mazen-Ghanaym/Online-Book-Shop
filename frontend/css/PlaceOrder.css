@@ -99,10 +99,6 @@
   background-color: #eee;
   box-sizing: border-box;
 }
-.buy #phonenum {
-  /* width: 40%; */
-}
-
 .buy button {
   background-color: #00cc07;
   color: #fff;
