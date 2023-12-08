@@ -252,8 +252,12 @@ def book(bookId):
     bookInfo = getQuaryFromDataBase("Books.db",
                                     "select * from Book where book_id = ?",
                                     bookId,
-                                    )
-    # if user wants to add an item to thier cart
+                                    )[0]
+    similarBookInfo = getQuaryFromDataBase("Books.db",
+                                           "select * from Book where category_id = ? LIMIT 4",
+                                           bookInfo["category_id"],
+                                           )
+    # if user wants to add an item to their cart
     if request.method == "POST":
         # handling 
         if session.get("user_id") == None:
