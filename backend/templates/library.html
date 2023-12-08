@@ -15,17 +15,27 @@
   <!--  -->
   <link rel="stylesheet" href="static/catrgories.css" />
   <title>Book Store</title>
+  <script>
+    function redirectToLink(link) {
+      // Change the URL to the desired destination
+      window.location.href = link;
+    }
+  </script>
 </head>
 
 <body>
   <header>
     <!-- navbar -->
     <nav>
-      <img src="images/logo.svg" alt="Logo" />
+      <img src="static/images/logo.svg" alt="Logo" />
 
       <div class="sing-log">
-        <button class="sing">Sing Up</button>
-        <button class="log">Log In</button>
+        {% if session['user_id'] %}
+        <button onclick="redirectToLink('/logout')" class="sing">Log Out</button>
+        {% else %}
+        <button onclick="redirectToLink('/signup')" class="sing">Sing Up</button>
+        <button onclick="redirectToLink('/signup')" class="log">Log In</button>
+        {% endif %}
       </div>
     </nav>
     <!--  -->
@@ -73,7 +83,7 @@
           </form>
 
           <div class="img-book">
-            <img src="images/Introduction-to-Algorithms1.svg" alt="" />
+            <img src="static/images/Introduction-to-Algorithms1.svg" alt="" />
           </div>
 
           <div class="stars">
@@ -112,7 +122,7 @@
           </form>
 
           <div class="img-book">
-            <img src="images/Introduction-to-Algorithms1.svg" alt="" />
+            <img src="static/images/Introduction-to-Algorithms1.svg" alt="" />
           </div>
 
           <div class="stars">
@@ -151,7 +161,7 @@
           </form>
 
           <div class="img-book">
-            <img src="images/Introduction-to-Algorithms1.svg" alt="" />
+            <img src="static/images/Introduction-to-Algorithms1.svg" alt="" />
           </div>
 
           <div class="stars">
@@ -190,7 +200,7 @@
           </form>
 
           <div class="img-book">
-            <img src="images/Introduction-to-Algorithms1.svg" alt="" />
+            <img src="static/images/Introduction-to-Algorithms1.svg" alt="" />
           </div>
 
           <div class="stars">
@@ -229,7 +239,7 @@
           </form>
 
           <div class="img-book">
-            <img src="images/Introduction-to-Algorithms1.svg" alt="" />
+            <img src="static/images/Introduction-to-Algorithms1.svg" alt="" />
           </div>
 
           <div class="stars">

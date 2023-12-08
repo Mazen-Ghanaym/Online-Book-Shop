@@ -15,17 +15,27 @@
   <!--  -->
   <link rel="stylesheet" href="static/home.css" />
   <title>Book Store</title>
+  <script>
+    function redirectToLink(link) {
+      // Change the URL to the desired destination
+      window.location.href = link;
+    }
+  </script>
 </head>
 
 <body>
   <header>
     <!-- navbar -->
     <nav>
-      <img src="images/logo.svg" alt="Logo" />
-
+      <a href="{{url_for('home')}}"><img src="static/images/logo.svg" alt="Logo" />
+      </a>
       <div class="sing-log">
-        <button class="sing">Sing Up</button>
-        <button class="log">Log In</button>
+        {% if session['user_id'] %}
+        <button onclick="redirectToLink('/logout')" class="sing">Log Out</button>
+        {% else %}
+        <button onclick="redirectToLink('/signup')" class="sing">Sing Up</button>
+        <button onclick="redirectToLink('/signin')" class="log">Log In</button>
+        {% endif %}
       </div>
     </nav>
 
@@ -49,7 +59,7 @@
         </form>
 
         <div class="img-book">
-          <img src="images/Introduction-to-Algorithms1.svg" alt="" />
+          <img src="static/images/Introduction-to-Algorithms1.svg" alt="" />
         </div>
 
         <div class="stars">

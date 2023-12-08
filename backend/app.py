@@ -10,7 +10,7 @@ from functools import wraps
 import requests
 import sqlite3
 # Configure application
-app = Flask(__name__,template_folder='templates/frontend', static_folder='templates/frontend/static')
+app = Flask(__name__)
 
 
 # Configure session to use filesystem (instead of signed cookies)
@@ -211,8 +211,8 @@ def profile():
 
 # home
 @app.route("/", methods=["GET", "POST"])
-@login_required
-def index():
+@app.route("/home", methods=["GET", "POST"])
+def home():
     """Show home page"""
     if(request.method == "GET"):
         session['cart'] = {}
@@ -238,7 +238,7 @@ def index():
         con.close()
         # render home page
         # TODO: popular books
-        return render_template("index.html", categories=categories)
+        return render_template("home.html", categories=categories)
     else:
         # retrive data from form
         search = request.form.get("search")

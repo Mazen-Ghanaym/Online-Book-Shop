@@ -16,15 +16,15 @@
     <!--start header-->
 
     <header>
-      <img class="logo" src="images/bookshop.png" width="60PX" height="60PX" />
+      <img class="logo" src="static/images/bookshop.png" width="60PX" height="60PX" />
       <!--logo-->
 
-      <a class="sing-in" href="SingIn.html">
+      <a class="sing-in" href="{{ url_for('signin') }}">
         <!--button sing in-->
         <span> Sign In </span>
       </a>
 
-      <a class="sing-up" href="SignUp.html">
+      <a class="sing-up" href="{{ url_for('signup') }}">
         <!--button sing up-->
         <span> Sign Up </span>
       </a>
@@ -35,26 +35,26 @@
   <div class="container">
     <!--start container-->
 
-    <form action="####" method="post">
+    <form action="{{ url_for('signup') }}" method="post">
       <!--start form-->
 
       <h2>Sign Up</h2>
 
       <label for="Full Name">Full Name:</label>
       <!--input filed for full name-->
-      <input type="text" id="Full Name" name="Full Name" required />
+      <input type="text" id="Full Name" name="fullname" required />
 
       <label for="Email">Email:</label>
       <!--input filed for email-->
-      <input type="email" id="Email" name="Email" required />
+      <input type="email" id="Email" name="email" required />
 
       <label for="pass1">Password:</label>
       <!--input filed for password-->
-      <input type="password" id="pass1" name="Password" required />
+      <input type="password" id="pass1" name="password" required />
 
       <label for="pass2">Confirm Password:</label>
       <!--input filed for confirm password-->
-      <input type="password" id="pass2" name="Password" required />
+      <input type="password" id="pass2" name="confirm" required />
 
       <button type="submit">Sign Up</button>
       <!--button submit form-->
