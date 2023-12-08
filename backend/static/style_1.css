@@ -1,204 +1,387 @@
 :root {
-    --main-color: #c4c4c4;
+  --main-color: #c4c4c4;
 }
 
 :visited {
-    color: rgb(179, 179, 179);
+  color: rgb(179, 179, 179);
 }
 
 * {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+  font-family: sans-serif;
+
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
 nav {
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #000000;
-    color: rgb(255, 255, 255);
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
 }
 
 .left-navbar ul {
+  display: flex;
+  flex-direction: row;
 
-    display: flex;
-    flex-direction: row;
+  margin-left: 20px;
 
-    margin-left: 20px;
-
-    list-style: none;
+  list-style: none;
 }
 
 .right-navbar ul {
-    display: flex;
-    flex-direction: row-reverse;
+  display: flex;
+  flex-direction: row-reverse;
 
-    list-style: none;
+  list-style: none;
 }
 
 .right-navbar ul li {
-    margin: 0px 20px;
+  margin: 0px 20px;
 }
 
 .book {
-    width: 100%;
-    height: 600px;
-    margin-top: 50px;
-    padding-left: 25px;
-    padding-right: 25px;
-    display: flex;
-    justify-content: space-evenly;
+  width: 100%;
+  /* height: 600px; */
+  margin-top: 50px;
+  padding-left: 25px;
+  padding-right: 25px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .book .image {
-    flex-basis: 25%;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  flex-basis: 25%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
 .book .image img {
-    width: 450px;
-    height: auto;
-    max-width: 100%;
+  width: 450px;
+  height: auto;
+  max-width: 100%;
 }
-
 
 .book .info {
-    flex-basis: 50%;
-    display: flex;
-    flex-direction: column;
-    padding-left: 20px;
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
 }
-
 .book .info .title {
-    font-size: 50px;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 30px;
+  font-size: 50px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
-
 .book .info .author {
-    font-size: 20px;
-    margin-bottom: 25px;
+  font-size: 20px;
+  margin-bottom: 25px;
 }
 
 .book .info .rate ul {
-    list-style-type: none;
-    display: flex;
-    margin: 20px 0px;
+  list-style-type: none;
+  display: flex;
+  margin: 20px 0px;
 }
-
 .book .info .rate ul li {
-    margin-right: 10px;
-    font-size: 20px;
+  margin-right: 10px;
+  font-size: 20px;
 }
-
 .checked {
-    color: orange;
+  color: orange;
 }
 
 .book .info .description {
-    font-size: 20px;
-    margin-top: 25px;
-    margin-bottom: 25px;
+  font-size: 20px;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .book .info .description p {
-    margin: 10px 0px;
+  margin: 10px 0px;
 }
-
 
 .book .card {
-    flex-basis: 25%;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--main-color);
-    font-size: 20px;
-    margin-top: 75px;
-    margin-bottom: 75px;
-    padding: 100px 50px;
+  flex-basis: 25%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--main-color);
+  font-size: 20px;
+  margin-top: 75px;
+  margin-bottom: 75px;
+  padding: 100px 50px;
 
-    border-radius: 20px;
+  border-radius: 20px;
 }
-
 .book .card .price {
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
 }
-
 .book .card .price {
-    font-size: 20px;
-    font-weight: bold;
-
+  font-size: 20px;
+  font-weight: bold;
 }
-
 .book .card .quantity {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
-
 .book .card .quantity label {
-    font-size: 20px;
-    font-weight: bold;
+  font-size: 20px;
+  font-weight: bold;
 }
-
 .book .card .quantity input {
-    appearance: textfield;
-    width: 50px;
-    height: 22px;
-    text-align: center;
-    padding: 5px 6px;
-    border: 1px solid white;
-    border-radius: 5px;
-    font-size: 20px;
-    font-weight: bold;
+  appearance: textfield;
+  width: 50px;
+  height: 22px;
+  text-align: center;
+  padding: 5px 6px;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
 }
-
 .book .card .buttons-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
 }
-
 .book .card .buttons-group button {
-    display: block;
-    width: 300px;
-    padding: 20px;
-    border-radius: 20px;
-
+  display: block;
+  width: 300px;
+  padding: 20px;
+  border-radius: 20px;
 }
-
 .book .card .buttons-group .add-btn {
-    background-color: #00ADD3;
-    color: white;
-    font-size: 20px;
-    font-weight: 700;
-    border-color: white;
-    line-height: 12.1px;
+  background-color: #00add3;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  border-color: white;
+  line-height: 12.1px;
 }
-
 .book .card .buttons-group .buy-btn {
-    background-color: #00D32F;
-    color: white;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 12.1px;
+  background-color: #00d32f;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 12.1px;
 }
 
 .book .card .buttons-group .buy-btn:hover {
-    background-color: #055d18;
+  background-color: #055d18;
+}
+.book .card .buttons-group .add-btn:hover {
+  background-color: #0a758d;
 }
 
-.book .card .buttons-group .add-btn:hover {
-    background-color: #0a758d;
+button {
+  /* cursor: pointer; */
+  border: none !important;
+  outline: none;
+}
+
+@media (max-width: 1024px) {
+  .book {
+    flex-direction: column;
+  }
+}
+
+.books {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: 600ms;
+  margin-bottom: 30px;
+  padding: 20px;
+  gap: 20px;
+}
+
+.books:hover {
+  background-color: #f0f0f0;
+}
+
+.books .catigories {
+  padding: 90px 90px;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.books .head {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 31.47px;
+  margin-bottom: 30px;
+}
+
+.books .type-book {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 37px;
+}
+
+.books .book {
+  position: relative;
+  height: 450px;
+  width: 300px;
+  cursor: pointer;
+  border: 1px solid black;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.books .book .add-to-cart {
+  position: absolute;
+  top: 45%;
+  right: -35%;
+
+  color: white;
+  border: none;
+  border-radius: 0 0 0 12px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.books .book .add-to-cart button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background-color: rgba(128, 128, 128, 0.774);
+  padding: 1rem;
+  border-radius: 100%;
+
+  color: rgb(41, 41, 41);
+}
+.books .img-book {
+  width: 100%;
+  height: 187px;
+}
+
+.books .img-book img {
+  width: 100%;
+  height: 100%;
+}
+
+.books .book-details {
+  padding: 0.4rem;
+}
+.books .book-details .add-to-cart {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  color: white;
+  border: none;
+  border-radius: 0 0 0 12px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.books .title {
+  margin-bottom: 7px;
+}
+
+.books .title .book-title {
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+  line-height: 12.1px;
+}
+
+.books .title .book-creator {
+  text-decoration: none;
+  color: #4a4949;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.books .title .book-creator:hover {
+  color: black;
+}
+
+.books .explain {
+  font-size: 1rem;
+  font-weight: 500;
+
+  color: #000000;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.books .price {
+  display: flex;
+  justify-content: end;
+}
+
+.books .price span {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 12.1px;
+}
+.catigories {
+  padding: 90px 90px;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.head {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 31.47px;
+  margin-bottom: 30px;
+}
+.book .add-to-cart {
+  position: absolute;
+  top: 45%;
+  right: 0;
+
+  color: white;
+  border: none;
+  border-radius: 0 0 0 12px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.book .add-to-cart button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background-color: rgba(128, 128, 128, 0.774);
+  padding: 1rem;
+  border-radius: 100%;
+
+  color: rgb(41, 41, 41);
+}
+footer {
+  height: 27px;
+  color: white;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.copy {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14.52px;
 }
