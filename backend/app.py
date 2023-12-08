@@ -264,6 +264,7 @@ def book(bookId):
             error_message = createErrorMessage(True,
                                                 "login_required",
                                                 "You have to login fisrt to be able to buy this item.")
+            return redirect("/signIn")
 
         # handling the quantity error when quantity be non positive value
         if request.form.get("quantity") < 1:
@@ -280,16 +281,14 @@ def book(bookId):
         # check if these is any item in the cart before (cart has been created)
         quantityOfBook = 0 # TODO need to pass as arg!
         if "cart" in session: # if cart already created
-            if session["cart"].get(bookId):
-                session["cart"][bookId] = int(request.form.get("quantity"))
-            else:
-                session["cart"][bookId] = int(request.form.get("quantity"))
+            session["cart"][bookId] = int(request.form.get("quantity"))
         else: # if cart not created
             session["cart"] = {} # cart will be a dict
             session["cart"][bookId] = int(request.form.get("quantity"))
         if "cart" in session:
             quantityOfBook = int(request.form.get("quantity")) # TODO need to pass as arg!
-        return render_template("frontend/single-book.html", page_name = f"add to cart book id = {bookId}")
+        return render_template("frontend/single-book.html",
+                                page_name = f"add to cart book id = {bookId}")
     
     # if the user request the page via get method
     else:
