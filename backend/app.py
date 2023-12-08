@@ -244,7 +244,12 @@ def home():
         search = request.form.get("search")
         # TODO:
 
-# library 
+# library for search books
+@app.route("/library", methods=["GET", "POST"])
+def library(categoryId = None):
+    """Show library page"""
+    # retrive data from form
+    search = request.form.get("search")
 # book -> mahmoud
 @app.route("/book/<int:bookId>",  methods=["GET", "POST"])
 @login_required
