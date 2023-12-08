@@ -228,7 +228,7 @@ def home():
         categories = [dict(zip(columns, row)) for row in db.fetchall()]
         # retrive all books from database with state = 1 and each category with their books in dictionary
         for category in categories:
-            db.execute("SELECT * FROM Book WHERE category_id=? AND state=?;", (category["category_id"], 1,))
+            db.execute("SELECT * FROM Book WHERE category_id=? AND state=? LIMIT 5;", (category["category_id"], 1,))
             # convert retrived data into list of dictionaries
             columns = [column[0] for column in db.description]
             category["books"] = [dict(zip(columns, row)) for row in db.fetchall()]
