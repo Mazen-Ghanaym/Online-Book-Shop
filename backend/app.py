@@ -237,6 +237,7 @@ def index():
         db.close()
         con.close()
         # render home page
+        # TODO: popular books
         return render_template("index.html", categories=categories)
     else:
         # retrive data from form
