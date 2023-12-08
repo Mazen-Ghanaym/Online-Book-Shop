@@ -3,72 +3,69 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="static/SignIn.css" />
-    <title>Sing In</title>
-  </head>
 
-  <body>
-    <div class="header">
-      <!--start header-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="static/SignIn.css" />
+  <title>Sign In</title>
+</head>
 
-      <header>
-        <img
-          class="logo"
-          src="images/bookshop .png"
-          width="60PX"
-          height="60PX"
-        />
-        <!--logo-->
+<body>
+  <div class="header">
+    <!--start header-->
 
-        <a href="SingIn.html" class="sing-in">
-          <!--button sing in-->
-          <span> Sign In </span>
-        </a>
+    <header>
+      <img class="logo" src="images/bookshop.png" width="60PX" height="60PX" />
+      <!--logo-->
 
-        <a href="SignUp.html" class="sing-up">
-          <!--button sing up-->
-          <span> Sign Up </span>
-        </a>
-      </header>
-    </div>
-    <!--end header-->
+      <a href="{{ url_for('signin') }}" class="sing-in">
+        <!--button sing in-->
+        <span> Sign In </span>
+      </a>
 
-    <div class="container">
-      <!--start container-->
+      <a href="{{ url_for('signup') }}" class="sing-up">
+        <!--button sing up-->
+        <span> Sign Up </span>
+      </a>
+    </header>
+  </div>
+  <!--end header-->
 
-      <form action="####" method="post">
-        <!--start form-->
+  <div class="container">
+    <!--start container-->
 
-        <h2>Sign In</h2>
+    <form action="####" method="post">
+      <!--start form-->
 
-        <label for="Email">Email:</label>
-        <!--input filed for email-->
-        <input type="email" id="Email" name="Email" required />
+      <h2>Sign In</h2>
 
-        <label for="pass">Password:</label>
-        <!--input filed for password-->
-        <input type="password" id="pass" name="Password" required />
+      <label for="Email">Email:</label>
+      <!--input filed for email-->
+      <input type="email" id="Email" name="Email" required />
 
-        <button type="submit">Sign In</button>
-        <!--button submit form-->
-      </form>
-      <!--end form-->
-    </div>
-    <!--end container-->
+      <label for="pass">Password:</label>
+      <!--input filed for password-->
+      <input type="password" id="pass" name="Password" required />
 
-    <div class="footer">
-      <!--start footer-->
+      <button type="submit">Sign In</button>
+      <!--button submit form-->
+    </form>
+    <!--end form-->
+  </div>
+  <!--end container-->
 
-      <footer>
-        <p>copyrights @ www.bookshop.com</p>
-        <!--paragraph for footer-->
-      </footer>
-    </div>
-    <!--end footer-->
-  </body>
+  <div class="footer">
+    <!--start footer-->
+
+    <footer>
+      <p>copyrights @ www.bookshop.com</p>
+      <!--paragraph for footer-->
+    </footer>
+  </div>
+  <!--end footer-->
+</body>
+
 </html>
 
 <!--.............................................................. #_The_End_._ .........................................................................  -->

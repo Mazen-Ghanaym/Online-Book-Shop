@@ -22,7 +22,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get("user_id") is None:
-            return redirect("/signIn")
+            return redirect("/signin")
         return f(*args, **kwargs)
     return decorated_function
 
@@ -66,8 +66,8 @@ def createErrorMessage(err_state = False, err_type = None, err_mesg_txt = None):
 # ----------------------------------------------------------------------------------------
 
 # login  -> mazen
-@app.route("/signIn", methods=["GET", "POST"])
-def signIn():
+@app.route("/signin", methods=["GET", "POST"])
+def signin():
     """Log user in"""
     # Forget any user_id
     session.clear()
@@ -78,10 +78,10 @@ def signIn():
         password = request.form.get("password")
         # Ensure email was submitted
         if not email:
-            return render_template("signIn.html", error_message="message", invalid=True)
+            return render_template("signin.html", error_message="message", invalid=True)
         # Ensure password was submitted
         elif not password:
-            return render_template("signIn.html", error_message="message", invalid=True)
+            return render_template("signin.html", error_message="message", invalid=True)
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
         db = con.cursor()
@@ -93,10 +93,10 @@ def signIn():
 
         # Ensure username exists and password is correct
         if len(rows) != 1:
-            return render_template("signIn.html", error_message="message", invalid=True)
+            return render_template("signin.html", error_message="message", invalid=True)
         
         if rows[0]["password"] != password:
-            return render_template("signIn.html", error_message="message", invalid=True)
+            return render_template("signin.html", error_message="message", invalid=True)
         
         # commit and close database
         con.commit()
@@ -108,7 +108,7 @@ def signIn():
         return redirect("/")
     # User reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("signIn.html", error_message="", invalid=False)
+        return render_template("signin.html", error_message="", invalid=False)
 
 # signup -> mazen
 @app.route("/signup", methods=["GET", "POST"])
@@ -130,19 +130,19 @@ def signup():
         # check if user provide valid username
         if not email:
             # wail for render the register page with error message
-            return render_template("signUp.html", error_message="message email", invalid=True)
+            return render_template("signup.html", error_message="message email", invalid=True)
 
         # check if user provide valid password
         if not password:
-            return render_template("signUp.html", error_message="message password", invalid=True)
+            return render_template("signup.html", error_message="message password", invalid=True)
 
         # check if user provide valid confirm
         if not confirm:
-            return render_template("signUp.html", error_message="message confirm", invalid=True)
+            return render_template("signup.html", error_message="message confirm", invalid=True)
 
         # check if password equals the confirmation password
         if password != confirm:
-            return render_template("signUp.html", error_message="message", invalid=True)
+            return render_template("signup.html", error_message="message", invalid=True)
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
         db = con.cursor()
@@ -155,7 +155,7 @@ def signup():
 
         # check if username registered before
         if len(users) >= 1:
-            return render_template("signUp.html", error_message="message", invalid=True)
+            return render_template("signup.html", error_message="message", invalid=True)
 
         # after validating all conditions insert new user into database
         user_state = db.execute("SELECT * FROM User_state WHERE title = ?;", ('user',)).fetchone()
@@ -178,7 +178,7 @@ def signup():
         # redirect to the main page
         return redirect("/")
     else:
-        return render_template("signUp.html", error_message="", invalid=False)
+        return render_template("signup.html", error_message="", invalid=False)
 
 # logout -> mazen
 @app.route("/logout")
