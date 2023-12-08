@@ -10,7 +10,7 @@ from functools import wraps
 import requests
 import sqlite3
 # Configure application
-app = Flask(__name__)
+app = Flask(__name__,template_folder='templates/frontend', static_folder='templates/frontend/static')
 
 
 # Configure session to use filesystem (instead of signed cookies)
