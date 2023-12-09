@@ -283,7 +283,7 @@ def home():
         con.close()
         # render home page
         # TODO: popular books
-        return render_template("home.html", categories=categories)
+        return render_template("home.html", categories = categories , pupular_books = pupular_books)
     else:
         # retrive data from form
         search = request.form.get("search")
