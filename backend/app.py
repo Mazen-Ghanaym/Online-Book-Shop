@@ -260,6 +260,11 @@ def home():
         # convert retrived data into list of dictionaries
         columns = [column[0] for column in db.description]
         categories = [dict(zip(columns, row)) for row in db.fetchall()]
+        # retrive first 5 books
+        db.execute("SELECT * FROM Book WHERE state=? LIMIT 5;", (1,))
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        pupular_books = [dict(zip(columns, row)) for row in db.fetchall()]
         # retrive all books from database with state = 1 and each category with their books in dictionary
         for category in categories:
             db.execute(
