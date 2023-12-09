@@ -6,7 +6,7 @@ from io import BytesIO
 import sqlite3
 import random
 
-def download_and_convert_image(url, format='jpg', folder_path='DBimages', bookid=None):
+def download_and_convert_image(url, format='jpg', folder_path='static/DBimages', bookid=None):
     # Create the folder if it doesn't exist
     os.makedirs(folder_path, exist_ok=True)
 
@@ -31,7 +31,7 @@ def download_and_convert_image(url, format='jpg', folder_path='DBimages', bookid
             f.write(response.content)
 
     # Return the local path of the saved image
-    return os.path.abspath(image_name)
+    return image_name
 
 # Example usage:
 con = sqlite3.connect('Books.db')
@@ -58,11 +58,9 @@ for category in categories:
         try:
             image_url = book['volumeInfo']['imageLinks']['thumbnail']
             local_path = download_and_convert_image(image_url, format='png', bookid=bookid)
-            local_path = "../DBimages/" + local_path
         except:
-            image_url = 'https://www.placehold.it/200x300/EFEFEF/AAAAAA&text=no+image'
+            image_url = f'https://www.placehold.it/200x300/EFEFEF/AAAAAA&text={title}'
             local_path = download_and_convert_image(image_url, format='png', bookid=bookid)
-            local_path = "../DBimages/" + local_path
         price = random.randint(20, 500)
         quantity = random.randint(10, 100)
         category_id = category['category_id']
