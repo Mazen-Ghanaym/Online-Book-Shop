@@ -305,7 +305,7 @@ def home():
         db.execute("SELECT * FROM Book WHERE state=? LIMIT 5;", (1,))
         # convert retrived data into list of dictionaries
         columns = [column[0] for column in db.description]
-        pupular_books = [dict(zip(columns, row)) for row in db.fetchall()]
+        popular_books = [dict(zip(columns, row)) for row in db.fetchall()]
         # retrive all books from database with state = 1 and each category with their books in dictionary
         for category in categories:
             db.execute(
@@ -325,7 +325,7 @@ def home():
         # render home page
         # TODO: popular books
         return render_template(
-            "home.html", categories=categories, pupular_books=pupular_books
+            "home.html", categories=categories, popular_books=popular_books
         )
     else:
         # retrive data from form

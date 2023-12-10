@@ -47,19 +47,23 @@
       </form>
     </div>
   </header>
+
+
+
   <div class="catigories popular-books">
     <div class="head">Popular Books</div>
-
     <div class="books">
+      
+      {% for book in popular_books %}
       <div class="book">
-        <form class="add-to-cart">
+        <form action="url_for('add_to_cart', book_id=book['book_id'])" method="get" class="add-to-cart">
           <button>
             <i class="material-icons">add_shopping_cart</i>
           </button>
         </form>
 
         <div class="img-book">
-          <img src="static/images/Introduction-to-Algorithms1.svg" alt="" />
+          <img src="{{book['image']}}" alt="" />
         </div>
 
         <div class="stars">
@@ -72,25 +76,27 @@
         <div class="book-details">
           <div class="title">
             <a href="" class="book-title">
-              Relativity : the special and the general theory
+              {{book['title']}}
             </a>
           </div>
           <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
+            <a href="" class="book-creator"> {{ book['author'] }} </a>
           </div>
           <div class="title">
             <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
+              {{ book['subscript'] }}
             </p>
           </div>
           <div class="price">
-            <span>$30</span>
+            <span>{{ book['price'] }}</span>
           </div>
         </div>
       </div>
-      <div class="book">
+      {% endfor %}
+
+
+
+      <!-- <div class="book">
         <form class="add-to-cart">
           <button>
             <i class="material-icons">add_shopping_cart</i>
@@ -128,6 +134,12 @@
           </div>
         </div>
       </div>
+
+
+
+
+
+
       <div class="book">
         <form class="add-to-cart">
           <button>
@@ -166,6 +178,12 @@
           </div>
         </div>
       </div>
+
+
+
+
+
+
       <div class="book">
         <form class="add-to-cart">
           <button>
@@ -204,6 +222,10 @@
           </div>
         </div>
       </div>
+
+
+
+
       <div class="book">
         <form class="add-to-cart">
           <button>
@@ -241,9 +263,33 @@
             <span>$30</span>
           </div>
         </div>
-      </div>
+      </div> -->
+
+
+
+
+
+
+
+
     </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div class="catigories">
     <div class="head">Catigories</div>
 
