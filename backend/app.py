@@ -337,10 +337,13 @@ def home():
 
 # library for search books
 @app.route("/library", methods=["GET", "POST"])
-def library(categoryId=None):
+@app.route("/library/<category_id>", methods=["GET", "POST"])
+def library(category_id=None):
     """Show library page"""
     # retrive data from form
     search = request.form.get("search")
+    print(search)
+    return render_template("library.html", search=search)
 
 
 # book -> mahmoud
