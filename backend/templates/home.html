@@ -103,7 +103,7 @@
     <div class="books">
       {% for book in category['books'] %}
       <div class="book">
-        <form class="add-to-cart">
+        <form action="{{url_for('add_to_cart', book_id=book['book_id'])}}" method="get" class="add-to-cart">
           <button>
             <i class="material-icons">add_shopping_cart</i>
           </button>
@@ -142,7 +142,7 @@
     {% endfor %}
   </div>
   <footer>
-    <div class="copy">Copyrights @ www.bookshop.com</div>
+    <div class="copy">Copyrights &copy; www.bookshop.com</div>
   </footer>
 </body>
 
