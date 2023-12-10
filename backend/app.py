@@ -302,7 +302,7 @@ def home():
         columns = [column[0] for column in db.description]
         categories = [dict(zip(columns, row)) for row in db.fetchall()]
         # retrive first 5 books
-        #print(categories)
+        # print(categories)
         db.execute("SELECT * FROM Book WHERE state=? LIMIT 5;", (1,))
         # convert retrived data into list of dictionaries
         columns = [column[0] for column in db.description]
@@ -325,7 +325,7 @@ def home():
         con.close()
         # render home page
         # TODO: popular books
-        #print(categories)
+        # print(categories)
         return render_template(
             "home.html", categories=categories, popular_books=popular_books
         )
@@ -361,7 +361,9 @@ def library(category_id=None):
             db.close()
             con.close()
             # render library page
-            return render_template("library.html", books=books, categories=categories, search="All Books")
+            return render_template(
+                "library.html", books=books, categories=categories, search="All Books"
+            )
         else:
             # retrive all books from database with the same category_id
             db.execute(
@@ -377,9 +379,7 @@ def library(category_id=None):
             # retrive all categories with category_id
             db.execute(
                 "SELECT title FROM Category WHERE category_id = ?;",
-                (
-                    category_id,
-                ),
+                (category_id,),
             )
             # convert retrived data into list of dictionaries
             columns = [column[0] for column in db.description]
@@ -389,7 +389,12 @@ def library(category_id=None):
             db.close()
             con.close()
             # render library page
-            return render_template("library.html", books=books, categories=categories, search=category[0]["title"])
+            return render_template(
+                "library.html",
+                books=books,
+                categories=categories,
+                search=category[0]["title"],
+            )
     else:
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
@@ -406,7 +411,7 @@ def library(category_id=None):
             db.execute(
                 "SELECT * FROM Book WHERE title LIKE ? AND state = ?;",
                 (
-                    "%"+search+"%",
+                    "%" + search + "%",
                     1,
                 ),
             )
@@ -418,7 +423,9 @@ def library(category_id=None):
             db.close()
             con.close()
             # render library page
-            return render_template("library.html", books=books, categories=categories, search=search)
+            return render_template(
+                "library.html", books=books, categories=categories, search=search
+            )
 
 
 # book -> mahmoud
@@ -535,7 +542,7 @@ def add_to_cart(book_id):
 
     # retrive all books from database with the same book_id
     db.execute(
-        "SELECT * FROM Book WHERE book_id = ? and state = ?;",
+        "SELECT * FROM Book WHERE book_id = ? AND state = ?;",
         (
             book_id,
             1,
@@ -603,13 +610,17 @@ def cart():
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
         db = con.cursor()
+
+
         # retrive all books from database with the same book_id
+        # keys is a tuple of book_id after converting session["cart"] to tuple
+        keys = tuple(session["cart"].keys())
+        # place = ?,?,?... as the number of keys
+        place = ",".join("?" * len(keys))
+        # add state = 1 to keys
+        keys = keys + (1,)
         db.execute(
-            "SELECT * FROM Book WHERE book_id IN (?) AND state = ?;",
-            (
-                tuple(session["cart"].keys()),
-                1,
-            ),
+            f"SELECT * FROM Book WHERE book_id IN ({place}) AND state = ?;", (keys)
         )
         # convert retrived data into list of dictionaries
         columns = [column[0] for column in db.description]
