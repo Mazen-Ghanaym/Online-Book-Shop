@@ -444,12 +444,13 @@ def book(bookId):
     )
     quantityOfBook = 0
 
-    def getQuantity(bookId):
+    def getQuantity(bId):
         quantity = 0
         try:
-            quantity = session["cart"][bookId]
+            quantity = int(session["cart"][bId])
         except:
             quantity = 0
+        print(quantity)
         return quantity
 
     # ! ------------------------------------------
@@ -462,16 +463,10 @@ def book(bookId):
                 "login_required",
                 "You have to login fisrt to be able to buy this item.",
             )
-            return render_template("book.html", err_mes=error_message)
+            return render_template("signin.html", err_mes=error_message)
 
         # handling the quantity error when quantity be non positive value
         if int(request.form.get("quantity")) < 1:
-            # create the error message as object
-            error_message = createErrorMessage(
-                True, "invaled value", "Quantity can not be non positive!"
-            )
-            # return the page with the message
-            # do not forget to add the bookInfo to the page.
             return render_template(
                 "book.html",
                 bookInfo=bookInfo,
@@ -479,25 +474,29 @@ def book(bookId):
                 simBooks=similarBookInfo,
                 err_mes=createErrorMessage(
                     True, "invaled value", "Quantity can not be non positive!"
-                ),
+                )
             )
 
         # check if these is any item in the cart before (cart has been created)
 
-        if "cart" in session:  # if cart already created
+        if session.get("cart"):  # if cart already created
             session["cart"][bookId] = int(request.form.get("quantity"))
         else:  # if cart not created
             session["cart"] = {}  # cart will be a dict
             session["cart"][bookId] = int(request.form.get("quantity"))
-        if "cart" in session:
-            quantityOfBook = int(request.form.get("quantity"))
-        return render_template(
-            "book.html",
-            bookInfo=bookInfo[0],
-            quantity=quantityOfBook,
-            simBooks=similarBookInfo,
-            err_mes=createErrorMessage(),
-        )
+        # try to get the quantity of the book from the session.
+        # quantityOfBook = getQuantity(bookId)
+        try:
+            quantityOfBook = int(session["cart"][bookId])
+        except:
+            quantityOfBook = 0
+        return redirect(url_for('book', bookId = str(bookId)))
+        # return render_template("book.html",
+        #                        bookInfo=bookInfo,
+        #                        quantity=quantityOfBook,
+        #                        simBooks=similarBookInfo,
+        #                        err_mes=createErrorMessage()
+        #                        )
 
     # if the user request the page via "get" method
     else:
