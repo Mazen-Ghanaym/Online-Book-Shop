@@ -517,43 +517,39 @@ def book(bookId):
 @login_required
 def add_to_cart(book_id):
     """Add book to cart"""
-    if request.method == "GET":
-        # connect with database and create cursor called db
-        con = sqlite3.connect("Books.db")
-        db = con.cursor()
-        quantity = 1
-        # check whether the quantity submitted from book page(has quantity) or from library page(doesn't has quantity)
-        try:
-            quantity = int(request.form.get("quantity"))
-        except ValueError:
-            return "TODO"
-
-        # retrive all books from database with the same book_id
-        db.execute(
-            "SELECT * FROM Book WHERE book_id = ? WHERE state = ?;",
-            (
-                book_id,
-                1,
-            ),
-        )
-
-        # convert retrived data into list of dictionaries
-        columns = [column[0] for column in db.description]
-        books = [dict(zip(columns, row)) for row in db.fetchall()]
-
-        # add book to cart
-        session["cart"][books[0]["book_id"]] = quantity
-
-        # commit changes
-        con.commit()
-        db.close()
-        con.close()
-
-        # redirect to the main page
-        return redirect("/cart")
-    else:
-        # I don't know what to do here
+    # connect with database and create cursor called db
+    con = sqlite3.connect("Books.db")
+    db = con.cursor()
+    quantity = 1
+    # check whether the quantity submitted from book page(has quantity) or from library page(doesn't has quantity)
+    try:
+        quantity = int(request.form.get("quantity"))
+    except ValueError:
         return "TODO"
+
+    # retrive all books from database with the same book_id
+    db.execute(
+        "SELECT * FROM Book WHERE book_id = ? WHERE state = ?;",
+        (
+            book_id,
+            1,
+        ),
+    )
+
+    # convert retrived data into list of dictionaries
+    columns = [column[0] for column in db.description]
+    books = [dict(zip(columns, row)) for row in db.fetchall()]
+
+    # add book to cart
+    session["cart"][books[0]["book_id"]] = quantity
+
+    # commit changes
+    con.commit()
+    db.close()
+    con.close()
+
+    # redirect to the main page
+    return redirect("/cart")
 
 
 @app.route("/cart/remove/<book_id>", methods=["GET", "POST"])
