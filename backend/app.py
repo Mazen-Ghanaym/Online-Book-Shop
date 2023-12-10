@@ -341,9 +341,31 @@ def home():
 def library(category_id=None):
     """Show library page"""
     # retrive data from form
-    search = request.form.get("search")
-    print(search)
-    return render_template("library.html", search=search)
+    if category_id == None:
+        search = request.form.get("search")
+        print(f"search: {search}")
+        return render_template("library.html", search=search)
+    else:
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # retrive all books from database with the same category_id
+        db.execute(
+            "SELECT * FROM Book WHERE category_id = ? AND state = ?;",
+            (
+                category_id,
+                1,
+            ),
+        )
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        books = [dict(zip(columns, row)) for row in db.fetchall()]
+        # commit changes
+        con.commit()
+        db.close()
+        con.close()
+        # render library page
+        return render_template("library.html", books=books)
 
 
 # book -> mahmoud
