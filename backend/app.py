@@ -789,6 +789,10 @@ def save_cart():
 
 # admin
 # add book
+@app.route("/admin/addbook", methods = ["GET", "POST"])
+@login_required
+def adminAddBook():
+    return render_template("adminAddBook.html")
 ## all books
 ## requests for books/updates
 ## requests for writers
