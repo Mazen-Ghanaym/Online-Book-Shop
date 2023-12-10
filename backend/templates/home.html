@@ -48,15 +48,14 @@
     </div>
   </header>
 
-
-
+  <!-- popular books -->
   <div class="catigories popular-books">
     <div class="head">Popular Books</div>
     <div class="books">
-      
+
       {% for book in popular_books %}
       <div class="book">
-        <form action="url_for('add_to_cart', book_id=book['book_id'])" method="get" class="add-to-cart">
+        <form action="{{url_for('add_to_cart', book_id=book['book_id'])}}" method="get" class="add-to-cart">
           <button>
             <i class="material-icons">add_shopping_cart</i>
           </button>
@@ -93,208 +92,16 @@
         </div>
       </div>
       {% endfor %}
-
-
-
-      <!-- <div class="book">
-        <form class="add-to-cart">
-          <button>
-            <i class="material-icons">add_shopping_cart</i>
-          </button>
-        </form>
-        <div class="img-book">
-          <img src="images/Introduction-to-Algorithms1.svg" alt="" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div>
-
-
-
-
-
-
-      <div class="book">
-        <form class="add-to-cart">
-          <button>
-            <i class="material-icons">add_shopping_cart</i>
-          </button>
-        </form>
-        <div class="img-book">
-          <img src="images/Introduction-to-Algorithms1.svg" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div>
-
-
-
-
-
-
-      <div class="book">
-        <form class="add-to-cart">
-          <button>
-            <i class="material-icons">add_shopping_cart</i>
-          </button>
-        </form>
-        <div class="img-book">
-          <img src="images/Introduction-to-Algorithms1.svg" alt="" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div>
-
-
-
-
-      <div class="book">
-        <form class="add-to-cart">
-          <button>
-            <i class="material-icons">add_shopping_cart</i>
-          </button>
-        </form>
-        <div class="img-book">
-          <img src="images/Introduction-to-Algorithms1.svg" alt="" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div> -->
-
-
-
-
-
-
-
-
     </div>
   </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <!-- catigories -->
   <div class="catigories">
     <div class="head">Catigories</div>
-
-    <div class="type-book">Software Engineering</div>
+    {% for category in categories %}
+    <div class="type-book">{{category['title']}}</div>
     <div class="books">
+      {% for book in category['books'] %}
       <div class="book">
         <form class="add-to-cart">
           <button>
@@ -302,9 +109,8 @@
           </button>
         </form>
         <div class="img-book">
-          <img src="images/Introduction-to-Algorithms1.svg" alt="" />
+          <img src="{{book['image']}}" alt="" />
         </div>
-
         <div class="stars">
           <i class="fa fa-star checked"></i>
           <i class="fa fa-star checked"></i>
@@ -315,373 +121,26 @@
         <div class="book-details">
           <div class="title">
             <a href="" class="book-title">
-              Relativity : the special and the general theory
+              {{book['title']}}
             </a>
           </div>
           <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
+            <a href="" class="book-creator"> {{book['author']}} </a>
           </div>
           <div class="title">
             <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
+              {{book['subscript']}}
             </p>
           </div>
           <div class="price">
-            <span>$30</span>
+            <span>{{book['price']}}</span>
           </div>
         </div>
       </div>
-      <div class="book">
-        <form class="add-to-cart">
-          <button>
-            <i class="material-icons">add_shopping_cart</i>
-          </button>
-        </form>
-        <div class="img-book">
-          <img src="images/Introduction-to-Algorithms1.svg" alt="" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div>
-      <div class="book">
-        <form class="add-to-cart">
-          <button>
-            <i class="material-icons">add_shopping_cart</i>
-          </button>
-        </form>
-        <div class="img-book">
-          <img src="images/Introduction-to-Algorithms1.svg" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div>
-      <div class="book">
-        <form class="add-to-cart">
-          <button>
-            <i class="material-icons">add_shopping_cart</i>
-          </button>
-        </form>
-        <div class="img-book">
-          <img src="images/Introduction-to-Algorithms1.svg" alt="" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div>
-      <div class="book">
-        <form class="add-to-cart">
-          <button>
-            <i class="material-icons">add_shopping_cart</i>
-          </button>
-        </form>
-        <div class="img-book">
-          <img src="images/Introduction-to-Algorithms1.svg" alt="" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
-    <div class="type-book">Science</div>
-    <div class="books">
-      <div class="book">
-        <form class="add-to-cart">
-          <button>
-            <i class="material-icons">add_shopping_cart</i>
-          </button>
-        </form>
-        <div class="img-book">
-          <img src="images/relatvity1.svg" alt="" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div>
-      <div class="book">
-        <form class="add-to-cart">
-          <button>
-            <i class="material-icons">add_shopping_cart</i>
-          </button>
-        </form>
-        <div class="img-book">
-          <img src="images/relatvity1.svg" alt="" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div>
-      <div class="book">
-        <form class="add-to-cart">
-          <button>
-            <i class="material-icons">add_shopping_cart</i>
-          </button>
-        </form>
-        <div class="img-book">
-          <img src="images/relatvity1.svg" alt="" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="book">
-        <form class="add-to-cart">
-          <button>
-            <i class="material-icons">add_shopping_cart</i>
-          </button>
-        </form>
-        <div class="img-book">
-          <img src="images/relatvity1.svg" alt="" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div>
-      <div class="book">
-        <form class="add-to-cart">
-          <button>
-            <i class="material-icons">add_shopping_cart</i>
-          </button>
-        </form>
-        <div class="img-book">
-          <img src="images/relatvity1.svg" alt="" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
-
   <footer>
     <div class="copy">Copyrights @ www.bookshop.com</div>
   </footer>

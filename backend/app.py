@@ -302,6 +302,7 @@ def home():
         columns = [column[0] for column in db.description]
         categories = [dict(zip(columns, row)) for row in db.fetchall()]
         # retrive first 5 books
+        #print(categories)
         db.execute("SELECT * FROM Book WHERE state=? LIMIT 5;", (1,))
         # convert retrived data into list of dictionaries
         columns = [column[0] for column in db.description]
@@ -324,6 +325,7 @@ def home():
         con.close()
         # render home page
         # TODO: popular books
+        #print(categories)
         return render_template(
             "home.html", categories=categories, popular_books=popular_books
         )
