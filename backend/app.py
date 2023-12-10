@@ -473,10 +473,9 @@ def book(bookId):
                 bookInfo=bookInfo,
                 quantity=quantityOfBook,
                 simBooks=similarBookInfo,
-                err_mes=createErrorMessage(True, 
-                                           "invaled value", 
-                                           "Quantity can not be non positive!"
-                                           )
+                err_mes=createErrorMessage(
+                    True, "invaled value", "Quantity can not be non positive!"
+                ),
             )
 
         # check if these is any item in the cart before (cart has been created)
@@ -485,9 +484,8 @@ def book(bookId):
         else:  # if cart not created
             session["cart"] = {}  # cart will be a dict
             session["cart"][bookId] = int(request.form.get("quantity"))
-            
-        return redirect(url_for('book', bookId = str(bookId)))
-        
+
+        return redirect(url_for("book", bookId=str(bookId)))
 
     # if the user request the page via "get" method
     else:
@@ -639,15 +637,11 @@ def cart():
         columns = [column[0] for column in db.description]
         books = [dict(zip(columns, row)) for row in db.fetchall()]
         # each book in session["cart"] has {book_id : quantity}
-        # ! I think about error why
-        # ! while i'm updating the book['quantity'] in session["cart"] if i found an error
-        # ! and i returned the user if he want to change the quantity of the book
-        # ! when compare we will compare with the updated quantity(from prevous request) not the original quantity(in database)
         # copy books to new_books for updating quantity in new_books
         new_books = books
         # update quantity in new_books
-        for book in session["cart"].keys():
-            new_books[book]["quantity"] = session["cart"][book]
+        for book in new_books:
+            book["quantity"] = session["cart"][book["book_id"]]
 
         # retrive new quantity from form for each book
         for book_id in session["cart"].keys():
