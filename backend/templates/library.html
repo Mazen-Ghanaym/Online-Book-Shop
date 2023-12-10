@@ -44,7 +44,7 @@
     <div class="search">
       <form action="{{url_for('library')}}" method="post">
         <button><i class="material-icons">search</i></button>
-        <input type="search" placeholder="Search for a book ......." />
+        <input type="search" name="search" placeholder="Search for a book ......." />
       </form>
     </div>
     <!--  -->
@@ -54,21 +54,11 @@
     <aside>
       <nav>
         <p>Categories</p>
-        <a href="" class="nav-link">
-          <span>Software Engineering</span>
+        {% for category in categories %}
+        <a href="{{url_for('library', category_id=category['category_id'])}}" class="nav-link">
+          <span>{{category['title']}}</span>
         </a>
-        <a href="" class="nav-link">
-          <span>Information Technology</span>
-        </a>
-        <a href="" class="nav-link">
-          <span>History</span>
-        </a>
-        <a href="" class="nav-link">
-          <span>Geography</span>
-        </a>
-        <a href="" class="nav-link">
-          <span>Science</span>
-        </a>
+        {% endfor %}
       </nav>
     </aside>
 

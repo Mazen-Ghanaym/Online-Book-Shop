@@ -340,23 +340,17 @@ def home():
 @app.route("/library/<category_id>", methods=["GET", "POST"])
 def library(category_id=None):
     """Show library page"""
-    # retrive data from form
-    if category_id == None:
-        search = request.form.get("search")
-        print(f"search: {search}")
-        return render_template("library.html", search=search)
-    else:
+    if request.method == "GET":
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
         db = con.cursor()
-        # retrive all books from database with the same category_id
-        db.execute(
-            "SELECT * FROM Book WHERE category_id = ? AND state = ?;",
-            (
-                category_id,
-                1,
-            ),
-        )
+        # retrive all categories from database
+        db.execute("SELECT * FROM Category;")
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        categories = [dict(zip(columns, row)) for row in db.fetchall()]
+        # retrive all books from database with state = 1
+        db.execute("SELECT * FROM Book WHERE state=?;", (1,))
         # convert retrived data into list of dictionaries
         columns = [column[0] for column in db.description]
         books = [dict(zip(columns, row)) for row in db.fetchall()]
@@ -365,7 +359,65 @@ def library(category_id=None):
         db.close()
         con.close()
         # render library page
-        return render_template("library.html", books=books)
+        return render_template("library.html", books=books, categories=categories, search="All Books")
+    else:
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # retrive all categories from database
+        db.execute("SELECT * FROM Category;")
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        categories = [dict(zip(columns, row)) for row in db.fetchall()]
+        # retrive data from form
+        if category_id == None:
+            search = request.form.get("search")
+            # retrive all books from database like search title
+            search ="%"+search+"%"
+            db.execute(
+                "SELECT * FROM Book WHERE title LIKE ? AND state = ?;",
+                (
+                    search,
+                    1,
+                ),
+            )
+            # convert retrived data into list of dictionaries
+            columns = [column[0] for column in db.description]
+            books = [dict(zip(columns, row)) for row in db.fetchall()]
+            # commit changes
+            con.commit()
+            db.close()
+            con.close()
+            # render library page
+            return render_template("library.html", books=books, categories=categories, search=search)
+        else:
+            # retrive all books from database with the same category_id
+            db.execute(
+                "SELECT * FROM Book WHERE category_id = ? AND state = ?;",
+                (
+                    category_id,
+                    1,
+                ),
+            )
+            # convert retrived data into list of dictionaries
+            columns = [column[0] for column in db.description]
+            books = [dict(zip(columns, row)) for row in db.fetchall()]
+            # retrive all categories with category_id
+            db.execute(
+                "SELECT title FROM Category WHERE category_id = ?;",
+                (
+                    category_id,
+                ),
+            )
+            # convert retrived data into list of dictionaries
+            columns = [column[0] for column in db.description]
+            category = [dict(zip(columns, row)) for row in db.fetchall()]
+            # commit changes
+            con.commit()
+            db.close()
+            con.close()
+            # render library page
+            return render_template("library.html", books=books, categories=categories, search=category[0]["title"])
 
 
 # book -> mahmoud
