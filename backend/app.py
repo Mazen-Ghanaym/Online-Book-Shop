@@ -349,38 +349,10 @@ def library(category_id=None):
         # convert retrived data into list of dictionaries
         columns = [column[0] for column in db.description]
         categories = [dict(zip(columns, row)) for row in db.fetchall()]
-        # retrive all books from database with state = 1
-        db.execute("SELECT * FROM Book WHERE state=?;", (1,))
-        # convert retrived data into list of dictionaries
-        columns = [column[0] for column in db.description]
-        books = [dict(zip(columns, row)) for row in db.fetchall()]
-        # commit changes
-        con.commit()
-        db.close()
-        con.close()
-        # render library page
-        return render_template("library.html", books=books, categories=categories, search="All Books")
-    else:
-        # connect with database and create cursor called db
-        con = sqlite3.connect("Books.db")
-        db = con.cursor()
-        # retrive all categories from database
-        db.execute("SELECT * FROM Category;")
-        # convert retrived data into list of dictionaries
-        columns = [column[0] for column in db.description]
-        categories = [dict(zip(columns, row)) for row in db.fetchall()]
-        # retrive data from form
+
         if category_id == None:
-            search = request.form.get("search")
-            # retrive all books from database like search title
-            search ="%"+search+"%"
-            db.execute(
-                "SELECT * FROM Book WHERE title LIKE ? AND state = ?;",
-                (
-                    search,
-                    1,
-                ),
-            )
+            # retrive all books from database with state = 1
+            db.execute("SELECT * FROM Book WHERE state=?", (1,))
             # convert retrived data into list of dictionaries
             columns = [column[0] for column in db.description]
             books = [dict(zip(columns, row)) for row in db.fetchall()]
@@ -389,7 +361,7 @@ def library(category_id=None):
             db.close()
             con.close()
             # render library page
-            return render_template("library.html", books=books, categories=categories, search=search)
+            return render_template("library.html", books=books, categories=categories, search="All Books")
         else:
             # retrive all books from database with the same category_id
             db.execute(
@@ -418,6 +390,35 @@ def library(category_id=None):
             con.close()
             # render library page
             return render_template("library.html", books=books, categories=categories, search=category[0]["title"])
+    else:
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # retrive all categories from database
+        db.execute("SELECT * FROM Category;")
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        categories = [dict(zip(columns, row)) for row in db.fetchall()]
+        # retrive data from form
+        if category_id == None:
+            search = request.form.get("search")
+            # retrive all books from database like search title
+            db.execute(
+                "SELECT * FROM Book WHERE title LIKE ? AND state = ?;",
+                (
+                    "%"+search+"%",
+                    1,
+                ),
+            )
+            # convert retrived data into list of dictionaries
+            columns = [column[0] for column in db.description]
+            books = [dict(zip(columns, row)) for row in db.fetchall()]
+            # commit changes
+            con.commit()
+            db.close()
+            con.close()
+            # render library page
+            return render_template("library.html", books=books, categories=categories, search=search)
 
 
 # book -> mahmoud
