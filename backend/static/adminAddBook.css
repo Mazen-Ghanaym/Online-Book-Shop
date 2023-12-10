@@ -1,0 +1,168 @@
+/* ................................................................... Page Sing-In.................................................................... */
+
+/* ----------------------------------------------------------------------HEADER------------------------------------------------------------------------ */
+
+.header {
+    text-align: center;
+    background-color: #000000;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+  }
+  
+  /* ------------------------------------------------------------ button (sing-in , sing-up) ------------------------------------------------------------------- */
+  
+  .sing-in,
+  .sing-up {
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    color: #ffffff;
+    margin: 10px;
+    width: fit-content;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    /* float: right; */
+  }
+  
+  .sing-in span,.sing-up span{
+    display: inherit;
+    border-radius: inherit;
+    padding: 1rem 2rem;
+    translate: 0.25rem -0.25rem;
+    transition: translate 1000ms cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    background-color 250ms
+  }
+  
+  .sing-in span {
+    background-color: rgb(0, 135, 211);
+  }
+  
+  .sing-up span {
+    background-color: rgb(18, 214, 61);
+  }
+  
+  /* ----------------------button (sing-in) ------------------------*/
+  
+  .sing-in {
+    background-color: rgb(9, 99, 149);
+  }
+  
+  .sing-in:hover span {
+    background-color: rgb(0, 64, 180);
+  }
+  
+  .sing-in:active span {
+    translate: none;
+  }
+  
+  
+  .sing-in:hover {
+    background-color: rgb(2, 40, 90);
+  }
+  
+  /* ----------------------button (sing-up) ------------------------*/
+  
+  .sing-up {
+    background-color: rgb(5, 165, 29);
+  }
+  
+  .sing-up:hover {
+    background-color: rgb(3, 74, 20);
+  }
+  
+  .sing-up:active span {
+    translate: none;
+  }
+  
+  .sing-up:hover span {
+    background-color: rgb(9, 149, 40);
+  }
+  
+  /*--------------------------------------------------------- Simplify the styles for the (logo) -------------------------------------------------------  */
+  
+  .logo {
+    float: left;
+    padding: 11px;
+    margin: -6px 10px;
+  }
+  
+  /* --------------------------------------------------- Reset some default styles (body ,h2 ,p ,button) ----------------------------------------------- */
+   
+  body,
+  h2,
+  p,
+  button {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /*........................................................ Simplify the styles for the (body) .......................................................*/
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /*....................................................... Simplify the styles for the (container) ................................................*/
+
+  
+  
+  
+  /*........................................................... Simplify the styles for the (form) ..............................................*/
+
+
+
+
+  
+  /*............................................................. Adjust the footer styles.................................................................... */
+  
+  .footer {
+    text-align: center;
+    background-color: #000000;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 0;
+    height: 8px;
+    line-height: 6px;
+  }
+  
+  
+  /*       ____________________________________________              تجارب        ______________________________________________________                 */
+  
+  
+  
+  .container {
+    max-width: 100%;
+    margin: 0 auto; 
+  }
+  @media screen and (max-width: 768px) {
+    .container {
+      width: 90%;
+      margin: 10px;
+    }
+  }
+  
+  ::selection{
+    color: rgb(0, 0, 0);
+    background-color: rgb(217, 217, 217);;
+  }
+  /*  
+  *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }*/
+  
+  /* ------------------------------------------------------------------ #The_End. ---------------------------------------------------------------------------*/
