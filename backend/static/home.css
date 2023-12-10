@@ -210,10 +210,19 @@ form {
 }
 
 .title .book-title {
-  text-decoration: none;
+  /* text-decoration: none;
   color: black;
   font-weight: 700;
-  line-height: 12.1px;
+  line-height: 12.1px; */
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 9.68px;
+  color: #000000;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .title .book-creator {
@@ -227,7 +236,7 @@ form {
   color: black;
 }
 
-.explain {
+/* .explain {
   font-size: 1rem;
   font-weight: 500;
 
@@ -240,7 +249,36 @@ form {
 .price {
   display: flex;
   justify-content: end;
-}
+} */
+/* ///////////////////////////////////////////////// */
+.explain {
+
+  /* yousef */
+  
+      color: black;
+      width: 135px;
+      padding: -1px;
+      /* margin: 20px auto;  */
+      /* top: 195px; */
+      /* left: 600px;  */
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;  
+      overflow: hidden;
+      text-overflow: ellipsis;
+      position: absolute;
+  
+  }
+  
+  .price {
+    position:absolute;
+    left: 100px;
+    top: 325px;
+  
+    /* display: flex; */
+    /* justify-content: end; */
+  }
+  /* ///////////////////////////////////////////////////////////////// */
 
 .price span {
   font-weight: 600;

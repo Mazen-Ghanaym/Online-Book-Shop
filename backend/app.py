@@ -482,7 +482,7 @@ def book(bookId):
                 simBooks=similarBookInfo,
                 err_mes=createErrorMessage(
                     True, "invaled value", "Quantity can not be non positive!"
-                )
+                ),
             )
 
         # check if these is any item in the cart before (cart has been created)
@@ -498,7 +498,7 @@ def book(bookId):
             quantityOfBook = int(session["cart"][bookId])
         except:
             quantityOfBook = 0
-        return redirect(url_for('book', bookId = str(bookId)))
+        return redirect(url_for("book", bookId=str(bookId)))
         # return render_template("book.html",
         #                        bookInfo=bookInfo,
         #                        quantity=quantityOfBook,
@@ -604,7 +604,6 @@ def cart():
         con = sqlite3.connect("Books.db")
         db = con.cursor()
 
-
         # retrive all books from database with the same book_id
         # keys is a tuple of book_id after converting session["cart"] to tuple
         keys = tuple(session["cart"].keys())
@@ -626,7 +625,9 @@ def cart():
         db.close()
         con.close()
         # render cart page
-        return render_template("cart.html", cart=books, error_message="", invalid=False)
+        return render_template(
+            "cart.html", books=books, error_message="", invalid=False
+        )
     else:
         # retrive data from form
         address = request.form.get("address")
@@ -638,12 +639,14 @@ def cart():
         con = sqlite3.connect("Books.db")
         db = con.cursor()
         # retrive original books from database
+        # keys is a tuple of book_id after converting session["cart"] to tuple
+        keys = tuple(session["cart"].keys())
+        # place = ?,?,?... as the number of keys
+        place = ",".join("?" * len(keys))
+        # add state = 1 to keys
+        keys = keys + (1,)
         db.execute(
-            "SELECT * FROM Book WHERE book_id IN (?) AND state = ?;",
-            (
-                session["cart"].keys(),
-                1,
-            ),
+            f"SELECT * FROM Book WHERE book_id IN ({place}) AND state = ?;", (keys)
         )
         # convert retrived data into list of dictionaries
         columns = [column[0] for column in db.description]
@@ -726,12 +729,21 @@ def cart():
                 ),
             )
         # update quantity in database
-        for book in session["cart"]:
+        for book in session["cart"].keys():
+            # old quantity
             db.execute(
-                "UPDATE Book SET quantity=? WHERE book_id=?;",
+                "SELECT quantity FROM Book WHERE book_id = ?;",
+                (book,),
+            )
+            # convert retrived data into list of dictionaries
+            columns = [column[0] for column in db.description]
+            books = [dict(zip(columns, row)) for row in db.fetchall()]
+            old_quantity = books[0]["quantity"]
+            db.execute(
+                "UPDATE Book SET quantity = ? WHERE book_id = ?;",
                 (
-                    book["quantity"],
-                    book["book_id"],
+                    old_quantity - session["cart"][book],
+                    book,
                 ),
             )
         # commit changes
