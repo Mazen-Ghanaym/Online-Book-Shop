@@ -74,26 +74,30 @@ def createErrorMessage(err_state=False, err_type=None, err_mesg_txt=None):
     }
     return error_message
 
+
 def validEmail(the_email):
     if the_email == None:
         return False
-    # todo you need to select all emails from the data base to check that email is not found  
+    # todo you need to select all emails from the data base to check that email is not found
     else:
-        all_emails = getQuaryFromDataBase("Books.db",
-                                      "select email from user where user_id <> ?",
-                                      session["user_id"],
-                                      )
+        all_emails = getQuaryFromDataBase(
+            "Books.db",
+            "select email from user where user_id <> ?",
+            session["user_id"],
+        )
         just_emails = [row["email"] for row in all_emails]
-        return (the_email not in just_emails)
-    
+        return the_email not in just_emails
+
+
 def validName(the_name):
     if the_name == None:
         return False
     else:
         return True
-    
+
+
 def correctImage(imagePath):
-    return "..\\" + str(imagePath).replace('/','\\')
+    return "..\\" + str(imagePath).replace("/", "\\")
 
 
 # ----------------------------------------------------------------------------------------
@@ -248,7 +252,6 @@ def logout():
 def profile():
     # change password
     if request.method == "POST":
-        
         if validEmail(request.form.get("email")):
             pass
         else:
@@ -258,7 +261,7 @@ def profile():
         else:
             pass
         # update the user info in database
-        # quary of update 
+        # quary of update
         return redirect(url_for(profile))
 
     # show profile
@@ -277,7 +280,7 @@ def profile():
             "layout.html",
             page_name="profile",
             err_mes=createErrorMessage(),
-            items=personInfo
+            items=personInfo,
         )
 
 
@@ -299,10 +302,11 @@ def home():
         columns = [column[0] for column in db.description]
         categories = [dict(zip(columns, row)) for row in db.fetchall()]
         # retrive first 5 books
+        #print(categories)
         db.execute("SELECT * FROM Book WHERE state=? LIMIT 5;", (1,))
         # convert retrived data into list of dictionaries
         columns = [column[0] for column in db.description]
-        pupular_books = [dict(zip(columns, row)) for row in db.fetchall()]
+        popular_books = [dict(zip(columns, row)) for row in db.fetchall()]
         # retrive all books from database with state = 1 and each category with their books in dictionary
         for category in categories:
             db.execute(
@@ -321,7 +325,10 @@ def home():
         con.close()
         # render home page
         # TODO: popular books
-        return render_template("home.html", categories = categories , pupular_books = pupular_books)
+        #print(categories)
+        return render_template(
+            "home.html", categories=categories, popular_books=popular_books
+        )
     else:
         # retrive data from form
         search = request.form.get("search")
@@ -330,10 +337,87 @@ def home():
 
 # library for search books
 @app.route("/library", methods=["GET", "POST"])
-def library(categoryId=None):
+@app.route("/library/<category_id>", methods=["GET", "POST"])
+def library(category_id=None):
     """Show library page"""
-    # retrive data from form
-    search = request.form.get("search")
+    if request.method == "GET":
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # retrive all categories from database
+        db.execute("SELECT * FROM Category;")
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        categories = [dict(zip(columns, row)) for row in db.fetchall()]
+        # retrive all books from database with state = 1
+        db.execute("SELECT * FROM Book WHERE state=?;", (1,))
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        books = [dict(zip(columns, row)) for row in db.fetchall()]
+        # commit changes
+        con.commit()
+        db.close()
+        con.close()
+        # render library page
+        return render_template("library.html", books=books, categories=categories, search="All Books")
+    else:
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # retrive all categories from database
+        db.execute("SELECT * FROM Category;")
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        categories = [dict(zip(columns, row)) for row in db.fetchall()]
+        # retrive data from form
+        if category_id == None:
+            search = request.form.get("search")
+            # retrive all books from database like search title
+            search ="%"+search+"%"
+            db.execute(
+                "SELECT * FROM Book WHERE title LIKE ? AND state = ?;",
+                (
+                    search,
+                    1,
+                ),
+            )
+            # convert retrived data into list of dictionaries
+            columns = [column[0] for column in db.description]
+            books = [dict(zip(columns, row)) for row in db.fetchall()]
+            # commit changes
+            con.commit()
+            db.close()
+            con.close()
+            # render library page
+            return render_template("library.html", books=books, categories=categories, search=search)
+        else:
+            # retrive all books from database with the same category_id
+            db.execute(
+                "SELECT * FROM Book WHERE category_id = ? AND state = ?;",
+                (
+                    category_id,
+                    1,
+                ),
+            )
+            # convert retrived data into list of dictionaries
+            columns = [column[0] for column in db.description]
+            books = [dict(zip(columns, row)) for row in db.fetchall()]
+            # retrive all categories with category_id
+            db.execute(
+                "SELECT title FROM Category WHERE category_id = ?;",
+                (
+                    category_id,
+                ),
+            )
+            # convert retrived data into list of dictionaries
+            columns = [column[0] for column in db.description]
+            category = [dict(zip(columns, row)) for row in db.fetchall()]
+            # commit changes
+            con.commit()
+            db.close()
+            con.close()
+            # render library page
+            return render_template("library.html", books=books, categories=categories, search=category[0]["title"])
 
 
 # book -> mahmoud
@@ -348,24 +432,26 @@ def book(bookId):
         bookId,
     )
     if bookInfo != None and len(bookInfo) != 1:
-        return redirect(url_for('home'))
-    else :
+        return redirect(url_for("home"))
+    else:
         bookInfo = bookInfo[0]
 
-    bookInfo['image'] = correctImage(bookInfo['image'])
+    bookInfo["image"] = correctImage(bookInfo["image"])
     similarBookInfo = getQuaryFromDataBase(
         "Books.db",
         "select * from Book where category_id = ? LIMIT 4",
         bookInfo["category_id"],
     )
     quantityOfBook = 0
+
     def getQuantity(bookId):
         quantity = 0
         try:
-            quantity = session["cart"][bookId] 
+            quantity = session["cart"][bookId]
         except:
             quantity = 0
         return quantity
+
     # ! ------------------------------------------
     # if user wants to add an item to their cart
     if request.method == "POST":
@@ -376,55 +462,52 @@ def book(bookId):
                 "login_required",
                 "You have to login fisrt to be able to buy this item.",
             )
-            return render_template("book.html",
-                                   err_mes = error_message
-                                   )
+            return render_template("book.html", err_mes=error_message)
 
         # handling the quantity error when quantity be non positive value
         if int(request.form.get("quantity")) < 1:
             # create the error message as object
-            error_message = createErrorMessage(True,
-                                               "invaled value",
-                                               "Quantity can not be non positive!"
-                                               )
+            error_message = createErrorMessage(
+                True, "invaled value", "Quantity can not be non positive!"
+            )
             # return the page with the message
             # do not forget to add the bookInfo to the page.
-            return render_template("book.html",
-                                    bookInfo = bookInfo,
-                                    quantity = quantityOfBook,
-                                    simBooks = similarBookInfo,
-                                    err_mes = createErrorMessage(True,
-                                                                 "invaled value", 
-                                                                 "Quantity can not be non positive!"
-                                                                 )
-                                    )
+            return render_template(
+                "book.html",
+                bookInfo=bookInfo,
+                quantity=quantityOfBook,
+                simBooks=similarBookInfo,
+                err_mes=createErrorMessage(
+                    True, "invaled value", "Quantity can not be non positive!"
+                ),
+            )
 
         # check if these is any item in the cart before (cart has been created)
-        
+
         if "cart" in session:  # if cart already created
             session["cart"][bookId] = int(request.form.get("quantity"))
         else:  # if cart not created
             session["cart"] = {}  # cart will be a dict
             session["cart"][bookId] = int(request.form.get("quantity"))
         if "cart" in session:
-            quantityOfBook = int(
-                request.form.get("quantity")
-            )
-        return render_template("book.html", 
-                               bookInfo = bookInfo[0],
-                               quantity = quantityOfBook,
-                               simBooks = similarBookInfo,
-                               err_mes = createErrorMessage()
-                               )
+            quantityOfBook = int(request.form.get("quantity"))
+        return render_template(
+            "book.html",
+            bookInfo=bookInfo[0],
+            quantity=quantityOfBook,
+            simBooks=similarBookInfo,
+            err_mes=createErrorMessage(),
+        )
 
     # if the user request the page via "get" method
     else:
-        return render_template("book.html",
-                               bookInfo = bookInfo,
-                               quantity = quantityOfBook,
-                               simBooks = similarBookInfo,
-                               err_mes = createErrorMessage()
-                               )
+        return render_template(
+            "book.html",
+            bookInfo=bookInfo,
+            quantity=quantityOfBook,
+            simBooks=similarBookInfo,
+            err_mes=createErrorMessage(),
+        )
 
 
 # cart -> mazen
