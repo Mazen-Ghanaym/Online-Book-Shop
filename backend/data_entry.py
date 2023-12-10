@@ -6,7 +6,7 @@ from io import BytesIO
 import sqlite3
 import random
 
-def download_and_convert_image(url, format='jpg', folder_path='static/DBimages', bookid=None):
+def download_and_convert_image(url, format='jpg', folder_path='static\DBimages', bookid=None):
     # Create the folder if it doesn't exist
     os.makedirs(folder_path, exist_ok=True)
 

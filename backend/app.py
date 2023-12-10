@@ -1,5 +1,6 @@
 import os
 import datetime
+from pydoc import cram
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_session import Session
 from tempfile import mkdtemp
@@ -72,6 +73,27 @@ def createErrorMessage(err_state=False, err_type=None, err_mesg_txt=None):
         "error_message_text": err_mesg_txt,
     }
     return error_message
+
+def validEmail(the_email):
+    if the_email == None:
+        return False
+    # todo you need to select all emails from the data base to check that email is not found  
+    else:
+        all_emails = getQuaryFromDataBase("Books.db",
+                                      "select email from user where user_id <> ?",
+                                      session["user_id"],
+                                      )
+        just_emails = [row["email"] for row in all_emails]
+        return (the_email not in just_emails)
+    
+def validName(the_name):
+    if the_name == None:
+        return False
+    else:
+        return True
+    
+def correctImage(imagePath):
+    return "..\\" + str(imagePath).replace('/','\\')
 
 
 # ----------------------------------------------------------------------------------------
@@ -226,7 +248,18 @@ def logout():
 def profile():
     # change password
     if request.method == "POST":
-        pass
+        
+        if validEmail(request.form.get("email")):
+            pass
+        else:
+            pass
+        if validName(request.form.get("name")):
+            pass
+        else:
+            pass
+        # update the user info in database
+        # quary of update 
+        return redirect(url_for(profile))
 
     # show profile
     else:
@@ -235,11 +268,16 @@ def profile():
             "select * from user where user_id = ?",
             int(session["user_id"]),
         )
+        # render_template(
+        # "profile.html",
+        # err_mes = createErrorMessage(),
+        # personInfo = personInfo
+        # )
         return render_template(
             "layout.html",
             page_name="profile",
             err_mes=createErrorMessage(),
-            items=personInfo,
+            items=personInfo
         )
 
 
@@ -303,16 +341,32 @@ def library(categoryId=None):
 @login_required
 def book(bookId):
     # get data from  database with the quary below
+    # ! ------------------------------------------
     bookInfo = getQuaryFromDataBase(
         "Books.db",
         "select * from Book where book_id = ?",
         bookId,
-    )[0]
+    )
+    if bookInfo != None and len(bookInfo) != 1:
+        return redirect(url_for('home'))
+    else :
+        bookInfo = bookInfo[0]
+
+    bookInfo['image'] = correctImage(bookInfo['image'])
     similarBookInfo = getQuaryFromDataBase(
         "Books.db",
         "select * from Book where category_id = ? LIMIT 4",
         bookInfo["category_id"],
     )
+    quantityOfBook = 0
+    def getQuantity(bookId):
+        quantity = 0
+        try:
+            quantity = session["cart"][bookId] 
+        except:
+            quantity = 0
+        return quantity
+    # ! ------------------------------------------
     # if user wants to add an item to their cart
     if request.method == "POST":
         # handling
@@ -322,26 +376,31 @@ def book(bookId):
                 "login_required",
                 "You have to login fisrt to be able to buy this item.",
             )
-            return redirect("/signIn")
+            return render_template("book.html",
+                                   err_mes = error_message
+                                   )
 
         # handling the quantity error when quantity be non positive value
-        if request.form.get("quantity") < 1:
+        if int(request.form.get("quantity")) < 1:
             # create the error message as object
-            error_message = {
-                "error_state": True,
-                "error_type": "invaled value",
-                "error_message_text": "Quantity can not be non positive!",
-            }
-            # return the page with the ma=essage
+            error_message = createErrorMessage(True,
+                                               "invaled value",
+                                               "Quantity can not be non positive!"
+                                               )
+            # return the page with the message
             # do not forget to add the bookInfo to the page.
-            return render_template(
-                "frontend/single-book.html",
-                page_name="error message : quantity can not be non positive!",
-                err_mes=error_message,
-            )
+            return render_template("book.html",
+                                    bookInfo = bookInfo,
+                                    quantity = quantityOfBook,
+                                    simBooks = similarBookInfo,
+                                    err_mes = createErrorMessage(True,
+                                                                 "invaled value", 
+                                                                 "Quantity can not be non positive!"
+                                                                 )
+                                    )
 
         # check if these is any item in the cart before (cart has been created)
-        quantityOfBook = 0  # TODO need to pass as arg!
+        
         if "cart" in session:  # if cart already created
             session["cart"][bookId] = int(request.form.get("quantity"))
         else:  # if cart not created
@@ -350,33 +409,22 @@ def book(bookId):
         if "cart" in session:
             quantityOfBook = int(
                 request.form.get("quantity")
-            )  # TODO need to pass as arg!
-        return render_template(
-            "frontend/single-book.html", page_name=f"add to cart book id = {bookId}"
-        )
+            )
+        return render_template("book.html", 
+                               bookInfo = bookInfo[0],
+                               quantity = quantityOfBook,
+                               simBooks = similarBookInfo,
+                               err_mes = createErrorMessage()
+                               )
 
-    # if the user request the page via get method
+    # if the user request the page via "get" method
     else:
-        error_message = {
-            "error_state": False,
-            "error_type": "none",
-            "error_message_text": "none",
-        }
-        if bookInfo != None and len(bookInfo) > 0:
-            title = bookInfo[0]["title"]
-        else:
-            title = None
-            error_message["error_state"] = True
-            error_message["error_type"] = "not found"
-            error_message[
-                "error_message_text"
-            ] = "This book is not found at current time!"
-        return render_template(
-            "frontend/single-book.html",
-            title=title,
-            page_name=f"bookId = {bookId}",
-            err_mes=error_message,
-        )
+        return render_template("book.html",
+                               bookInfo = bookInfo,
+                               quantity = quantityOfBook,
+                               simBooks = similarBookInfo,
+                               err_mes = createErrorMessage()
+                               )
 
 
 # cart -> mazen
