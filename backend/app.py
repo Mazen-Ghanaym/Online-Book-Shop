@@ -436,8 +436,9 @@ def book(bookId):
     # ! ------------------------------------------
     bookInfo = getQuaryFromDataBase(
         "Books.db",
-        "select * from Book where book_id = ?",
+        "select * from Book where book_id = ? and state = ?",
         bookId,
+        1,
     )
     if bookInfo != None and len(bookInfo) != 1:
         return redirect(url_for("home"))
@@ -447,19 +448,11 @@ def book(bookId):
     bookInfo["image"] = correctImage(bookInfo["image"])
     similarBookInfo = getQuaryFromDataBase(
         "Books.db",
-        "select * from Book where category_id = ? LIMIT 4",
+        "select * from Book where category_id = ? and state = ? LIMIT 4",
         bookInfo["category_id"],
+        1,
     )
     quantityOfBook = 0
-
-    def getQuantity(bId):
-        quantity = 0
-        try:
-            quantity = int(session["cart"][bId])
-        except:
-            quantity = 0
-        print(quantity)
-        return quantity
 
     # ! ------------------------------------------
     # if user wants to add an item to their cart
@@ -480,34 +473,28 @@ def book(bookId):
                 bookInfo=bookInfo,
                 quantity=quantityOfBook,
                 simBooks=similarBookInfo,
-                err_mes=createErrorMessage(
-                    True, "invaled value", "Quantity can not be non positive!"
-                ),
+                err_mes=createErrorMessage(True, 
+                                           "invaled value", 
+                                           "Quantity can not be non positive!"
+                                           )
             )
 
         # check if these is any item in the cart before (cart has been created)
-
-        if session.get("cart"):  # if cart already created
+        if session.get("cart") != None:  # if cart already created
             session["cart"][bookId] = int(request.form.get("quantity"))
         else:  # if cart not created
             session["cart"] = {}  # cart will be a dict
             session["cart"][bookId] = int(request.form.get("quantity"))
-        # try to get the quantity of the book from the session.
-        # quantityOfBook = getQuantity(bookId)
+            
+        return redirect(url_for('book', bookId = str(bookId)))
+        
+
+    # if the user request the page via "get" method
+    else:
         try:
             quantityOfBook = int(session["cart"][bookId])
         except:
             quantityOfBook = 0
-        return redirect(url_for("book", bookId=str(bookId)))
-        # return render_template("book.html",
-        #                        bookInfo=bookInfo,
-        #                        quantity=quantityOfBook,
-        #                        simBooks=similarBookInfo,
-        #                        err_mes=createErrorMessage()
-        #                        )
-
-    # if the user request the page via "get" method
-    else:
         return render_template(
             "book.html",
             bookInfo=bookInfo,
