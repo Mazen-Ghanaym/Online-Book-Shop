@@ -16,10 +16,28 @@
   <link rel="stylesheet" href="static/home.css" />
   <title>Book Store</title>
   <script>
+    
     function redirectToLink(link) {
       // Change the URL to the desired destination
       window.location.href = link;
     }
+    // if the user click on any book the page will redirect the user to the page of this book.
+    document.addEventListener("click", function(event){
+      let target = event.target;
+      while(target){
+        if(target.classList.contains("goToBook")){
+          let link = "/book/"+target.getAttribute("data-id");
+          window.location.replace(link); 
+          break;
+        }
+        else if(target.classList.contains("add-to-cart")){
+          break;
+        }
+        else{
+          target = target.parentNode;
+        }
+      }
+    });
   </script>
 </head>
 
@@ -54,7 +72,7 @@
     <div class="books">
 
       {% for book in popular_books %}
-      <div class="book">
+      <div data-id="{{book['book_id']}}" class="book goToBook">
         <form action="{{url_for('add_to_cart', book_id=book['book_id'])}}" method="get" class="add-to-cart">
           <button>
             <i class="material-icons">add_shopping_cart</i>
@@ -102,7 +120,7 @@
     <div class="type-book">{{category['title']}}</div>
     <div class="books">
       {% for book in category['books'] %}
-      <div class="book">
+      <div data-id="{{book['book_id']}}" class="book goTobBook">
         <form action="{{url_for('add_to_cart', book_id=book['book_id'])}}" method="get" class="add-to-cart">
           <button>
             <i class="material-icons">add_shopping_cart</i>

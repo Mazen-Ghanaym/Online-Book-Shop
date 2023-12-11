@@ -20,6 +20,24 @@
       // Change the URL to the desired destination
       window.location.href = link;
     }
+    // if the user click on any book the page will redirect the user to the page of this book.
+    document.addEventListener("click", function(event){
+      let target = event.target;
+      
+      while(target){
+        if(target.classList.contains("goToBook")){
+          let link = "/book/"+target.getAttribute("data-id");
+          window.location.replace(link); 
+          break;
+        }
+        else if(target.classList.contains("add-to-cart")){
+          break;
+        }
+        else{
+          target = target.parentNode;
+        }
+      }
+    });
   </script>
 </head>
 
@@ -67,7 +85,7 @@
       <div class="books-container">
         <!-- books -->
         {% for book in books %}
-        <div class="book">
+        <div data-id="{{book['book_id']}}" class="book goToBook">
           <form class="add-to-cart">
             <button>
               <i class="material-icons">add_shopping_cart</i>
