@@ -51,7 +51,24 @@
 
       <div class="sing-log">
         {% if session['user_id'] %}
-        <button onclick="redirectToLink('/logout')" class="sing">Log Out</button>
+        <!-- <button onclick="redirectToLink('/logout')" class="sing">Log Out</button> -->
+        <ul class="nav-info">
+          <li>
+            <a href="{{url_for('profile')}}">
+              <img src="../static/images/user_1.png" alt="Profile" />
+            </a>
+          </li>
+          <li>
+            <a href="{{url_for('cart')}}">
+              <img src="../static/images/shopping_cart_1.png" alt="Store" />
+            </a>
+          </li>
+          <li>
+            <a href="{{url_for('logout')}}">
+              <img src="../static/images/logout_39px.png" alt="logout" />
+            </a>
+          </li>
+        </ul>
         {% else %}
         <button onclick="redirectToLink('/signup')" class="sing">Sing Up</button>
         <button onclick="redirectToLink('/signup')" class="log">Log In</button>
