@@ -45,7 +45,7 @@ nav {
 
 .book {
   width: 100%;
-  /* height: 600px; */
+  height: 500px;
   margin-top: 50px;
   padding-left: 25px;
   padding-right: 25px;
@@ -54,71 +54,97 @@ nav {
 }
 
 .book .image {
-  flex-basis: 25%;
-  height: 100%;
-  width: 100%;
+  /* flex-basis: 25%; */
+  position: relative;
+  height: 80%;
+  width: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 20px;
 }
+
 .book .image img {
-  width: 450px;
-  height: auto;
-  max-width: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .book .info {
+  position: relative;
+  width: 60%;
   flex-basis: 50%;
   display: flex;
   flex-direction: column;
   padding-left: 20px;
 }
+
 .book .info .title {
-  font-size: 50px;
+  position: relative;
+  font-size: 30px;
   font-weight: bold;
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin: 10px;
+  height: 20%;
+  width: 100%;
+  color: #000000;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
+
 .book .info .author {
+  position: relative;
+  height: 10%;
+  width: 100%;
   font-size: 20px;
-  margin-bottom: 25px;
+  margin: 10px;
 }
 
 .book .info .rate ul {
   list-style-type: none;
   display: flex;
-  margin: 20px 0px;
+  margin: 10px;
 }
+
 .book .info .rate ul li {
   margin-right: 10px;
   font-size: 20px;
 }
+
 .checked {
   color: orange;
 }
 
 .book .info .description {
+  position: relative;
+  height: 50%;
+  width: 100%;
   font-size: 20px;
-  margin-top: 25px;
-  margin-bottom: 25px;
-}
-
-.book .info .description p {
-  margin: 10px 0px;
+  margin: 10px;
+  color: black;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .book .card {
+  position: relative;
+  width: 20%;
+  height: 70%;
   flex-basis: 25%;
   display: flex;
   flex-direction: column;
   background-color: var(--main-color);
   font-size: 20px;
-  margin-top: 75px;
-  margin-bottom: 75px;
+  margin-top: 20px;
+  margin-left: 20px;
   padding: 100px 50px;
-
   border-radius: 20px;
 }
+
 .book .card .price {
   display: flex;
   flex-direction: row;
@@ -126,17 +152,21 @@ nav {
   justify-content: space-between;
   margin-bottom: 30px;
 }
+
 .book .card .price {
   font-size: 20px;
   font-weight: bold;
 }
+
 .book .card .quantity {
   margin-bottom: 50px;
 }
+
 .book .card .quantity label {
   font-size: 20px;
   font-weight: bold;
 }
+
 .book .card .quantity input {
   appearance: textfield;
   width: 50px;
@@ -148,6 +178,7 @@ nav {
   font-size: 20px;
   font-weight: bold;
 }
+
 .book .card .buttons-group {
   display: flex;
   flex-direction: column;
@@ -155,12 +186,14 @@ nav {
   justify-content: space-between;
   align-items: center;
 }
+
 .book .card .buttons-group button {
   display: block;
   width: 300px;
   padding: 20px;
   border-radius: 20px;
 }
+
 .book .card .buttons-group .add-btn {
   background-color: #00add3;
   color: white;
@@ -169,6 +202,7 @@ nav {
   border-color: white;
   line-height: 12.1px;
 }
+
 .book .card .buttons-group .buy-btn {
   background-color: #00d32f;
   color: white;
@@ -180,6 +214,7 @@ nav {
 .book .card .buttons-group .buy-btn:hover {
   background-color: #055d18;
 }
+
 .book .card .buttons-group .add-btn:hover {
   background-color: #0a758d;
 }
@@ -231,6 +266,7 @@ button {
 }
 
 .books .book {
+  background-color: white;
   position: relative;
   height: 450px;
   width: 300px;
@@ -240,6 +276,7 @@ button {
   display: flex;
   flex-direction: column;
 }
+
 .books .book .add-to-cart {
   position: absolute;
   top: 45%;
@@ -253,6 +290,7 @@ button {
   font-size: 1.5rem;
   font-weight: 700;
 }
+
 .books .book .add-to-cart button {
   background: none;
   border: none;
@@ -265,6 +303,7 @@ button {
 
   color: rgb(41, 41, 41);
 }
+
 .books .img-book {
   width: 100%;
   height: 187px;
@@ -278,6 +317,7 @@ button {
 .books .book-details {
   padding: 0.4rem;
 }
+
 .books .book-details .add-to-cart {
   position: absolute;
   top: 0;
@@ -300,7 +340,11 @@ button {
   text-decoration: none;
   color: black;
   font-weight: 700;
-  line-height: 12.1px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .books .title .book-creator {
@@ -319,9 +363,14 @@ button {
   font-weight: 500;
 
   color: #000000;
-  display: -webkit-box;
+  /* display: -webkit-box;
   -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical; */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .books .price {
@@ -334,6 +383,7 @@ button {
   font-size: 20px;
   line-height: 12.1px;
 }
+
 .catigories {
   padding: 90px 90px;
   display: flex;
@@ -346,6 +396,7 @@ button {
   line-height: 31.47px;
   margin-bottom: 30px;
 }
+
 .book .add-to-cart {
   position: absolute;
   top: 45%;
@@ -359,6 +410,7 @@ button {
   font-size: 1.5rem;
   font-weight: 700;
 }
+
 .book .add-to-cart button {
   background: none;
   border: none;
@@ -371,6 +423,7 @@ button {
 
   color: rgb(41, 41, 41);
 }
+
 footer {
   height: 27px;
   color: white;

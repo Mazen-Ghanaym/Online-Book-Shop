@@ -116,10 +116,14 @@ def signin():
         password = request.form.get("password")
         # Ensure email was submitted
         if not email:
-            return render_template("signin.html", error_message="Invalid Email", invalid=True)
+            return render_template(
+                "signin.html", error_message="Invalid Email", invalid=True
+            )
         # Ensure password was submitted
         elif not password:
-            return render_template("signin.html", error_message="Invalid Password", invalid=True)
+            return render_template(
+                "signin.html", error_message="Invalid Password", invalid=True
+            )
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
         db = con.cursor()
@@ -131,10 +135,16 @@ def signin():
 
         # Ensure username exists and password is correct
         if len(rows) != 1:
-            return render_template("signin.html", error_message="This email is not register before", invalid=True)
+            return render_template(
+                "signin.html",
+                error_message="This email is not register before",
+                invalid=True,
+            )
 
         if rows[0]["password"] != password:
-            return render_template("signin.html", error_message="Invalid Password", invalid=True)
+            return render_template(
+                "signin.html", error_message="Invalid Password", invalid=True
+            )
 
         # commit and close database
         con.commit()
@@ -183,12 +193,18 @@ def signup():
         # check if user provide valid confirm
         if not confirm:
             return render_template(
-                "signup.html", error_message="Invalid password confirmation", invalid=True
+                "signup.html",
+                error_message="Invalid password confirmation",
+                invalid=True,
             )
 
         # check if password equals the confirmation password
         if password != confirm:
-            return render_template("signup.html", error_message="Confirmation doesn't match password", invalid=True)
+            return render_template(
+                "signup.html",
+                error_message="Confirmation doesn't match password",
+                invalid=True,
+            )
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
         db = con.cursor()
@@ -201,7 +217,9 @@ def signup():
 
         # check if username registered before
         if len(users) >= 1:
-            return render_template("signup.html", error_message="This email exists before", invalid=True)
+            return render_template(
+                "signup.html", error_message="This email exists before", invalid=True
+            )
 
         # after validating all conditions insert new user into database
         user_state = db.execute(
@@ -281,7 +299,7 @@ def profile():
         db.close()
         con.close()
         # query of update
-        return redirect(url_for('profile'))
+        return redirect(url_for("profile"))
     # show profile
     else:
         # connect with database and create cursor called db
@@ -296,9 +314,7 @@ def profile():
         # retrive all bills from database with the same user_id
         db.execute(
             "SELECT * FROM Bill WHERE user_id = ? ORDER BY date_time DESC;",
-            (
-                session["user_id"],
-            ),
+            (session["user_id"],),
         )
         # convert retrived data into list of dictionaries
         columns = [column[0] for column in db.description]
@@ -358,7 +374,7 @@ def home():
             "home.html", categories=categories, popular_books=popular_books
         )
     else:
-        return redirect( url_for('library') )
+        return redirect(url_for("library"))
 
 
 # library for search books
@@ -561,10 +577,10 @@ def add_to_cart(book_id):
             quantity = 1
     # check if quantity is valid
     if quantity < 0:
-        redirect(url_for('book', bookId=book_id))
+        redirect(url_for("book", bookId=book_id))
     # check if quantity is valid
     if quantity > books[0]["quantity"]:
-        redirect(url_for('book', bookId=book_id))
+        redirect(url_for("book", bookId=book_id))
     # check if book is already in cart
     if session["cart"].get(books[0]["book_id"]) != None:
         # update quantity in session["cart"]
@@ -573,7 +589,7 @@ def add_to_cart(book_id):
         # add book to cart
         session["cart"][books[0]["book_id"]] = quantity
     # redirect to the main page
-    return redirect('/cart')
+    return redirect("/cart")
 
 
 @app.route("/cart/remove/<book_id>", methods=["GET", "POST"])
@@ -655,11 +671,12 @@ def cart():
         con.close()
         # render cart page
         return render_template(
-            "cart.html", books=books.values(),
+            "cart.html",
+            books=books.values(),
             total_price=total_price,
             total_quantity=total_quantity,
-            error_message="", 
-            invalid=False
+            error_message="",
+            invalid=False,
         )
     else:
         # retrive data from form
@@ -706,14 +723,14 @@ def cart():
             try:
                 new_quantity = int(new_quantity)
             except ValueError:
-                return redirect(url_for('cart'))
+                return redirect(url_for("cart"))
             # check if new quantity is valid
             if new_quantity < 0:
-                return redirect(url_for('cart'))
+                return redirect(url_for("cart"))
             # check if new quantity is valid
             #! [{}]
             if new_quantity > books[book_id]["quantity"]:
-                return redirect(url_for('cart'))
+                return redirect(url_for("cart"))
             # update quantity in session["cart"]
             session["cart"][book_id] = new_quantity
             # update quantity in database
@@ -749,7 +766,7 @@ def cart():
 
         bill_id = bills[0]["bill_id"]
         # insert into order table they have same bill
-        tablen="Book_Order"
+        tablen = "Book_Order"
         for book in session["cart"]:
             db.execute(
                 f"INSERT INTO {tablen}(bill_id, book_id, quantity, price_per_book) VALUES(?,?,?,?);",
