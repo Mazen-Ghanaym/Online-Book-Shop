@@ -116,10 +116,10 @@ def signin():
         password = request.form.get("password")
         # Ensure email was submitted
         if not email:
-            return render_template("signin.html", error_message="message", invalid=True)
+            return render_template("signin.html", error_message="Invalid Email", invalid=True)
         # Ensure password was submitted
         elif not password:
-            return render_template("signin.html", error_message="message", invalid=True)
+            return render_template("signin.html", error_message="Invalid Password", invalid=True)
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
         db = con.cursor()
@@ -131,10 +131,10 @@ def signin():
 
         # Ensure username exists and password is correct
         if len(rows) != 1:
-            return render_template("signin.html", error_message="message", invalid=True)
+            return render_template("signin.html", error_message="This email is not register before", invalid=True)
 
         if rows[0]["password"] != password:
-            return render_template("signin.html", error_message="message", invalid=True)
+            return render_template("signin.html", error_message="Invalid Password", invalid=True)
 
         # commit and close database
         con.commit()
@@ -171,19 +171,19 @@ def signup():
         if not email:
             # wail for render the register page with error message
             return render_template(
-                "signup.html", error_message="message email", invalid=True
+                "signup.html", error_message="Invalid Email", invalid=True
             )
 
         # check if user provide valid password
         if not password:
             return render_template(
-                "signup.html", error_message="message password", invalid=True
+                "signup.html", error_message="Invalid password", invalid=True
             )
 
         # check if user provide valid confirm
         if not confirm:
             return render_template(
-                "signup.html", error_message="message confirm", invalid=True
+                "signup.html", error_message="Invalid password confirmation", invalid=True
             )
 
         # check if password equals the confirmation password
@@ -201,7 +201,7 @@ def signup():
 
         # check if username registered before
         if len(users) >= 1:
-            return render_template("signup.html", error_message="message", invalid=True)
+            return render_template("signup.html", error_message="This email exists before", invalid=True)
 
         # after validating all conditions insert new user into database
         user_state = db.execute(
