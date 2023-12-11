@@ -5,33 +5,37 @@
   <meta charset="UTF-8" />
   <title>Book</title>
   <link rel="icon" href="static/images/book_shop.png" />
-  <link rel="stylesheet" href="../static/style1.css"/>
+  <link rel="stylesheet" href="../static/style1.css" />
   <link rel="stylesheet" href="static/error.css" />
   <script src="static/script.js"></script>
   <!-- Font Awesome Icon Library -->
-  <link 
-    rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" 
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link
     href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-    rel="stylesheet" 
-  />
-  <link 
-    rel="stylesheet" 
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" 
-  />
-  <link 
-    rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" 
-  />
-  
-  
-  
+    rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+
 
 </head>
 
 <body>
+  <!-- error handling -->
+  <div class="popup-background">
+    <div id="popup" class="popup">
+      <h4>{{ error_message }}</h4>
+      <p>Please input valid data</p>
+    </div>
+  </div>
+  {% if invalid %}
+  <script>
+    showPopup();
+  </script>
+  {% endif %}
+  <!--end error handling-->
   <header>
     <nav>
       <div class="left-navbar">
@@ -93,11 +97,12 @@
 
 
       <!-- action="{{url_for('book', bookId = bookInfo['book_id'])}}" 
-        if you want to make book bage return the user to the same page --> 
+        if you want to make book bage return the user to the same page -->
 
       <!-- action="{{url_for('add_to_cart', book_id = bookInfo['book_id'])}}" 
          if you want to make book page return the user to the cart page-->
-      <form action="{{url_for('book', bookId = bookInfo['book_id'])}}"   id="changeQuantity" method="post" class="buttons-group">
+      <form action="{{url_for('book', bookId = bookInfo['book_id'])}}" id="changeQuantity" method="post"
+        class="buttons-group">
         <button form="changeQuantity" class="add-btn" type="submit">Add to Cart</button>
         <!-- <button class="buy-btn">Buy Now</button> -->
       </form>
