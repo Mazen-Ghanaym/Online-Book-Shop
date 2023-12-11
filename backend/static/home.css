@@ -62,6 +62,14 @@ header nav img {
   background-color: #003a5b;
 }
 
+
+.nav-info{
+  display: flex;
+}
+.nav-info *{
+  margin-right: 10px;
+}
+
 /* ************************************* search **************************************/
 
 .search {
