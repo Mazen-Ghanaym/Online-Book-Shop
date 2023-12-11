@@ -774,12 +774,15 @@ def save_cart():
         for book in new_books:
             book["quantity"] = session["cart"][book["book_id"]]
 
-        cby_books = {}
+        cpy_books = {}
         # convert books to dictionary of dictionaries
         for book in books:
-            cby_books[book["book_id"]] = book
-        books = cby_books
-        for book in books.values():
+            cpy_books[book["book_id"]] = book
+        
+        print(cpy_books)
+        books = cpy_books
+        print(books)
+        for book in cpy_books.values():
             print(book["quantity"])
         # retrive new quantity from form for each book
         for book_id in session["cart"].keys():
@@ -800,7 +803,7 @@ def save_cart():
             if new_quantity < 0:
                 return redirect("/cart")
             # check if new quantity is valid
-            if new_quantity > books[book_id]["quantity"]:
+            if new_quantity > cpy_books[book_id]["quantity"]:
                 print("hhhh")
                 return redirect("/cart")
             # update quantity in session["cart"]
