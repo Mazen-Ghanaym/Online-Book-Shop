@@ -17,7 +17,6 @@
 
 .sing-in,
 .sing-up {
-  display: inline-block;
   text-decoration: none;
   border-radius: 0.25rem;
   color: #ffffff;
@@ -29,7 +28,8 @@
   float: right;
 }
 
-.sing-in span,.sing-up span{
+.sing-in span,
+.sing-up span {
   display: inherit;
   border-radius: inherit;
   padding: 1rem 2rem;
@@ -92,7 +92,7 @@
 }
 
 /* --------------------------------------------------- Reset some default styles (body ,h2 ,p ,button) ----------------------------------------------- */
- 
+
 body,
 h2,
 p,
@@ -120,7 +120,7 @@ body {
   border-radius: 30px;
   overflow: hidden;
   width: 1000px;
-  margin: 20px;
+  margin: 44px 0px 0px 0px;
 }
 
 .container:hover {
@@ -158,7 +158,7 @@ label {
 /*...................................................... Simplify the styles for the (any input filed) ..............................................*/
 
 input {
-  width: 100%; 
+  width: 100%;
   padding: 10px;
   margin-bottom: 16px;
   border: 1px solid #000000;
@@ -166,7 +166,7 @@ input {
   background-color: rgb(217, 217, 217);
   box-sizing: border-box;
 
-                                               /* caret-color: #00af00; */
+  /* caret-color: #00af00; */
 }
 
 
@@ -216,10 +216,11 @@ button:hover {
 
 
 
-.container {
+/* .container {
   max-width: 100%;
-  margin: 0 auto; 
-}
+  margin: 0 auto;
+} */
+
 @media screen and (max-width: 768px) {
   .container {
     width: 90%;
@@ -227,10 +228,11 @@ button:hover {
   }
 }
 
-::selection{
+::selection {
   color: black;
-  background-color: rgb(217, 217, 217);;
-} 
+  background-color: rgb(217, 217, 217);
+  ;
+}
 
 
 

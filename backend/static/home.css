@@ -297,7 +297,7 @@ form {
 /* ************************************* stars ************************************* */
 
 .checked {
-  color: orange;
+  color: rgba(255, 230, 0, 0.726);
 }
 
 .stars {
@@ -333,10 +333,13 @@ footer {
 
 .popular-books .book {
   cursor: pointer;
-  border: 3px solid gold;
   overflow: hidden;
+  border: 3px solid rgba(0, 0, 0, 0.075);
 }
-
+.book:hover{
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.938);
+}
 .catigories {
   padding-top: 0;
 }

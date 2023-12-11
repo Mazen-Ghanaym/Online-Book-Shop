@@ -248,7 +248,7 @@ def signup():
         con.commit()
         db.close()
         con.close()
-
+        session["cart"] = {}
         # redirect to the main page
         return redirect("/")
     else:
