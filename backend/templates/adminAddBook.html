@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../static/adminAddBook.css" />
   <link rel="stylesheet" href="../static/error.css" />
-  <script src="static/script.js"></script>
+  <script src="../static/script.js"></script>
   <title>Sign In</title>
 </head>
 
@@ -27,69 +27,93 @@
   </script>
   {% endif %}
   <!--end error handling-->
-  <div class="header">
-    <!--start header-->
+  
+  <!--start header-->
+  <header>
+    <div class="logo-div">
+      <!-- do not forget to change the image to an admin image -->
+      <a class="admin-home-link" href="{{ url_for('adminAddBook') }}"><img class="logo-img" src="../static/images/book_shop.png" /></a>
+    </div>
+    <!--logo-->
+    <div class="links">
+      <ul class="pages-ul">
+        <li>
+          <a href="{{ url_for('signup') }}" class="sing-up"> log out </a>
+        </li>
+        <li>
+          <a href="{{ url_for('signup') }}" class="sing-up"> log out </a>
+        </li>
+        <li>
+          <a href="{{ url_for('signup') }}" class="sing-up"> log out </a>
+        </li>
+      </ul>
+      
+    </div>
+    
+  </header>
 
-    <header>
-      <img class="logo" src="../static/images/bookshop.png" width="60PX" height="60PX" />
-      <!--logo-->
-      <a href="{{ url_for('signup') }}" class="sing-up">
-        <!--button sing up-->
-        <span> log out </span>
-      </a>
-    </header>
-  </div>
   <!--end header-->
 
-  <div class="container">
-    <!--start container-->
+  <main>
 
-    <h2>Add New Book</h2>
+    <!--start main-->
+    <div class="head">
+      <h2>Add New Book</h2>
+    </div>
 
-    <form>
-        <label>title</label>
-        <input placeholder="Enter Book Title" type="text" name="bookTitle">
-        
-        <label>Author</label>
-        <input placeholder="Enter Book Title" type="text" name="author">
+    <div class="addBookForm-div">
+      <form class="addBookForm">
 
-        <label>Image URL</label>
-        <input placeholder="Enter Book Title" type="file" name="imageFile">
+        <div class="form-row">
+          <label>Title</label>
+          <input placeholder="Enter Book Title" type="text" name="bookTitle">
+        </div>
 
-        
+        <div class="form-row">
+          <label>Author</label>
+          <input placeholder="Enter Book Title" type="text" name="author">
+        </div>
 
-        <label>price</label>
-        <input placeholder="Enter Book Title" type="text" name="price">
+        <div class="form-row">
+          <label>Image URL</label>
+          <input placeholder="Enter Book Title" type="file" name="imageFile">
+        </div>
 
-        <label>quantity</label>
-        <input placeholder="Enter Book Title" type="text" name="quantity">
+        <div class="form-row">
+          <div class="priceAndQuantity">
+            <div>
+              <label>price</label>
+              <input placeholder="Enter Book Title" type="text" name="price">
+            </div>
+            <div>
+              <label>quantity</label>
+              <input placeholder="Enter Book Title" type="text" name="quantity">
+            </div>
+          </div>
+        </div>
 
+        <div class="form-row">
+          <label>Description</label>
+          <br>
+          <textarea class="theDesc" name="description"></textarea>
+        </div>
 
-        <label>Description</label>
-        <textarea name="description">
+        <div class="form-row">
+          <input class="submit-btn" placeholder="Enter Book Title" type="submit" name="bookTitle">
+        </div>
 
-        </textarea>
+      </form>
+    </div>
 
-
-      <label>quantity</label>
-      <input placeholder="Enter Book Title" type="text" name="bookTitle">
-
-      <input placeholder="Enter Book Title" type="submit" name="bookTitle">
-
-    </form>
-
-
-  </div>
+  </main>
   <!--end container-->
 
-  <div class="footer">
+  
     <!--start footer-->
-
     <footer>
       <p>copyrights @ www.bookshop.com</p>
       <!--paragraph for footer-->
     </footer>
-  </div>
   <!--end footer-->
 </body>
 

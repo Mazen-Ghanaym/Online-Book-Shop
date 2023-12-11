@@ -1,168 +1,157 @@
-/* ................................................................... Page Sing-In.................................................................... */
+body{
+  margin: 0;
+  min-height: 100%;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 8% 87% 5%;
+  font-family: Arial, sans-serif;
+}
+/* -------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------*/
+/* ---------------------------------------------   header   --------------------------------------------- */
+header{
+  grid-row: 1;
+  background-color: rgb(58, 35, 204);
+  display: grid;
+  grid-template-columns: 50% 50%;
+  overflow: hidden;
+}
 
-/* ----------------------------------------------------------------------HEADER------------------------------------------------------------------------ */
+/* ----------------------------------------  logo image -------------------------------------- */
 
-.header {
-    text-align: center;
-    background-color: #000000;
-    color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 70px;
-  }
-  
-  /* ------------------------------------------------------------ button (sing-in , sing-up) ------------------------------------------------------------------- */
-  
-  .sing-in,
-  .sing-up {
-    display: inline-block;
-    text-decoration: none;
-    border-radius: 0.25rem;
-    color: #ffffff;
-    margin: 10px;
-    width: fit-content;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 14px;
-    /* float: right; */
-  }
-  
-  .sing-in span,.sing-up span{
-    display: inherit;
-    border-radius: inherit;
-    padding: 1rem 2rem;
-    translate: 0.25rem -0.25rem;
-    transition: translate 1000ms cubic-bezier(0.175, 0.885, 0.32, 1.275),
-    background-color 250ms
-  }
-  
-  .sing-in span {
-    background-color: rgb(0, 135, 211);
-  }
-  
-  .sing-up span {
-    background-color: rgb(18, 214, 61);
-  }
-  
-  /* ----------------------button (sing-in) ------------------------*/
-  
-  .sing-in {
-    background-color: rgb(9, 99, 149);
-  }
-  
-  .sing-in:hover span {
-    background-color: rgb(0, 64, 180);
-  }
-  
-  .sing-in:active span {
-    translate: none;
-  }
-  
-  
-  .sing-in:hover {
-    background-color: rgb(2, 40, 90);
-  }
-  
-  /* ----------------------button (sing-up) ------------------------*/
-  
-  .sing-up {
-    background-color: rgb(5, 165, 29);
-  }
-  
-  .sing-up:hover {
-    background-color: rgb(3, 74, 20);
-  }
-  
-  .sing-up:active span {
-    translate: none;
-  }
-  
-  .sing-up:hover span {
-    background-color: rgb(9, 149, 40);
-  }
-  
-  /*--------------------------------------------------------- Simplify the styles for the (logo) -------------------------------------------------------  */
-  
-  .logo {
-    float: left;
-    padding: 11px;
-    margin: -6px 10px;
-  }
-  
-  /* --------------------------------------------------- Reset some default styles (body ,h2 ,p ,button) ----------------------------------------------- */
-   
-  body,
-  h2,
-  p,
-  button {
-    margin: 0;
-    padding: 0;
-  }
-  
-  /*........................................................ Simplify the styles for the (body) .......................................................*/
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #ffffff;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  /*....................................................... Simplify the styles for the (container) ................................................*/
+header .logo-div {
+  display: flex;
+  align-items: center;
+  grid-column: 1;
+}
 
-  
-  
-  
-  /*........................................................... Simplify the styles for the (form) ..............................................*/
+header .logo-div .admin-home-link {
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+/* -------------------------------------------  links  ------------------------------------------- */
+
+header .links{
+  grid-column: 2;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding-right: 10px;
+}
+
+header .links .pages-ul{
+  list-style: none;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+header .links .pages-ul li{
+  margin-right: 15px;
+  width: 80px;
+  height: 30px;
+  box-sizing: border-box;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+header .links .pages-ul li:hover{
+  background-color: rgb(216, 216, 216);
+}
+
+header .links .pages-ul li a{
+  text-decoration: none;
+  color: black;
+}
 
 
 
+/* -------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------*/
+/* ---------------------------------------------   main   --------------------------------------------- */
+main{
+  display: grid;
+  grid-row: 2;
+  grid-template-rows: 10% 90%;
+  row-gap: 0px;
+}
 
-  
-  /*............................................................. Adjust the footer styles.................................................................... */
-  
-  .footer {
-    text-align: center;
-    background-color: #000000;
-    color: #fff;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10px 0;
-    height: 8px;
-    line-height: 6px;
-  }
-  
-  
-  /*       ____________________________________________              تجارب        ______________________________________________________                 */
-  
-  
-  
-  .container {
-    max-width: 100%;
-    margin: 0 auto; 
-  }
-  @media screen and (max-width: 768px) {
-    .container {
-      width: 90%;
-      margin: 10px;
-    }
-  }
-  
-  ::selection{
-    color: rgb(0, 0, 0);
-    background-color: rgb(217, 217, 217);;
-  }
-  /*  
-  *{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }*/
-  
-  /* ------------------------------------------------------------------ #The_End. ---------------------------------------------------------------------------*/
+main .head{
+  grid-row: 1;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+main .addBookForm-div{
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+}
+
+main .addBookForm-div .addBookForm{
+  display: grid;
+  grid-template-rows: auto auto auto auto auto auto;
+  grid-column: 2;
+  margin: 20px;
+  overflow-y: scroll;
+  width: 100%;
+}
+main .addBookForm-div .addBookForm .form-row{
+  width: 90%;
+  margin: 10px;
+}
+
+
+main .addBookForm-div .addBookForm .form-row input{
+  width: 90%;
+  height: 30px;
+  display: block;
+  background-color: rgba(139, 131, 146, 0.541);
+  margin-right: 10px;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  padding: 5px;
+  text-align: center;
+}
+
+.priceAndQuantity *{
+  display: inline-block;
+  width: 40%;
+}
+.priceAndQuantity div input{
+  width: 50%;
+  background-color: aqua;
+}
+
+.theDesc{
+  max-width: 80%;
+  max-height: 200px;
+  width: 70%;
+  height: 150px;
+}
+
+
+
+/* -------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------*/
+/* ---------------------------------------------   footer   --------------------------------------------- */
+footer{
+  grid-row: 3;
+  background-color: rgb(113, 105, 228);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
