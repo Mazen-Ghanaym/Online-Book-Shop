@@ -36,17 +36,38 @@
     <!--profile content-->
     <div class="information">
         <h2 class="title">Information</h2>
-        <form action="url_for('profile')" method="post">
+        <form action="{{ url_for('profile') }}" method="post">
             <label for="Email">Email:</label>
             <!--input filed for email-->
-            <input type="email" id="Email" name="email"/>
+            <input type="email" id="Email" name="email" value="{{ items['email']}}"/>
 
             <label for="fname">Full Name:</label>
             <!--input filed for password-->
-            <input type="text" id="fname" name="fullname"/>
+            <input type="text" id="fname" name="fullname" value="{{ items['full_name'] }}"/>
 
             <button type="submit">Save</button>
         </form>
+    </div>
+    <div class="bills">
+        <h2 class="title">Bills</h2>
+        <table class="table">
+            <tr class="table-head">
+                <th>#</th>
+                <th>Total</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Time</th>
+            </tr>
+            {% for bill in bills %}
+            <tr class="table-data">
+                <td>{{ bill['bill_id'] }}</td>
+                <td>{{ bill['total'] }}</td>
+                <td>{{ bill['address'] }}</td>
+                <td>{{ bill['phone'] }}</td>
+                <td>{{ bill['date_time'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
 
 

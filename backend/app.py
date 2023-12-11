@@ -257,31 +257,60 @@ def profile():
             pass
         else:
             pass
-        if validName(request.form.get("name")):
+        if validName(request.form.get("fullname")):
             pass
         else:
             pass
         # update the user info in database
-        # quary of update
-        return redirect(url_for(profile))
-
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # update user info in database
+        db.execute(
+            "UPDATE User SET email = ?, full_name = ? WHERE user_id = ?;",
+            (
+                request.form.get("email"),
+                request.form.get("fullname"),
+                session["user_id"],
+            ),
+        )
+        # commit changes
+        con.commit()
+        db.close()
+        con.close()
+        # query of update
+        return redirect(url_for('profile'))
     # show profile
     else:
-        personInfo = getQuaryFromDataBase(
-            "Books.db",
-            "select * from user where user_id = ?",
-            int(session["user_id"]),
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # get user data from database
+        db.execute("SELECT * FROM User WHERE user_id = ?;", (session["user_id"],))
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        users = [dict(zip(columns, row)) for row in db.fetchall()]
+        personInfo = users[0]
+        # retrive all bills from database with the same user_id
+        db.execute(
+            "SELECT * FROM Bill WHERE user_id = ? ORDER BY date_time DESC;",
+            (
+                session["user_id"],
+            ),
         )
-        # render_template(
-        # "profile.html",
-        # err_mes = createErrorMessage(),
-        # personInfo = personInfo
-        # )
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        bills = [dict(zip(columns, row)) for row in db.fetchall()]
+        # commit changes
+        con.commit()
+        db.close()
+        con.close()
         return render_template(
             "profile.html",
             page_name="profile",
             err_mes=createErrorMessage(),
             items=personInfo,
+            bills=bills,
         )
 
 
