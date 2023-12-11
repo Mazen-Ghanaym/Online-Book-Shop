@@ -779,7 +779,6 @@ def cart():
         con.close()
         # redirect to the main page
         session["cart"] = {}
-        flash("Order has been placed successfully")
         return redirect("/")
 
 
