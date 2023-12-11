@@ -567,8 +567,13 @@ def add_to_cart(book_id):
         return render_template(
             "book.html", bookInfo=books[0], quantity=0, err_mes=createErrorMessage()
         )
-    # add book to cart
-    session["cart"][books[0]["book_id"]] = quantity
+    # check if book is already in cart
+    if session["cart"].get(books[0]["book_id"]) != None:
+        # update quantity in session["cart"]
+        session["cart"][books[0]["book_id"]] += quantity
+    else:
+        # add book to cart
+        session["cart"][books[0]["book_id"]] = quantity
     # redirect to the main page
     return redirect("/cart")
 
