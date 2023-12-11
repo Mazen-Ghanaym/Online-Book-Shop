@@ -298,3 +298,19 @@ footer {
   padding-top: 50px;
   padding-bottom: 0;
 }
+
+.add_shopping_cart {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: black;
+  border: none;
+  border-radius: 0 0 0 12px;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background-color: rgba(128, 128, 128, 0.774);
+  border-radius: 100%;
+  top: 45%;
+}
