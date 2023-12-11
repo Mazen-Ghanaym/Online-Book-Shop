@@ -143,6 +143,7 @@ def signin():
         # Remember which user has logged in
         session["user_id"] = rows[0]["user_id"]
         # Redirect user to home page
+        session["cart"] = {}
         return redirect("/")
     # User reached route via GET (as by clicking a link or via redirect)
     else:
@@ -277,7 +278,7 @@ def profile():
         # personInfo = personInfo
         # )
         return render_template(
-            "layout.html",
+            "profile.html",
             page_name="profile",
             err_mes=createErrorMessage(),
             items=personInfo,
@@ -290,8 +291,6 @@ def profile():
 def home():
     """Show home page"""
     if request.method == "GET":
-        session["cart"] = {}
-
         # display all categories with their books
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
@@ -511,13 +510,6 @@ def add_to_cart(book_id):
     # connect with database and create cursor called db
     con = sqlite3.connect("Books.db")
     db = con.cursor()
-    quantity = 1
-    # check whether the quantity submitted from book page(has quantity) or from library page(doesn't has quantity)
-    try:
-        quantity = int(request.form.get("quantity"))
-    except ValueError:
-        return "TODO"
-
     # retrive all books from database with the same book_id
     db.execute(
         "SELECT * FROM Book WHERE book_id = ? AND state = ?;",
@@ -526,19 +518,32 @@ def add_to_cart(book_id):
             1,
         ),
     )
-
     # convert retrived data into list of dictionaries
     columns = [column[0] for column in db.description]
     books = [dict(zip(columns, row)) for row in db.fetchall()]
-
-    # add book to cart
-    session["cart"][books[0]["book_id"]] = quantity
-
     # commit changes
     con.commit()
     db.close()
     con.close()
-
+    if request.method == "GET":
+        quantity = 1
+    else:
+        try:
+            quantity = int(request.form.get("quantity"))
+        except ValueError:
+            quantity = 1
+    # check if quantity is valid
+    if quantity < 0:
+        return render_template(
+            "book.html", bookInfo=books[0], quantity=0, err_mes=createErrorMessage()
+        )
+    # check if quantity is valid
+    if quantity > books[0]["quantity"]:
+        return render_template(
+            "book.html", bookInfo=books[0], quantity=0, err_mes=createErrorMessage()
+        )
+    # add book to cart
+    session["cart"][books[0]["book_id"]] = quantity
     # redirect to the main page
     return redirect("/cart")
 
@@ -602,6 +607,11 @@ def cart():
         # convert retrived data into list of dictionaries
         columns = [column[0] for column in db.description]
         books = [dict(zip(columns, row)) for row in db.fetchall()]
+        # each book in session["cart"] has {book_id : quantity}
+        cpy_books = {}
+        for book in books:
+            cpy_books[book["book_id"]] = book
+        books = cpy_books
         # update quantity in books
         for book in session["cart"].keys():
             books[book]["quantity"] = session["cart"][book]
@@ -611,7 +621,7 @@ def cart():
         con.close()
         # render cart page
         return render_template(
-            "cart.html", books=books, error_message="", invalid=False
+            "cart.html", books=books.values(), error_message="", invalid=False
         )
     else:
         # retrive data from form
@@ -639,6 +649,11 @@ def cart():
         # each book in session["cart"] has {book_id : quantity}
         # copy books to new_books for updating quantity in new_books
         new_books = books
+        cpy_books = {}
+        # convert books to dictionary of dictionaries
+        for book in books:
+            cpy_books[book["book_id"]] = book
+        books = cpy_books
         # update quantity in new_books
         for book in new_books:
             book["quantity"] = session["cart"][book["book_id"]]
@@ -654,17 +669,18 @@ def cart():
                 new_quantity = int(new_quantity)
             except ValueError:
                 return render_template(
-                    "cart.html", cart=new_books, error_message="message", invalid=True
+                    "cart.html", books=new_books, error_message="message", invalid=True
                 )
             # check if new quantity is valid
             if new_quantity < 0:
                 return render_template(
-                    "cart.html", cart=new_books, error_message="message", invalid=True
+                    "cart.html", books=new_books, error_message="message", invalid=True
                 )
             # check if new quantity is valid
+            #! [{}]
             if new_quantity > books[book_id]["quantity"]:
                 return render_template(
-                    "cart.html", cart=new_books, error_message="message", invalid=True
+                    "cart.html", books=new_books, error_message="message", invalid=True
                 )
             # update quantity in session["cart"]
             session["cart"][book_id] = new_quantity
@@ -711,19 +727,10 @@ def cart():
             )
         # update quantity in database
         for book in session["cart"].keys():
-            # old quantity
-            db.execute(
-                "SELECT quantity FROM Book WHERE book_id = ?;",
-                (book,),
-            )
-            # convert retrived data into list of dictionaries
-            columns = [column[0] for column in db.description]
-            books = [dict(zip(columns, row)) for row in db.fetchall()]
-            old_quantity = books[0]["quantity"]
             db.execute(
                 "UPDATE Book SET quantity = ? WHERE book_id = ?;",
                 (
-                    old_quantity - session["cart"][book],
+                    books[book]["quantity"] - session["cart"][book],
                     book,
                 ),
             )
@@ -747,12 +754,15 @@ def save_cart():
         con = sqlite3.connect("Books.db")
         db = con.cursor()
         # retrive original books from database
+        # keys is a tuple of book_id after converting session["cart"] to tuple
+        keys = tuple(session["cart"].keys())
+        # place = ?,?,?... as the number of keys
+        place = ",".join("?" * len(keys))
+        # add state = 1 to keys
+        keys = keys + (1,)
+
         db.execute(
-            "SELECT * FROM Book WHERE book_id IN (?) AND state = ?;",
-            (
-                session["cart"].keys(),
-                1,
-            ),
+            f"SELECT * FROM Book WHERE book_id IN ({place}) AND state = ?;", (keys)
         )
         # convert retrived data into list of dictionaries
         columns = [column[0] for column in db.description]
@@ -761,44 +771,58 @@ def save_cart():
         # copy books to new_books for updating quantity in new_books
         new_books = books
         # update quantity in new_books
-        for book in session["cart"].keys():
-            new_books[book]["quantity"] = session["cart"][book]
+        for book in new_books:
+            book["quantity"] = session["cart"][book["book_id"]]
 
+        cby_books = {}
+        # convert books to dictionary of dictionaries
+        for book in books:
+            cby_books[book["book_id"]] = book
+        books = cby_books
+        for book in books.values():
+            print(book["quantity"])
         # retrive new quantity from form for each book
         for book_id in session["cart"].keys():
             # quantity_name = quantity_[book_id] this name will be the same as the name of the input in cart.html form
-            quantity_name = "quentity_" + str(book_id)
+            quantity_name = "quantity_" + str(book_id)
             # retrive new quantity from form
             new_quantity = request.form.get(quantity_name)
             # check if new quantity is valid
+            print(f"{quantity_name}: {new_quantity}")
+            if new_quantity == None:
+                new_quantity = session["cart"][book_id]
+
             try:
                 new_quantity = int(new_quantity)
             except ValueError:
-                return render_template(
-                    "cart.html", cart=new_books, error_message="message", invalid=True
-                )
+                return redirect("/cart")
             # check if new quantity is valid
             if new_quantity < 0:
-                return render_template(
-                    "cart.html", cart=new_books, error_message="message", invalid=True
-                )
+                return redirect("/cart")
             # check if new quantity is valid
             if new_quantity > books[book_id]["quantity"]:
-                return render_template(
-                    "cart.html", cart=new_books, error_message="message", invalid=True
-                )
+                print("hhhh")
+                return redirect("/cart")
             # update quantity in session["cart"]
             session["cart"][book_id] = new_quantity
             # update quantity in database
-        redirect("/cart")
+        # commit changes
+        con.commit()
+        db.close()
+        con.close()
+        return redirect("/cart")
+    # redirect to the main page
+    return redirect("/cart")
 
 
 # admin
 # add book
-@app.route("/admin/addbook", methods = ["GET", "POST"])
+@app.route("/admin/addbook", methods=["GET", "POST"])
 @login_required
 def adminAddBook():
     return render_template("adminAddBook.html")
+
+
 ## all books
 ## requests for books/updates
 ## requests for writers

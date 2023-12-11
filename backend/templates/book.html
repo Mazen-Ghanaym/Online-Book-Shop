@@ -87,7 +87,7 @@
         <label for="quantity">Quantity:</label>
         <input type="number" form="changeQuantity" name="quantity" id="quantity" min="1" value={{quantity}} />
       </div>
-      <form action="{{url_for('book', bookId = bookInfo['book_id'])}}"  id="changeQuantity" method="post" class="buttons-group">
+      <form action="{{url_for('add_to_cart', book_id = bookInfo['book_id'])}}"  id="changeQuantity" method="post" class="buttons-group">
         <button form="changeQuantity" class="add-btn" type="submit">Add to Cart</button>
         <!-- <button class="buy-btn">Buy Now</button> -->
       </form>
