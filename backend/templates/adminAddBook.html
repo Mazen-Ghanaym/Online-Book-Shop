@@ -27,9 +27,7 @@
   </script>
   {% endif %}
   <!--end error handling-->
-  <div class="header">
-    <!--start header-->
-
+  
   <!--start header-->
   <header>
     <div class="logo-div">
@@ -59,38 +57,50 @@
   <main>
 
     <!--start main-->
-    <h2>Add New Book</h2>
+    <div class="head">
+      <h2>Add New Book</h2>
+    </div>
 
-    <div>
+    <div class="addBookForm-div">
       <form class="addBookForm">
-        <label>title</label>
-        <input placeholder="Enter Book Title" type="text" name="bookTitle">
 
-        <label>Author</label>
-        <input placeholder="Enter Book Title" type="text" name="author">
+        <div class="form-row">
+          <label>Title</label>
+          <input placeholder="Enter Book Title" type="text" name="bookTitle">
+        </div>
 
-        <label>Image URL</label>
-        <input placeholder="Enter Book Title" type="file" name="imageFile">
+        <div class="form-row">
+          <label>Author</label>
+          <input placeholder="Enter Book Title" type="text" name="author">
+        </div>
 
+        <div class="form-row">
+          <label>Image URL</label>
+          <input placeholder="Enter Book Title" type="file" name="imageFile">
+        </div>
 
+        <div class="form-row">
+          <div class="priceAndQuantity">
+            <div>
+              <label>price</label>
+              <input placeholder="Enter Book Title" type="text" name="price">
+            </div>
+            <div>
+              <label>quantity</label>
+              <input placeholder="Enter Book Title" type="text" name="quantity">
+            </div>
+          </div>
+        </div>
 
-        <label>price</label>
-        <input placeholder="Enter Book Title" type="text" name="price">
+        <div class="form-row">
+          <label>Description</label>
+          <br>
+          <textarea class="theDesc" name="description"></textarea>
+        </div>
 
-        <label>quantity</label>
-        <input placeholder="Enter Book Title" type="text" name="quantity">
-
-
-        <label>Description</label>
-        <textarea name="description">
-
-            </textarea>
-
-
-      <label>quantity</label>
-      <input placeholder="Enter Book Title" type="text" name="bookTitle">
-
-      <input placeholder="Enter Book Title" type="submit" name="bookTitle">
+        <div class="form-row">
+          <input class="submit-btn" placeholder="Enter Book Title" type="submit" name="bookTitle">
+        </div>
 
       </form>
     </div>

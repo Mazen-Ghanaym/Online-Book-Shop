@@ -78,10 +78,71 @@ header .links .pages-ul li a{
 ----------------------------------------------------------------------------------------------------------*/
 /* ---------------------------------------------   main   --------------------------------------------- */
 main{
+  display: grid;
+  grid-row: 2;
+  grid-template-rows: 10% 90%;
+  row-gap: 0px;
+}
+
+main .head{
+  grid-row: 1;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+main .addBookForm-div{
   grid-row: 2;
   display: grid;
-  grid-template-rows: 20% 80%;
+  grid-template-columns: 20% 60% 20%;
 }
+
+main .addBookForm-div .addBookForm{
+  display: grid;
+  grid-template-rows: auto auto auto auto auto auto;
+  grid-column: 2;
+  margin: 20px;
+  overflow-y: scroll;
+  width: 100%;
+}
+main .addBookForm-div .addBookForm .form-row{
+  width: 90%;
+  margin: 10px;
+}
+
+
+main .addBookForm-div .addBookForm .form-row input{
+  width: 90%;
+  height: 30px;
+  display: block;
+  background-color: rgba(139, 131, 146, 0.541);
+  margin-right: 10px;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  padding: 5px;
+  text-align: center;
+}
+
+.priceAndQuantity *{
+  display: inline-block;
+  width: 40%;
+}
+.priceAndQuantity div input{
+  width: 50%;
+  background-color: aqua;
+}
+
+.theDesc{
+  max-width: 80%;
+  max-height: 200px;
+  width: 70%;
+  height: 150px;
+}
+
+
 
 /* -------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------
