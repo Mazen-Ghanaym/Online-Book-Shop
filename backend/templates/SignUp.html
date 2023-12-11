@@ -8,6 +8,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="static/SignUp.css" />
+  <link rel="stylesheet" href="static/error.css" />
   <link rel="icon" href="static/images/book_shop.png" />
   <title>Sign Up</title>
 </head>
@@ -32,6 +33,27 @@
     </header>
   </div>
   <!--end header-->
+  <div id="popup" class="popup">
+    <h2>{{ error_message }}</h2>
+    <p>Please input valid data</p>
+  </div>
+  {% if invalid %}
+  <script>
+    function showPopup() {
+      var popup = document.getElementById("popup");
+      popup.style.display = "block";
+
+      setTimeout(function () {
+        hidePopup();
+      }, 3000);
+    }
+    showPopup();
+    function hidePopup() {
+      var popup = document.getElementById("popup");
+      popup.style.display = "none";
+    }
+  </script>
+  {% endif %}
 
   <div class="container">
     <!--start container-->
