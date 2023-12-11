@@ -74,11 +74,10 @@
           <div class="quantity">
             <label for="quantity">Quantity:</label>
             {% set qname = 'quantity_' + book['book_id'] | string %}
-            {{ qname }}
             <input type="number" name="{{qname}}" id="quantity" min="1" value ="{{ book['quantity'] }}" />
           </div>
           <div class="buttons-group">
-            <button class="rmv-btn">Remove From Cart</button>
+            <button type="submit" formaction="{{ url_for('remove_from_cart', book_id=book['book_id']) }}" formmethod="post" formnovalidate class="rmv-btn">Remove From Cart</button>
           </div>
         </div>
       </div>

@@ -552,13 +552,13 @@ def add_to_cart(book_id):
 @login_required
 def remove_from_cart(book_id):
     """Remove book from cart"""
-    if request.method == "GET":
+    if request.method == "POST":
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
         db = con.cursor()
         # retrive all books from database with the same book_id
         db.execute(
-            "SELECT * FROM Book WHERE book_id = ? WHERE state = ?;",
+            "SELECT * FROM Book WHERE book_id = ? AND state = ?;",
             (
                 book_id,
                 1,
@@ -769,21 +769,13 @@ def save_cart():
         books = [dict(zip(columns, row)) for row in db.fetchall()]
         # each book in session["cart"] has {book_id : quantity}
         # copy books to new_books for updating quantity in new_books
-        new_books = books
-        # update quantity in new_books
-        for book in new_books:
-            book["quantity"] = session["cart"][book["book_id"]]
-
         cpy_books = {}
         # convert books to dictionary of dictionaries
         for book in books:
             cpy_books[book["book_id"]] = book
         
-        print(cpy_books)
         books = cpy_books
-        print(books)
-        for book in cpy_books.values():
-            print(book["quantity"])
+        
         # retrive new quantity from form for each book
         for book_id in session["cart"].keys():
             # quantity_name = quantity_[book_id] this name will be the same as the name of the input in cart.html form
@@ -803,8 +795,7 @@ def save_cart():
             if new_quantity < 0:
                 return redirect("/cart")
             # check if new quantity is valid
-            if new_quantity > cpy_books[book_id]["quantity"]:
-                print("hhhh")
+            if new_quantity > books[book_id]["quantity"]:
                 return redirect("/cart")
             # update quantity in session["cart"]
             session["cart"][book_id] = new_quantity
