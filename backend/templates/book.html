@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <title>Book</title>
-  <link rel="icon" href="static/images/book_shop.png" />
+  <link rel="icon" href="../static/images/book_shop.png" />
   <link rel="stylesheet" href="../static/style1.css" />
-  <link rel="stylesheet" href="static/error.css" />
-  <script src="static/script.js"></script>
+  <link rel="stylesheet" href="../static/error.css" />
+  <script src="../static/script.js"></script>
   <!-- Font Awesome Icon Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link
@@ -41,17 +41,17 @@
       <div class="left-navbar">
         <ul>
           <li>
-            <a href="#"><img src="../static/images/book_shop.png" alt="Book" /></a>
+            <a href="{{ url_for('home') }}"><img src="../static/images/book_shop.png" alt="Book" /></a>
           </li>
         </ul>
       </div>
       <div class="right-navbar">
         <ul>
           <li>
-            <a href="#"><img src="../static/images/user_1.png" alt="Profile" /></a>
+            <a href="{{ url_for('profile') }}"><img src="../static/images/user_1.png" alt="Profile" /></a>
           </li>
           <li>
-            <a href="#">
+            <a href="{{ url_for('cart') }}">
               <img src="../static/images/shopping_cart_1.png" alt="Store" />
             </a>
           </li>
@@ -62,11 +62,11 @@
 
   <div class="book">
     <div class="image">
-      <img src="{{bookInfo['image']}}" alt="" />
+      <img src="{{ '../' + bookInfo['image']}}" alt="" />
     </div>
     <div class="info">
       <div class="title">{{bookInfo['title']}}</div>
-      <div class="author">BY : <a href="#">{{bookInfo['author']}}</a></div>
+      <div class="author">BY : {{bookInfo['author']}}</div>
       <div class="rate">
         <ul>
           <li class="fa fa-star checked"></li>
@@ -82,6 +82,12 @@
         </p>
       </div>
     </div>
+
+
+
+
+
+
     <div class="card">
       <div class="price">
         <span>Price:</span>
@@ -97,10 +103,10 @@
 
 
       <!-- action="{{url_for('book', bookId = bookInfo['book_id'])}}" 
-        if you want to make book bage return the user to the same page -->
+            if you want to make book bage return the user to the same page -->
 
       <!-- action="{{url_for('add_to_cart', book_id = bookInfo['book_id'])}}" 
-         if you want to make book page return the user to the cart page-->
+            if you want to make book page return the user to the cart page-->
       <form action="{{url_for('book', bookId = bookInfo['book_id'])}}" id="changeQuantity" method="post"
         class="buttons-group">
         <button form="changeQuantity" class="add-btn" type="submit">Add to Cart</button>
@@ -108,14 +114,22 @@
       </form>
     </div>
   </div>
+
+
+
+
+
+
+
+
   <div class="catigories">
     <div class="head">Similar Books</div>
     <div class="books">
+      {% for book in simBooks %}
       <div class="book">
         <div class="img-book">
-          <img src="images/Introduction-to-Algorithms1.svg" alt="" />
+          <img src="{{ '../' + book['image']}}" alt="" />
         </div>
-
         <div class="stars">
           <i class="fa fa-star checked"></i>
           <i class="fa fa-star checked"></i>
@@ -126,90 +140,23 @@
         <div class="book-details">
           <div class="title">
             <a href="" class="book-title">
-              Relativity : the special and the general theory
+              {{book['title']}}
             </a>
           </div>
           <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
+            <a href="" class="book-creator"> {{book['author']}} </a>
           </div>
           <div class="title">
             <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
+              {{book['subscript']}}
             </p>
           </div>
           <div class="price">
-            <span>$30</span>
+            <span>${{ book['price'] }}</span>
           </div>
         </div>
       </div>
-      <div class="book">
-        <div class="img-book">
-          <img src="images/Introduction-to-Algorithms1.svg" alt="" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div>
-      <div class="book">
-        <div class="img-book">
-          <img src="images/Introduction-to-Algorithms1.svg" />
-        </div>
-
-        <div class="stars">
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star checked"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="book-details">
-          <div class="title">
-            <a href="" class="book-title">
-              Relativity : the special and the general theory
-            </a>
-          </div>
-          <div class="title">
-            <a href="" class="book-creator"> By: Albert Einstein </a>
-          </div>
-          <div class="title">
-            <p class="explain">
-              This work has been selected by scholars as being culturally
-              important, and is part of the knowledge base of civilization as
-              we know it.
-            </p>
-          </div>
-          <div class="price">
-            <span>$30</span>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
   <div class="footer">
