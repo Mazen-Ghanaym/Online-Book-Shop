@@ -257,31 +257,60 @@ def profile():
             pass
         else:
             pass
-        if validName(request.form.get("name")):
+        if validName(request.form.get("fullname")):
             pass
         else:
             pass
         # update the user info in database
-        # quary of update
-        return redirect(url_for(profile))
-
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # update user info in database
+        db.execute(
+            "UPDATE User SET email = ?, full_name = ? WHERE user_id = ?;",
+            (
+                request.form.get("email"),
+                request.form.get("fullname"),
+                session["user_id"],
+            ),
+        )
+        # commit changes
+        con.commit()
+        db.close()
+        con.close()
+        # query of update
+        return redirect(url_for('profile'))
     # show profile
     else:
-        personInfo = getQuaryFromDataBase(
-            "Books.db",
-            "select * from user where user_id = ?",
-            int(session["user_id"]),
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
+        # get user data from database
+        db.execute("SELECT * FROM User WHERE user_id = ?;", (session["user_id"],))
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        users = [dict(zip(columns, row)) for row in db.fetchall()]
+        personInfo = users[0]
+        # retrive all bills from database with the same user_id
+        db.execute(
+            "SELECT * FROM Bill WHERE user_id = ? ORDER BY date_time DESC;",
+            (
+                session["user_id"],
+            ),
         )
-        # render_template(
-        # "profile.html",
-        # err_mes = createErrorMessage(),
-        # personInfo = personInfo
-        # )
+        # convert retrived data into list of dictionaries
+        columns = [column[0] for column in db.description]
+        bills = [dict(zip(columns, row)) for row in db.fetchall()]
+        # commit changes
+        con.commit()
+        db.close()
+        con.close()
         return render_template(
             "profile.html",
             page_name="profile",
             err_mes=createErrorMessage(),
             items=personInfo,
+            bills=bills,
         )
 
 
@@ -538,8 +567,13 @@ def add_to_cart(book_id):
         return render_template(
             "book.html", bookInfo=books[0], quantity=0, err_mes=createErrorMessage()
         )
-    # add book to cart
-    session["cart"][books[0]["book_id"]] = quantity
+    # check if book is already in cart
+    if session["cart"].get(books[0]["book_id"]) != None:
+        # update quantity in session["cart"]
+        session["cart"][books[0]["book_id"]] += quantity
+    else:
+        # add book to cart
+        session["cart"][books[0]["book_id"]] = quantity
     # redirect to the main page
     return redirect("/cart")
 
@@ -611,13 +645,23 @@ def cart():
         # update quantity in books
         for book in session["cart"].keys():
             books[book]["quantity"] = session["cart"][book]
+        # total price and quantity
+        total_price = 0
+        total_quantity = 0
+        for book in books:
+            total_price += books[book]["quantity"] * books[book]["price"]
+            total_quantity += books[book]["quantity"]
         # commit changes
         con.commit()
         db.close()
         con.close()
         # render cart page
         return render_template(
-            "cart.html", books=books.values(), error_message="", invalid=False
+            "cart.html", books=books.values(),
+            total_price=total_price,
+            total_quantity=total_quantity,
+            error_message="", 
+            invalid=False
         )
     else:
         # retrive data from form

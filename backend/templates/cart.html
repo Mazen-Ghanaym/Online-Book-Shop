@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Cart</title>
+  <link rel="icon" href="static/images/book_shop.png" />
   <link rel="stylesheet" href="../static/PlaceOrder.css" />
   <link rel="stylesheet" href="../static/style_2.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -89,8 +90,8 @@
 
     <div class="buy">
       <div class="group_flex">
-        <div>Total Price: 30$</div>
-        <div>Total: 3</div>
+        <div>Total Price: {{ total_price }}$</div>
+        <div>Total: {{ total_quantity }}</div>
       </div>
 
       <div class="container">
