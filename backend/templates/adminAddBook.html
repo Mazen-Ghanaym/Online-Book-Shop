@@ -7,43 +7,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../static/adminAddBook.css"/>
+  <link rel="stylesheet" href="../static/adminAddBook.css" />
   <link rel="stylesheet" href="../static/error.css" />
-  <script src="static/script.js"></script>
+  <script src="../static/script.js"></script>
   <title>Sign In</title>
 </head>
 
 <body>
-  <div class="header">
-    <!--start header-->
 
-    <header>
-      <img class="logo" src="../static/images/bookshop.png" width="60PX" height="60PX" />
-      <!--logo-->
-      <a href="{{ url_for('signup') }}" class="sing-up">
-        <!--button sing up-->
-        <span> log out </span>
-      </a>
-    </header>
-  </div>
+  <!--start header-->
+  <header>
+    <div class="logo-div">
+      <!-- do not forget to change the image to an admin image -->
+      <a class="admin-home-link" href="{{ url_for('adminAddBook') }}"><img class="logo-img" src="../static/images/book_shop.png" /></a>
+    </div>
+    <!--logo-->
+    <div class="links">
+      <ul class="pages-ul">
+        <li>
+          <a href="{{ url_for('signup') }}" class="sing-up"> log out </a>
+        </li>
+        <li>
+          <a href="{{ url_for('signup') }}" class="sing-up"> log out </a>
+        </li>
+        <li>
+          <a href="{{ url_for('signup') }}" class="sing-up"> log out </a>
+        </li>
+      </ul>
+      
+    </div>
+    
+  </header>
+
   <!--end header-->
 
-  <div class="container">
-    <!--start container-->
+  <main>
 
+    <!--start main-->
     <h2>Add New Book</h2>
 
-    <form>
+    <div>
+      <form class="addBookForm">
         <label>title</label>
         <input placeholder="Enter Book Title" type="text" name="bookTitle">
-        
+
         <label>Author</label>
         <input placeholder="Enter Book Title" type="text" name="author">
 
         <label>Image URL</label>
         <input placeholder="Enter Book Title" type="file" name="imageFile">
 
-        
+
 
         <label>price</label>
         <input placeholder="Enter Book Title" type="text" name="price">
@@ -55,25 +69,23 @@
         <label>Description</label>
         <textarea name="description">
 
-        </textarea>
+            </textarea>
 
 
         <input placeholder="Enter Book Title" type="submit" name="bookTitle">
 
-    </form>
+      </form>
+    </div>
 
-
-  </div>
+  </main>
   <!--end container-->
 
-  <div class="footer">
+  
     <!--start footer-->
-
     <footer>
       <p>copyrights @ www.bookshop.com</p>
       <!--paragraph for footer-->
     </footer>
-  </div>
   <!--end footer-->
 </body>
 
