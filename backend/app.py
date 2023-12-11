@@ -323,15 +323,11 @@ def home():
         db.close()
         con.close()
         # render home page
-        # TODO: popular books
-        # print(categories)
         return render_template(
             "home.html", categories=categories, popular_books=popular_books
         )
     else:
-        # retrive data from form
-        search = request.form.get("search")
-        # TODO:
+        return redirect( url_for('library') )
 
 
 # library for search books
@@ -773,9 +769,9 @@ def save_cart():
         # convert books to dictionary of dictionaries
         for book in books:
             cpy_books[book["book_id"]] = book
-        
+
         books = cpy_books
-        
+
         # retrive new quantity from form for each book
         for book_id in session["cart"].keys():
             # quantity_name = quantity_[book_id] this name will be the same as the name of the input in cart.html form
