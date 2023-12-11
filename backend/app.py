@@ -645,13 +645,23 @@ def cart():
         # update quantity in books
         for book in session["cart"].keys():
             books[book]["quantity"] = session["cart"][book]
+        # total price and quantity
+        total_price = 0
+        total_quantity = 0
+        for book in books:
+            total_price += books[book]["quantity"] * books[book]["price"]
+            total_quantity += books[book]["quantity"]
         # commit changes
         con.commit()
         db.close()
         con.close()
         # render cart page
         return render_template(
-            "cart.html", books=books.values(), error_message="", invalid=False
+            "cart.html", books=books.values(),
+            total_price=total_price,
+            total_quantity=total_quantity,
+            error_message="", 
+            invalid=False
         )
     else:
         # retrive data from form
