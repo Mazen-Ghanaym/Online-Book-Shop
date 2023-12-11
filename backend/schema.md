@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS Bill(
   	total REAL,
     address TEXT NOT NULL,
   	phone TEXT NOT NULL,
-  	data_time TEXT,
+  	date_time TEXT,
   	FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 -- create a table to place an order

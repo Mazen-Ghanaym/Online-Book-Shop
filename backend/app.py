@@ -657,27 +657,21 @@ def cart():
         # retrive new quantity from form for each book
         for book_id in session["cart"].keys():
             # quantity_name = quantity_[book_id] this name will be the same as the name of the input in cart.html form
-            quantity_name = "quentity_" + str(book_id)
+            quantity_name = "quantity_" + str(book_id)
             # retrive new quantity from form
             new_quantity = request.form.get(quantity_name)
             # check if new quantity is valid
             try:
                 new_quantity = int(new_quantity)
             except ValueError:
-                return render_template(
-                    "cart.html", books=new_books, error_message="message", invalid=True
-                )
+                return redirect(url_for('cart'))
             # check if new quantity is valid
             if new_quantity < 0:
-                return render_template(
-                    "cart.html", books=new_books, error_message="message", invalid=True
-                )
+                return redirect(url_for('cart'))
             # check if new quantity is valid
             #! [{}]
             if new_quantity > books[book_id]["quantity"]:
-                return render_template(
-                    "cart.html", books=new_books, error_message="message", invalid=True
-                )
+                return redirect(url_for('cart'))
             # update quantity in session["cart"]
             session["cart"][book_id] = new_quantity
             # update quantity in database
@@ -685,10 +679,12 @@ def cart():
 
         # check if total is valid with user balance
         """TODO"""
-
+        # connect with database and create cursor called db
+        con = sqlite3.connect("Books.db")
+        db = con.cursor()
         # insert into bill table first
         db.execute(
-            "INSERT INTO Bill(address, phone, user_id, date_time, total) VALUES(?,?,?,?);",
+            "INSERT INTO Bill(address, phone, user_id, date_time, total) VALUES(?,?,?,?,?);",
             (
                 address,
                 phone,
@@ -711,14 +707,15 @@ def cart():
 
         bill_id = bills[0]["bill_id"]
         # insert into order table they have same bill
+        tablen="Book_Order"
         for book in session["cart"]:
             db.execute(
-                "INSERT INTO Order(bill_id, book_id, quantity, price_per_book) VALUES(?,?,?,?);",
+                f"INSERT INTO {tablen}(bill_id, book_id, quantity, price_per_book) VALUES(?,?,?,?);",
                 (
                     bill_id,
-                    book["book_id"],
-                    book["quantity"],
-                    book["price"],
+                    books[book]["book_id"],
+                    session["cart"][book],
+                    books[book]["price"],
                 ),
             )
         # update quantity in database
