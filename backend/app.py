@@ -561,14 +561,10 @@ def add_to_cart(book_id):
             quantity = 1
     # check if quantity is valid
     if quantity < 0:
-        return render_template(
-            "book.html", bookInfo=books[0], quantity=0, err_mes=createErrorMessage()
-        )
+        redirect(url_for('book', bookId=book_id))
     # check if quantity is valid
     if quantity > books[0]["quantity"]:
-        return render_template(
-            "book.html", bookInfo=books[0], quantity=0, err_mes=createErrorMessage()
-        )
+        redirect(url_for('book', bookId=book_id))
     # check if book is already in cart
     if session["cart"].get(books[0]["book_id"]) != None:
         # update quantity in session["cart"]
@@ -577,7 +573,7 @@ def add_to_cart(book_id):
         # add book to cart
         session["cart"][books[0]["book_id"]] = quantity
     # redirect to the main page
-    return redirect("/cart")
+    return redirect('/cart')
 
 
 @app.route("/cart/remove/<book_id>", methods=["GET", "POST"])

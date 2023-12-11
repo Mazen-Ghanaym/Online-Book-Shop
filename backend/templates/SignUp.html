@@ -19,7 +19,9 @@
     <!--start header-->
 
     <header>
-      <img class="logo" src="static/images/bookshop.png" width="60PX" height="60PX" />
+      <a href="{{url_for('home')}}">
+        <img class="logo" src="static/images/bookshop.png" width="60PX" height="60PX" />
+      </a>
       <!--logo-->
 
       <a class="sing-in" href="{{ url_for('signin') }}">

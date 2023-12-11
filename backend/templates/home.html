@@ -16,6 +16,7 @@
   <!--  -->
   <link rel="stylesheet" href="static/home.css" />
   <link rel="stylesheet" href="static/error.css" />
+  <script src="static/script.js"></script>
   <title>Book Store</title>
   <script>
     
@@ -47,7 +48,8 @@
   <header>
     <!-- navbar -->
     <nav>
-      <a href="{{url_for('home')}}"><img src="static/images/logo.svg" alt="Logo" />
+      <a href="{{url_for('home')}}">
+        <img src="static/images/logo.svg" alt="Logo" />
       </a>
       <div class="sing-log">
         {% if session['user_id'] %}
