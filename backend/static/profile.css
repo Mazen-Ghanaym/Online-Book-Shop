@@ -8,7 +8,7 @@
 
 * {
     font-family: sans-serif;
-
+    overflow-x: hidden;
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
@@ -26,9 +26,7 @@ nav {
 .left-navbar ul {
     display: flex;
     flex-direction: row;
-
     margin-left: 20px;
-
     list-style: none;
 }
 
@@ -57,9 +55,6 @@ footer {
 
 /* center div */
 .information {
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     margin-top: 20px;
     width: 90%;
     position: relative;
@@ -93,6 +88,7 @@ input {
     background-color: rgb(217, 217, 217);
     box-sizing: border-box;
     border: none;
+    outline: none;
 }
 
 button {

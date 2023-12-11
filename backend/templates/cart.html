@@ -13,6 +13,19 @@
 </head>
 
 <body>
+  <!-- error handling -->
+  <div class="popup-background">
+    <div id="popup" class="popup">
+      <h4>{{ error_message }}</h4>
+      <p>Please input valid data</p>
+    </div>
+  </div>
+  {% if invalid %}
+  <script>
+    showPopup();
+  </script>
+  {% endif %}
+  <!--end error handling-->
   <header>
     <nav>
       <div class="left-navbar">
@@ -77,10 +90,11 @@
           <div class="quantity">
             <label for="quantity">Quantity:</label>
             {% set qname = 'quantity_' + book['book_id'] | string %}
-            <input type="number" name="{{qname}}" id="quantity" min="1" value ="{{ book['quantity'] }}" />
+            <input type="number" name="{{qname}}" id="quantity" min="1" value="{{ book['quantity'] }}" />
           </div>
           <div class="buttons-group">
-            <button type="submit" formaction="{{ url_for('remove_from_cart', book_id=book['book_id']) }}" formmethod="post" formnovalidate class="rmv-btn">Remove From Cart</button>
+            <button type="submit" formaction="{{ url_for('remove_from_cart', book_id=book['book_id']) }}"
+              formmethod="post" formnovalidate class="rmv-btn">Remove From Cart</button>
           </div>
         </div>
       </div>
@@ -95,9 +109,10 @@
     </div>
 
     {% if books | length != 0 %}
-    <button type="submit" formaction="{{url_for('save_cart')}}" class="save-cart" formnovalidate formmethod="post">Save Changes</button>
+    <button type="submit" formaction="{{url_for('save_cart')}}" class="save-cart" formnovalidate formmethod="post">Save
+      Changes</button>
     {% endif %}
-    
+
     <div class="buy">
       <div class="group_flex">
         <div>Total Price: {{ total_price }}$</div>
@@ -105,11 +120,11 @@
       </div>
 
       <div class="container">
-          <label for="address">Address:</label>
-          <input type="text" id="address" name="address" required />
-          <label for="phonenum">Phone Number:</label>
-          <input type="tel" id="phonenum" name="phone" required />
-          <button type="submit" class="place-cart">Place Order Now</button>
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required />
+        <label for="phonenum">Phone Number:</label>
+        <input type="tel" id="phonenum" name="phone" required />
+        <button type="submit" class="place-cart">Place Order Now</button>
       </div>
     </div>
   </form>

@@ -19,23 +19,24 @@
   <script src="static/script.js"></script>
   <title>Book Store</title>
   <script>
+
     function redirectToLink(link) {
       // Change the URL to the desired destination
       window.location.href = link;
     }
     // if the user click on any book the page will redirect the user to the page of this book.
-    document.addEventListener("click", function(event){
+    document.addEventListener("click", function (event) {
       let target = event.target;
-      while(target){
-        if(target.classList.contains("goToBook")){
-          let link = "/book/"+target.getAttribute("data-id");
-          window.location.replace(link); 
+      while (target) {
+        if (target.classList.contains("goToBook")) {
+          let link = "/book/" + target.getAttribute("data-id");
+          window.location.replace(link);
           break;
         }
-        else if(target.classList.contains("add-to-cart")){
+        else if (target.classList.contains("add-to-cart")) {
           break;
         }
-        else{
+        else {
           target = target.parentNode;
         }
       }
@@ -86,7 +87,19 @@
       </form>
     </div>
   </header>
-
+  <!-- error handling -->
+  <div class="popup-background">
+    <div id="popup" class="popup">
+      <h4>{{ error_message }}</h4>
+      <p>Please input valid data</p>
+    </div>
+  </div>
+  {% if invalid %}
+  <script>
+    showPopup();
+  </script>
+  {% endif %}
+  <!--end error handling-->
   <!-- popular books -->
   <div class="catigories popular-books">
     <div class="head">Popular Books</div>
