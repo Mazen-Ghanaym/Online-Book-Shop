@@ -51,6 +51,7 @@
       <div class="sing-log">
         {% if session['user_id'] %}
         <button onclick="redirectToLink('/logout')" class="sing">Log Out</button>
+        <button onclick="redirectToLink('/cart')" class="log">Cart</button>
         {% else %}
         <button onclick="redirectToLink('/signup')" class="sing">Sing Up</button>
         <button onclick="redirectToLink('/signin')" class="log">Log In</button>

@@ -256,10 +256,12 @@ def profile():
         if validEmail(request.form.get("email")):
             pass
         else:
+            #! error message
             pass
         if validName(request.form.get("fullname")):
             pass
         else:
+            #! error message
             pass
         # update the user info in database
         # connect with database and create cursor called db
