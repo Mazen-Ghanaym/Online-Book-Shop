@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Cart</title>
+    <link rel="icon" href="static/images/book_shop.png" />
+    <link rel="stylesheet" href="../static/profile.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="left-navbar">
+                <ul>
+                    <li>
+                        <a href="{{url_for('home')}}"><img src="../static/images/book_shop.png" alt="Book" /></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-navbar">
+                <ul>
+                    <li>
+                        <a href="{{url_for('profile')}}"><img src="../static/images/user_1.png" alt="Profile" /></a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('cart')}}">
+                            <img src="../static/images/shopping_cart_1.png" alt="Store" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!--profile content-->
+    <div class="information">
+        <h2 class="title">Information</h2>
+        <form action="url_for('profile')" method="post">
+            <label for="Email">Email:</label>
+            <!--input filed for email-->
+            <input type="email" id="Email" name="email"/>
+
+            <label for="fname">Full Name:</label>
+            <!--input filed for password-->
+            <input type="text" id="fname" name="fullname"/>
+
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+
+
+    <!--end profile content-->
+    <div class="footer">
+        <footer>
+            <p>copyrights &copy; www.bookshop.com</p>
+        </footer>
+    </div>
+</body>
+
+</html>
