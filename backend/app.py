@@ -116,10 +116,10 @@ def signin():
         password = request.form.get("password")
         # Ensure email was submitted
         if not email:
-            return render_template("signin.html", error_message="message", invalid=True)
+            return render_template("signin.html", error_message="Invalid Email", invalid=True)
         # Ensure password was submitted
         elif not password:
-            return render_template("signin.html", error_message="message", invalid=True)
+            return render_template("signin.html", error_message="Invalid Password", invalid=True)
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
         db = con.cursor()
@@ -131,10 +131,10 @@ def signin():
 
         # Ensure username exists and password is correct
         if len(rows) != 1:
-            return render_template("signin.html", error_message="message", invalid=True)
+            return render_template("signin.html", error_message="This email is not register before", invalid=True)
 
         if rows[0]["password"] != password:
-            return render_template("signin.html", error_message="message", invalid=True)
+            return render_template("signin.html", error_message="Invalid Password", invalid=True)
 
         # commit and close database
         con.commit()
@@ -171,24 +171,24 @@ def signup():
         if not email:
             # wail for render the register page with error message
             return render_template(
-                "signup.html", error_message="message email", invalid=True
+                "signup.html", error_message="Invalid Email", invalid=True
             )
 
         # check if user provide valid password
         if not password:
             return render_template(
-                "signup.html", error_message="message password", invalid=True
+                "signup.html", error_message="Invalid password", invalid=True
             )
 
         # check if user provide valid confirm
         if not confirm:
             return render_template(
-                "signup.html", error_message="message confirm", invalid=True
+                "signup.html", error_message="Invalid password confirmation", invalid=True
             )
 
         # check if password equals the confirmation password
         if password != confirm:
-            return render_template("signup.html", error_message="message", invalid=True)
+            return render_template("signup.html", error_message="Confirmation doesn't match password", invalid=True)
         # connect with database and create cursor called db
         con = sqlite3.connect("Books.db")
         db = con.cursor()
@@ -201,7 +201,7 @@ def signup():
 
         # check if username registered before
         if len(users) >= 1:
-            return render_template("signup.html", error_message="message", invalid=True)
+            return render_template("signup.html", error_message="This email exists before", invalid=True)
 
         # after validating all conditions insert new user into database
         user_state = db.execute(
@@ -561,14 +561,10 @@ def add_to_cart(book_id):
             quantity = 1
     # check if quantity is valid
     if quantity < 0:
-        return render_template(
-            "book.html", bookInfo=books[0], quantity=0, err_mes=createErrorMessage()
-        )
+        redirect(url_for('book', bookId=book_id))
     # check if quantity is valid
     if quantity > books[0]["quantity"]:
-        return render_template(
-            "book.html", bookInfo=books[0], quantity=0, err_mes=createErrorMessage()
-        )
+        redirect(url_for('book', bookId=book_id))
     # check if book is already in cart
     if session["cart"].get(books[0]["book_id"]) != None:
         # update quantity in session["cart"]
@@ -577,7 +573,7 @@ def add_to_cart(book_id):
         # add book to cart
         session["cart"][books[0]["book_id"]] = quantity
     # redirect to the main page
-    return redirect("/cart")
+    return redirect('/cart')
 
 
 @app.route("/cart/remove/<book_id>", methods=["GET", "POST"])
@@ -779,7 +775,6 @@ def cart():
         con.close()
         # redirect to the main page
         session["cart"] = {}
-        flash("Order has been placed successfully")
         return redirect("/")
 
 

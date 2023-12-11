@@ -9,6 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="static/images/book_shop.png" />
   <link rel="stylesheet" href="static/SignIn.css" />
+  <link rel="stylesheet" href="static/error.css" />
+  <script src="static/script.js"></script>
   <title>Sign In</title>
 </head>
 
@@ -17,7 +19,9 @@
     <!--start header-->
 
     <header>
-      <img class="logo" src="static/images/bookshop.png" width="60PX" height="60PX" />
+      <a href="{{url_for('home')}}">
+        <img class="logo" src="static/images/bookshop.png" width="60PX" height="60PX" />
+      </a>
       <!--logo-->
 
       <a href="{{ url_for('signin') }}" class="sing-in">

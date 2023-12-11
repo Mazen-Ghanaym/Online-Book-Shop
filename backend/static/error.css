@@ -1,0 +1,22 @@
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    border: 2px solid #fc2d2d;
+    width: 300px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 2px 0 20px rgba(255, 64, 64, 0.3);
+    z-index: 1001;
+}
+.popup-background{
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: #7e7e7e63;
+    z-index: 1000;
+}

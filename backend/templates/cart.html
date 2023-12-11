@@ -4,10 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <title>Cart</title>
-  <link rel="icon" href="static/images/book_shop.png" />
+  <link rel="icon" href="../static/images/book_shop.png" />
   <link rel="stylesheet" href="../static/PlaceOrder.css" />
   <link rel="stylesheet" href="../static/style_2.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../static/error.css" />
+  <script src="../static/script.js"></script>
 </head>
 
 <body>
@@ -43,7 +45,7 @@
       {% for book in books %}
       <div class="book">
         <div class="image">
-          <img src="{{ '../' + book['image'] }}" alt="Book" />
+          <img src="{{ '../../' + book['image'] }}" alt="Book" />
         </div>
         <div class="info">
           <div class="title">
@@ -83,11 +85,19 @@
         </div>
       </div>
       {% endfor %}
+      <!-- if cart is free -->
+      {% if books | length == 0 %}
+      <div>
+        <img src="../static/images/empty_cart.jpg" alt="Empty Cart" height="500px" />
+      </div>
+      {% endif %}
+      <!-- end of empty cart -->
     </div>
 
-    
+    {% if books | length != 0 %}
     <button type="submit" formaction="{{url_for('save_cart')}}" class="save-cart" formnovalidate formmethod="post">Save Changes</button>
-
+    {% endif %}
+    
     <div class="buy">
       <div class="group_flex">
         <div>Total Price: {{ total_price }}$</div>
