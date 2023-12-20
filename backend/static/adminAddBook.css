@@ -103,6 +103,7 @@ main .addBookForm-div{
   grid-template-columns: 20% 60% 20%;
 }
 
+
 main .addBookForm-div .addBookForm{
   display: grid;
   grid-template-rows: auto auto auto auto auto auto;
@@ -112,6 +113,18 @@ main .addBookForm-div .addBookForm{
   width: 100%;
 }
 
+@media screen and (max-width: 600px) {
+  /* Styles for screens with a maximum width of 600 pixels or less */
+  main .addBookForm-div{
+    grid-template-columns: 5% 90% 5%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  /* Styles for screens with a maximum width of 600 pixels or less */
+  main .addBookForm-div{
+    grid-template-columns: 5% 90% 5%;
+  }
+}
 
 main .addBookForm-div .addBookForm::-webkit-scrollbar {
   width: 0;
