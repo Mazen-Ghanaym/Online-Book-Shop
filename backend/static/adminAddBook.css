@@ -1,3 +1,15 @@
+:root {
+  --main-color: rgb(255, 255, 255);
+  --nav-bar-color: rgb(58, 35, 204);
+  --nav-links-color: rgb(255, 255, 255);
+  --nav-links-hover-color: rgb(216, 216, 216);
+  --main-text-color: rgb(0, 0, 0);
+  --second-text-color-gray: rgb(137, 137, 137);
+  --input-background-color: rgb(185, 185, 185);
+  --input-border-color: rgb(137, 137, 137);
+  --footer-color: rgb(113, 105, 228);
+}
+
 *{
   font-family: Arial, sans-serif;
 }
@@ -17,7 +29,7 @@ body{
 
 header{
   grid-row: 1;
-  background-color: rgb(58, 35, 204);
+  background-color: var(--nav-bar-color);
   display: grid;
   grid-template-columns: 50% 50%;
   overflow: hidden;
@@ -58,7 +70,7 @@ header .links .pages-ul li{
   width: 80px;
   height: 30px;
   box-sizing: border-box;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--nav-links-color);
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -67,12 +79,12 @@ header .links .pages-ul li{
 }
 
 header .links .pages-ul li:hover{
-  background-color: rgb(216, 216, 216);
+  background-color: var(--nav-links-hover-color);
 }
 
 header .links .pages-ul li a{
   text-decoration: none;
-  color: black;
+  color: var(--main-text-color);
 }
 
 
@@ -106,7 +118,7 @@ main .addBookForm-div{
 
 main .addBookForm-div .addBookForm{
   display: grid;
-  grid-template-rows: auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto auto;
   grid-column: 2;
   margin: 20px;
   overflow-y: scroll;
@@ -143,13 +155,13 @@ main .addBookForm-div .addBookForm .form-row input,
   width: 90%;
   height: 30px;
   display: block;
-  background-color: rgb(185, 185, 185);
+  background-color: var(--input-background-color);
   margin-right: 10px;
   border-radius: 5px;
   outline: none;
   padding: 5px;
   text-align: center;
-  border: #898989 1px solid;
+  border: var(--input-border-color) 1px solid;
 }
 
 #labelUpLoadBtn{
@@ -166,7 +178,7 @@ main .addBookForm-div .addBookForm .form-row input,
   position: relative;
   left: 10px;
   top: 10px;
-  background-color: white;
+  background-color: var(--main-color);
   box-sizing: border-box;
   border-radius: 50px;
   padding: 3px 5px;
@@ -178,6 +190,27 @@ main .addBookForm-div .addBookForm .form-row input,
 #uploadBtn{
   display: none;
 }
+
+
+.selectionTag{
+  background-color: var(--input-background-color);
+  width: 200px;
+  height: 45px;
+  outline: none;
+  padding: 5px 3px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 15px;
+}
+
+.selectionTag .theOption{
+  background-color: var(--input-border-color);
+  outline: none;
+}
+
 
 .priceAndQuantity div{
   display: inline-block;
@@ -195,11 +228,11 @@ main .addBookForm-div .addBookForm .form-row input,
   width: 70%;
   height: 150px;
   outline: none;
-  border: 2px solid #898989;
+  border: 2px solid var(--input-border-color);
   font-size: 25px;
-  color: #898989;
+  color: var(--second-text-color-gray);
   border-radius: 5px;
-  padding-top: 10px;
+  padding: 10px;
 }
 
 #descriptionArea::-webkit-scrollbar{
@@ -207,7 +240,7 @@ main .addBookForm-div .addBookForm .form-row input,
 }
 #descriptionArea::-webkit-scrollbar-thumb{
   width: 4px;
-  background-color: #898989;
+  background-color: var(--input-background-color);
   border-radius: 50px;
 }
 
@@ -222,7 +255,7 @@ main .addBookForm-div .addBookForm .form-row input,
 /* ---------------------------------------------   footer   --------------------------------------------- */
 footer{
   grid-row: 3;
-  background-color: rgb(113, 105, 228);
+  background-color: var(--footer-color);
   display: flex;
   justify-content: center;
   align-items: center;

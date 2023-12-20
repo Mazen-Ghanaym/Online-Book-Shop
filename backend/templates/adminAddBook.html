@@ -62,16 +62,24 @@
     </div>
 
     <div class="addBookForm-div">
-      <form class="addBookForm" action="#" method="get">
+      <form class="addBookForm" action="{{url_for('adminAddBook')}}" method="post">
 
         <div class="form-row">
           <label class="coLabel">title</label>
-          <input placeholder="Enter Book Title" type="text" name="bookTitle">
+          {% if title %}
+            <input placeholder="Enter Book Title" value="{{title}}" type="text" name="title">
+          {% else %}
+            <input placeholder="Enter Book Title" type="text" name="title">
+          {%endif%}
         </div>
 
         <div class="form-row">
           <label class="coLabel">author</label>
-          <input placeholder="Enter the name of the author" type="text" name="author">
+          {% if author%}
+            <input placeholder="Enter the name of the author" type="text" name="author">
+          {% else %}
+            <input placeholder="Enter the name of the author" value="{{author}}" type="text" name="author">
+          {%endif%}
         </div>
 
         <div class="form-row">
@@ -80,13 +88,33 @@
         </div>
 
         <div class="form-row">
+          <label class="coLabel">category</label>
+          <select class="selectionTag" name="category">
+            {% for cat in categories %}
+              {% if cat['title'] == category%}
+                <option selected class="theOption" value="cat['id']">{{cat['title']}}</option>
+              {% else %}
+                <option class="theOption" value="cat['id']">{{cat['title']}}</option>
+              {% endif %}
+            {% endfor %}
+            <!-- <option class="theOption" value="2">cat 2</option> -->
+          </select>
+        </div>
+
+        <div class="form-row">
           <div class="priceAndQuantity">
             <div>
               <label class="coLabel">price</label>
+              {% if %}
+              {% else %}
+              {%endif%}
               <input placeholder="Enter price of the book" type="text" name="price">
             </div>
             <div>
               <label class="coLabel">quantity</label>
+              {% if %}
+              {% else %}
+              {%endif%}
               <input placeholder="Enter quantity of the book" type="text" name="quantity">
             </div>
           </div>
@@ -95,6 +123,9 @@
         <div class="form-row">
           <label class="coLabel">Description</label>
           <br>
+          {% if %}
+          {% else %}
+          {%endif%}
           <textarea id="descriptionArea" placeholder="There is no description yet." class="theDesc" maxlength="250" name="description"></textarea>
         </div>
 
