@@ -62,40 +62,40 @@
     </div>
 
     <div class="addBookForm-div">
-      <form class="addBookForm">
+      <form class="addBookForm" action="#" method="get">
 
         <div class="form-row">
-          <label>Title</label>
+          <label class="coLabel">title</label>
           <input placeholder="Enter Book Title" type="text" name="bookTitle">
         </div>
 
         <div class="form-row">
-          <label>Author</label>
-          <input placeholder="Enter Book Title" type="text" name="author">
+          <label class="coLabel">author</label>
+          <input placeholder="Enter the name of the author" type="text" name="author">
         </div>
 
         <div class="form-row">
-          <label>Image URL</label>
-          <input placeholder="Enter Book Title" type="file" name="imageFile">
+          <label for="uploadBtn" id="labelUpLoadBtn">Upload Cover Image</label>
+          <input id="uploadBtn" placeholder="Enter Book Title" type="file" name="imageFile">
         </div>
 
         <div class="form-row">
           <div class="priceAndQuantity">
             <div>
-              <label>price</label>
-              <input placeholder="Enter Book Title" type="text" name="price">
+              <label class="coLabel">price</label>
+              <input placeholder="Enter price of the book" type="text" name="price">
             </div>
             <div>
-              <label>quantity</label>
-              <input placeholder="Enter Book Title" type="text" name="quantity">
+              <label class="coLabel">quantity</label>
+              <input placeholder="Enter quantity of the book" type="text" name="quantity">
             </div>
           </div>
         </div>
 
         <div class="form-row">
-          <label>Description</label>
+          <label class="coLabel">Description</label>
           <br>
-          <textarea class="theDesc" name="description"></textarea>
+          <textarea id="descriptionArea" placeholder="There is no description yet." class="theDesc" maxlength="250" name="description"></textarea>
         </div>
 
         <div class="form-row">
