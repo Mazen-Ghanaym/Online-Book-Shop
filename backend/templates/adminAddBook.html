@@ -105,17 +105,19 @@
           <div class="priceAndQuantity">
             <div>
               <label class="coLabel">price</label>
-              {% if %}
+              {% if price%}
+                <input placeholder="Enter price of the book" value="{{price}}" type="text" name="price">
               {% else %}
+                <input placeholder="Enter price of the book" type="text" name="price">
               {%endif%}
-              <input placeholder="Enter price of the book" type="text" name="price">
             </div>
             <div>
               <label class="coLabel">quantity</label>
-              {% if %}
+              {% if quantity %}
+                <input placeholder="Enter quantity of the book" value="{{quantity}}" type="text" name="quantity">
               {% else %}
+                <input placeholder="Enter quantity of the book" type="text" name="quantity">
               {%endif%}
-              <input placeholder="Enter quantity of the book" type="text" name="quantity">
             </div>
           </div>
         </div>
@@ -123,10 +125,11 @@
         <div class="form-row">
           <label class="coLabel">Description</label>
           <br>
-          {% if %}
+          {% if description%}
+          <textarea id="descriptionArea" placeholder="There is no description yet." class="theDesc" maxlength="250" name="description">{{description}}</textarea>
           {% else %}
-          {%endif%}
           <textarea id="descriptionArea" placeholder="There is no description yet." class="theDesc" maxlength="250" name="description"></textarea>
+          {%endif%}
         </div>
 
         <div class="form-row">

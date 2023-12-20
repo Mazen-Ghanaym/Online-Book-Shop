@@ -56,15 +56,26 @@ def getQuaryFromDataBase(database="Books.db", quary_text="", *args):
     # create cursor with called db
     db = con.cursor()
     con.row_factory = sqlite3.Row
+
+    if(len(tuple(args)) == 0):
+        try:
+            db.execute(quary_text)
+            data = getData(db.fetchall(), db.description)
+            con.commit()
+            db.close()
+            con.close()
+        except:
+            return None
+    else:
     # try to get the data
-    try:
-        db.execute(quary_text, tuple(args))
-        data = getData(db.fetchall(), db.description)
-        con.commit()
-        db.close()
-        con.close()
-    except:
-        return None
+        try:
+            db.execute(quary_text, tuple(args))
+            data = getData(db.fetchall(), db.description)
+            con.commit()
+            db.close()
+            con.close()
+        except:
+            return None
     return data
 
 
@@ -932,7 +943,7 @@ def adminAddBook():
                          request.form.get("price"),
                          request.form.get("quantity")
                          )
-        if err_msg["err_state"]:
+        if err_msg["error_state"]:
             return render_template("adminAddBook.html",
                                 err_msg = err_msg,
                                 allCategories = categories,
