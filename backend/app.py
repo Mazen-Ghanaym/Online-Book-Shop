@@ -953,15 +953,6 @@ def adminAddBook():
         "Books.db",
         "select * from Category",
     )
-    # con = sqlite3.connect("Books.db")
-    # # create cursor with called db
-    # db = con.cursor()
-    # db.execute(quary_text)
-    # data = getData(db.fetchall(), db.description)
-    # con.commit()
-    # db.close()
-    # con.close()
-    # categories =
 
     if request.method == "POST":
         err_msg = validBookData(
