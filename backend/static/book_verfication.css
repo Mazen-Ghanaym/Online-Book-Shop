@@ -1,0 +1,112 @@
+:root {
+    --main-color: #c4c4c4;
+}
+
+:visited {
+    color: rgb(179, 179, 179);
+}
+
+* {
+    font-family: sans-serif;
+    overflow-x: hidden;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+nav {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+}
+
+.left-navbar ul {
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+    list-style: none;
+}
+
+.right-navbar ul {
+    display: flex;
+    flex-direction: row-reverse;
+
+    list-style: none;
+}
+
+.right-navbar ul li {
+    margin: 0px 20px;
+}
+/* end of nav bar */
+/* footer */
+footer {
+    position: absolute;
+    bottom: 0px;
+    height: 27px;
+    width: 100%;
+    color: white;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* end of footer */
+
+/* center div */
+.books {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    margin-top: 20px;
+    width: 90%;
+    position: relative;
+    left: 5%;
+    height: auto;
+}
+.books .title {
+    position: relative;
+    left: 10%;
+    margin-bottom: 20px;
+}
+.books .table{
+    position: relative;
+    left: 10%;
+    width: 80%;
+    border-collapse: collapse;
+    background-color: #dfdfdf;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+.table-head{
+    padding: 20px;
+    height: 30px;
+    text-align: center;
+    border-bottom : 1px solid #000000;
+    color: #030303;
+}
+.books .table-data{
+    padding: 20px;
+    height: 40px;
+    text-align: center;
+    border-bottom : 1px solid #000000;
+}
+
+.table-data .btn-add{
+    text-decoration: none;
+    background-color: #00D315;
+    color: white;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 4px;
+}
+.table-data .btn-reject{
+    text-decoration: none;
+    background-color: #D30000;
+    color: white;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 4px;
+}

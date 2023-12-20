@@ -57,7 +57,7 @@ def getQuaryFromDataBase(database="Books.db", quary_text="", *args):
     db = con.cursor()
     con.row_factory = sqlite3.Row
 
-    if(len(tuple(args)) == 0):
+    if len(tuple(args)) == 0:
         try:
             db.execute(quary_text)
             data = getData(db.fetchall(), db.description)
@@ -67,7 +67,7 @@ def getQuaryFromDataBase(database="Books.db", quary_text="", *args):
         except:
             return None
     else:
-    # try to get the data
+        # try to get the data
         try:
             db.execute(quary_text, tuple(args))
             data = getData(db.fetchall(), db.description)
@@ -112,16 +112,19 @@ def validName(the_name):
 def correctImage(imagePath):
     return "..\\" + str(imagePath).replace("/", "\\")
 
+
 #  ------------------>>  validation of book info <<---------------
 def validBookTitle(title):
     if title == None:
         return False
     return True
 
+
 def validBookAuthor(authorName):
-    if(authorName == None):
+    if authorName == None:
         return False
     return True
+
 
 def validBookCoverImage(imgFile):
     return True
@@ -130,6 +133,7 @@ def validBookCoverImage(imgFile):
 def validBookCategory(category):
     return True
 
+
 def validBookPrice(price):
     try:
         if price == None or (int(price) <= 0):
@@ -137,7 +141,8 @@ def validBookPrice(price):
         return True
     except:
         return False
-    
+
+
 def validBookQuantity(quantity):
     try:
         if quantity == None or (int(quantity) <= 0):
@@ -146,26 +151,38 @@ def validBookQuantity(quantity):
     except:
         return False
 
+
 def validBookData(title, authorName, imgFile, category, price, quantity):
     if not validBookTitle(title):
-        return createErrorMessage(True, "invaled value", "Title of the book is not valid!")
-    
+        return createErrorMessage(
+            True, "invaled value", "Title of the book is not valid!"
+        )
+
     if not validBookAuthor(authorName):
-        return createErrorMessage(True, "invaled value", "Author name of the book is not valid!")
-    
+        return createErrorMessage(
+            True, "invaled value", "Author name of the book is not valid!"
+        )
+
     if not validBookCoverImage(imgFile):
-        return createErrorMessage(True, "invaled value", "Image of the book is not valid!")
-    
+        return createErrorMessage(
+            True, "invaled value", "Image of the book is not valid!"
+        )
+
     if not validBookCategory(category):
         return createErrorMessage(True, "invaled value", "This is not valid category!")
-    
+
     if not validBookPrice(price):
-        return createErrorMessage(True, "invaled value", "The price value is not valid!")
-    
+        return createErrorMessage(
+            True, "invaled value", "The price value is not valid!"
+        )
+
     if not validBookQuantity(quantity):
-        return createErrorMessage(True, "invaled value", "The quantity value is not valid!")
-    
+        return createErrorMessage(
+            True, "invaled value", "The quantity value is not valid!"
+        )
+
     return createErrorMessage()
+
 
 # ----------------------------------------------------------------------------------------
 
@@ -932,59 +949,67 @@ def save_cart():
 @app.route("/admin/addbook", methods=["GET", "POST"])
 @login_required
 def adminAddBook():
-    categories = getQuaryFromDataBase("Books.db",
-                                      "select * form Category",
-                                      )
+    categories = getQuaryFromDataBase(
+        "Books.db",
+        "select * form Category",
+    )
     if request.method == "POST":
-        err_msg = validBookData(request.form.get("title"),
-                         request.form.get("author"),
-                         request.form.get("imageFile"),
-                         request.form.get("category"),
-                         request.form.get("price"),
-                         request.form.get("quantity")
-                         )
+        err_msg = validBookData(
+            request.form.get("title"),
+            request.form.get("author"),
+            request.form.get("imageFile"),
+            request.form.get("category"),
+            request.form.get("price"),
+            request.form.get("quantity"),
+        )
         if err_msg["error_state"]:
-            return render_template("adminAddBook.html",
-                                err_msg = err_msg,
-                                allCategories = categories,
-                                title = request.form.get("title"),
-                                author = request.form.get("author"),
-                                image = request.form.get("imageFile"),
-                                category = request.form.get("category"),
-                                price = request.form.get("price"),
-                                quantity = request.form.get("quantity"),
-                                description = request.form.get("description")
-                                )
-        
-        return render_template("adminAddBook.html",
-                                err_msg = createErrorMessage(True,
-                                                             "success",
-                                                             "Book has added successfully!"),
-                                allCategories = categories,
-                                title = None,
-                                author = None,
-                                image = None,
-                                category = None,
-                                price = None,
-                                quantity = None,
-                                description = None
-                                )
+            return render_template(
+                "adminAddBook.html",
+                err_msg=err_msg,
+                allCategories=categories,
+                title=request.form.get("title"),
+                author=request.form.get("author"),
+                image=request.form.get("imageFile"),
+                category=request.form.get("category"),
+                price=request.form.get("price"),
+                quantity=request.form.get("quantity"),
+                description=request.form.get("description"),
+            )
+
+        return render_template(
+            "adminAddBook.html",
+            err_msg=createErrorMessage(True, "success", "Book has added successfully!"),
+            allCategories=categories,
+            title=None,
+            author=None,
+            image=None,
+            category=None,
+            price=None,
+            quantity=None,
+            description=None,
+        )
     else:
-        return render_template("adminAddBook.html",
-                                err_msg = createErrorMessage(),
-                                allCategories = categories,
-                                title = None,
-                                author = None,
-                                image = None,
-                                category = None,
-                                price = None,
-                                quantity = None,
-                                description = None
-                                )
+        return render_template(
+            "adminAddBook.html",
+            err_msg=createErrorMessage(),
+            allCategories=categories,
+            title=None,
+            author=None,
+            image=None,
+            category=None,
+            price=None,
+            quantity=None,
+            description=None,
+        )
 
 
 ## all books
 ## requests for books/updates
+@app.route("/admin/bookver")
+def bookver():
+    return render_template("bookVerfication.html", error_message="", invalid = False)
+
+
 ## requests for writers
 ## all users (email, state, button to change state)
 ## history

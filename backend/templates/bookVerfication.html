@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Cart</title>
+    <link rel="icon" href="static/images/book_shop.png" />
+    <link rel="stylesheet" href="../static/book_verfication.css" />
+    <link rel="stylesheet" href="../static/error.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="../static/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="left-navbar">
+                <ul>
+                    <li>
+                        <a href="{{url_for('home')}}"><img src="../static/images/book_shop.png" alt="Book" /></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-navbar">
+                <ul>
+                    <li>
+                        <a href="{{url_for('profile')}}"><img src="../static/images/user_1.png" alt="Profile" /></a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('cart')}}">
+                            <img src="../static/images/shopping_cart_1.png" alt="Store" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!--profile content-->
+    <!-- error handling -->
+    <div class="popup-background">
+        <div id="popup" class="popup">
+            <h4>{{ error_message }}</h4>
+            <p>Please input valid data</p>
+        </div>
+    </div>
+    {% if invalid %}
+    <script>
+        showPopup();
+    </script>
+    {% endif %}
+    <!--end error handling-->
+    <div class="books">
+        <h2 class="title">Books Requests</h2>
+        <table class="table">
+            <tr class="table-head">
+                <th>#</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+            <tr class="table-data">
+                <td>1</td>
+                <td>dgf</td>
+                <td>dgdf</td>
+                <td>250.5</td>
+                <td><a class="btn-add" href="#">Add</a><a class="btn-reject" href="#">Remove</a></td>
+            </tr>
+            <tr class="table-data">
+                <td>1</td>
+                <td>dgf</td>
+                <td>dgdf</td>
+                <td>250.5</td>
+                <td><a class="btn-add" href="#">Add</a><a class="btn-reject" href="#">Remove</a></td>
+            </tr>
+            <tr class="table-data">
+                <td>1</td>
+                <td>dgf</td>
+                <td>dgdf</td>
+                <td>250.5</td>
+                <td><a class="btn-add" href="#">Add</a><a class="btn-reject" href="#">Remove</a></td>
+            </tr>
+            <tr class="table-data">
+                <td>1</td>
+                <td>dgf</td>
+                <td>dgdf</td>
+                <td>250.5</td>
+                <td><a class="btn-add" href="#">Add</a><a class="btn-reject" href="#">Remove</a></td>
+            </tr>
+            <tr class="table-data">
+                <td>1</td>
+                <td>dgf</td>
+                <td>dgdf</td>
+                <td>250.5</td>
+                <td><a class="btn-add" href="#">Add</a><a class="btn-reject" href="#">Remove</a></td>
+            </tr>
+            <tr class="table-data">
+                <td>1</td>
+                <td>dgf</td>
+                <td>dgdf</td>
+                <td>250.5</td>
+                <td><a class="btn-add" href="#">Add</a><a class="btn-reject" href="#">Remove</a></td>
+            </tr>
+            <tr class="table-data">
+                <td>1</td>
+                <td>dgf</td>
+                <td>dgdf</td>
+                <td>250.5</td>
+                <td><a class="btn-add" href="#">Add</a><a class="btn-reject" href="#">Remove</a></td>
+            </tr>
+            <tr class="table-data">
+                <td>1</td>
+                <td>dgf</td>
+                <td>dgdf</td>
+                <td>250.5</td>
+                <td><a class="btn-add" href="#">Add</a><a class="btn-reject" href="#">Remove</a></td>
+            </tr>
+        </table>
+    </div>
+
+
+
+    <!--end profile content-->
+    <div class="footer">
+        <footer>
+            <p>copyrights &copy; www.bookshop.com</p>
+        </footer>
+    </div>
+</body>
+
+</html>
