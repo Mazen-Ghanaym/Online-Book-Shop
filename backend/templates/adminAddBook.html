@@ -76,9 +76,9 @@
         <div class="form-row">
           <label class="coLabel">author</label>
           {% if author%}
-            <input placeholder="Enter the name of the author" type="text" name="author">
-          {% else %}
             <input placeholder="Enter the name of the author" value="{{author}}" type="text" name="author">
+          {% else %}
+            <input placeholder="Enter the name of the author" type="text" name="author">
           {%endif%}
         </div>
 
@@ -105,7 +105,7 @@
           <div class="priceAndQuantity">
             <div>
               <label class="coLabel">price</label>
-              {% if price%}
+              {% if price %}
                 <input placeholder="Enter price of the book" value="{{price}}" type="text" name="price">
               {% else %}
                 <input placeholder="Enter price of the book" type="text" name="price">

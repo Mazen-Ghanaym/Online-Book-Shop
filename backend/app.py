@@ -933,8 +933,19 @@ def save_cart():
 @login_required
 def adminAddBook():
     categories = getQuaryFromDataBase("Books.db",
-                                      "select * form Category",
+                                      "select * from Category",
                                       )
+    # con = sqlite3.connect("Books.db")
+    # # create cursor with called db
+    # db = con.cursor()
+    # db.execute(quary_text)
+    # data = getData(db.fetchall(), db.description)
+    # con.commit()
+    # db.close()
+    # con.close()
+    # categories = 
+
+
     if request.method == "POST":
         err_msg = validBookData(request.form.get("title"),
                          request.form.get("author"),
@@ -946,7 +957,7 @@ def adminAddBook():
         if err_msg["error_state"]:
             return render_template("adminAddBook.html",
                                 err_msg = err_msg,
-                                allCategories = categories,
+                                categories = categories,
                                 title = request.form.get("title"),
                                 author = request.form.get("author"),
                                 image = request.form.get("imageFile"),
@@ -960,7 +971,7 @@ def adminAddBook():
                                 err_msg = createErrorMessage(True,
                                                              "success",
                                                              "Book has added successfully!"),
-                                allCategories = categories,
+                                categories = categories,
                                 title = None,
                                 author = None,
                                 image = None,
@@ -972,7 +983,7 @@ def adminAddBook():
     else:
         return render_template("adminAddBook.html",
                                 err_msg = createErrorMessage(),
-                                allCategories = categories,
+                                categories = categories,
                                 title = None,
                                 author = None,
                                 image = None,
