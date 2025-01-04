@@ -1,16 +1,8 @@
-import os
-import datetime
-from pydoc import cram
-from turtle import tilt, title
-from unicodedata import category
-from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask import Flask, redirect, render_template, request, session, url_for
 from flask_session import Session
-from tempfile import mkdtemp
 import time
 from time import strftime
-import datetime
 from functools import wraps
-import requests
 import sqlite3
 
 # Configure application
