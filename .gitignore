@@ -1,2 +1,5 @@
 flask_session/
 backend/__pycache__/
+backend/flask_session/
+.venv/
+backend/Books.db

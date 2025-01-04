@@ -265,19 +265,19 @@ def signup():
         if not email:
             # wail for render the register page with error message
             return render_template(
-                "signup.html", error_message="Invalid Email", invalid=True
+                "SignUp.html", error_message="Invalid Email", invalid=True
             )
 
         # check if user provide valid password
         if not password:
             return render_template(
-                "signup.html", error_message="Invalid password", invalid=True
+                "SignUp.html", error_message="Invalid password", invalid=True
             )
 
         # check if user provide valid confirm
         if not confirm:
             return render_template(
-                "signup.html",
+                "SignUp.html",
                 error_message="Invalid password confirmation",
                 invalid=True,
             )
@@ -285,7 +285,7 @@ def signup():
         # check if password equals the confirmation password
         if password != confirm:
             return render_template(
-                "signup.html",
+                "SignUp.html",
                 error_message="Confirmation doesn't match password",
                 invalid=True,
             )
@@ -302,7 +302,7 @@ def signup():
         # check if username registered before
         if len(users) >= 1:
             return render_template(
-                "signup.html", error_message="This email exists before", invalid=True
+                "SignUp.html", error_message="This email exists before", invalid=True
             )
 
         # after validating all conditions insert new user into database
@@ -336,7 +336,7 @@ def signup():
         # redirect to the main page
         return redirect("/")
     else:
-        return render_template("signup.html", error_message="", invalid=False)
+        return render_template("SignUp.html", error_message="", invalid=False)
 
 
 # logout -> mazen
